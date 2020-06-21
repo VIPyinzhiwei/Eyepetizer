@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.discovery.DiscoveryFragment"
+    tools:visibility="visible">
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textSize="22sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="本周榜单" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvRightText8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_toStartOf="@id/ivInto8"
+        android:layout_toEndOf="@id/tvTitle8"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/blue"
+        android:textSize="14sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="查看全部" />
+
+    <ImageView
+        android:id="@+id/ivInto8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvRightText8"
+        android:layout_alignBottom="@id/tvRightText8"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_into_blue_24dp" />
+
+</RelativeLayout>

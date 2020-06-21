@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.discovery.DiscoveryFragment">
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|start"
+        android:textSize="21sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="Eyepetizer" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:text="@string/delete"
+        android:textColor="@color/blue"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:typeface="fzlLTypeface"
+        tools:visibility="visible" />
+
+</FrameLayout>

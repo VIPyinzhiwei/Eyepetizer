@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright (c) 2020. vipyinzhiwei <vipyinzhiwei@gmail.com>
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+  <path
+      android:pathData="M288,456.86A63.26,63.26 0,0 0,256 448a64,64 0,1 0,0 128c11.71,0 22.56,-3.39 32,-8.9 19.04,-11.07 32,-31.49 32,-55.1 0,-23.65 -12.96,-44.06 -32,-55.14m256,0A63.26,63.26 0,0 0,512 448c-11.71,0 -22.56,3.36 -32,8.86 -19.04,11.07 -32,31.49 -32,55.14 0,23.62 12.96,44.03 32,55.1 9.44,5.5 20.29,8.9 32,8.9s22.56,-3.39 32,-8.9c19.04,-11.07 32,-31.49 32,-55.1 0,-23.65 -12.96,-44.06 -32,-55.14M768,448c-11.71,0 -22.56,3.39 -32,8.86 -19.04,11.1 -32,31.52 -32,55.14 0,23.62 12.96,44.03 32,55.14 9.44,5.47 20.29,8.86 32,8.86a64,64 0,1 0,0 -128"
+      android:fillColor="#444444"/>
+</vector>

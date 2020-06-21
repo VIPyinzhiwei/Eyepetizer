@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.community.follow.FollowFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_avatar_gray_76dp"
+        app:civ_border_color="@color/gray"
+        app:civ_border_width="1px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatarStar"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="1dp"
+        android:src="@drawable/ic_star_white_15dp"
+        app:civ_border_color="@color/gray"
+        app:civ_border_width="1px"
+        app:civ_circle_background_color="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+        app:layout_constraintEnd_toEndOf="@id/ivAvatar" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvReleaseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+        app:layout_constraintStart_toEndOf="@id/ivAvatar"
+        app:typeface="fzlLTypeface"
+        tools:text="14:50" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvRelease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="@string/release"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvReleaseTime"
+        app:layout_constraintStart_toEndOf="@id/tvReleaseTime"
+        app:layout_constraintTop_toTopOf="@id/tvReleaseTime"
+        app:typeface="fzlLTypeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/colorTextPrimaryDark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvRelease"
+        app:layout_constraintEnd_toEndOf="@id/tvContent"
+        app:layout_constraintStart_toEndOf="@id/tvRelease"
+        app:layout_constraintTop_toTopOf="@id/tvRelease"
+        app:typeface="fzdb1Typeface"
+        tools:text="手机是如何检测你的睡眠质量，手机是如何检测你的睡眠质量。" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvNickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvReleaseTime"
+        app:layout_constraintEnd_toEndOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="@id/tvReleaseTime"
+        app:typeface="fzdb1Typeface"
+        tools:text="广告裁判" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:lineSpacingMultiplier="1.3"
+        android:maxLines="2"
+        android:textColor="@color/colorTextPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ivAvatar"
+        app:layout_constraintTop_toBottomOf="@id/tvReleaseTime"
+        app:typeface="fzlLTypeface"
+        tools:text="根据微软披露的最新数据，每月有 1.5 亿用户在使用免密登录。相比之下，去年 Ignite 2019 大会上公布的数据还只是 1 亿人左右。短短六个月时间，这一数字就增长了近 5000 万 ... " />
+
+    <com.eyepetizer.android.ui.common.view.AutoPlayerVideoPlayer
+        android:id="@+id/videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/coverSize"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContent" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvVideoDuration"
+        style="@style/Eyepetizer.VideoDurationTextView"
+        app:layout_constraintBottom_toBottomOf="@id/videoPlayer"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        tools:text="10:29" />
+
+    <ImageView
+        android:id="@+id/ivCollectionCount"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_favorite_border_black_20dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCollectionCount"
+        app:layout_constraintEnd_toStartOf="@+id/ivReply"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/videoPlayer"
+        app:layout_constraintTop_toTopOf="@id/tvCollectionCount" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvCollectionCount"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:paddingStart="9dp"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/ivCollectionCount"
+        app:layout_constraintTop_toBottomOf="@id/videoPlayer"
+        app:typeface="fzlLTypeface"
+        tools:text="0" />
+
+    <ImageView
+        android:id="@+id/ivReply"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_reply_gray_20dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvReplyCount"
+        app:layout_constraintEnd_toStartOf="@+id/ivFavorites"
+        app:layout_constraintStart_toEndOf="@id/ivCollectionCount"
+        app:layout_constraintTop_toTopOf="@id/tvReplyCount" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvReplyCount"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingStart="9dp"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCollectionCount"
+        app:layout_constraintStart_toEndOf="@id/ivReply"
+        app:layout_constraintTop_toTopOf="@id/tvCollectionCount"
+        app:typeface="fzlLTypeface"
+        tools:text="0" />
+
+    <ImageView
+        android:id="@+id/ivFavorites"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_star_gray_20dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvFavorites"
+        app:layout_constraintEnd_toStartOf="@+id/ivShare"
+        app:layout_constraintStart_toEndOf="@id/ivReply"
+        app:layout_constraintTop_toTopOf="@id/tvFavorites" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingStart="9dp"
+        android:text="@string/favorites"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCollectionCount"
+        app:layout_constraintStart_toEndOf="@id/ivFavorites"
+        app:layout_constraintTop_toTopOf="@id/tvCollectionCount"
+        app:typeface="fzlLTypeface" />
+
+    <ImageView
+        android:id="@+id/ivShare"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_share_gray_20dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCollectionCount"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        app:layout_constraintStart_toEndOf="@id/ivFavorites"
+        app:layout_constraintTop_toTopOf="@id/tvCollectionCount" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginTop="7dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        app:layout_constraintStart_toStartOf="@id/videoPlayer"
+        app:layout_constraintTop_toBottomOf="@id/tvCollectionCount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

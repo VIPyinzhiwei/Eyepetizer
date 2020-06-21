@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="76dp"
+    android:background="?android:selectableItemBackground"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="Eyepetizer" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="13sp"
+        app:typeface="fzlLTypeface"
+        tools:text="https://github.com/VIPyinzhiwei/Eyepetizer" />
+
+</LinearLayout>

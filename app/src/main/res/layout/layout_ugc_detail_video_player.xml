@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.ugcdetail.UgcDetailVideoPlayer">
+
+    <FrameLayout
+        android:id="@+id/surface_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <RelativeLayout
+        android:id="@+id/thumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitCenter" />
+
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true" />
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/space"
+        android:layout_marginTop="101dp"
+        android:background="@color/blackAlpha50"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/start"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="13dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_play_white_24dp" />
+
+        <SeekBar
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.0"
+            android:background="@null"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:progressDrawable="@drawable/video_seek_progress"
+            android:thumb="@drawable/video_seek_thumb" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:typeface="fzdb1Typeface"
+            tools:text="00:00" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/split_line_two"
+            android:textColor="@color/white"
+            app:typeface="fzdb1Typeface" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:typeface="fzdb1Typeface"
+            tools:text="00:00" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccent"
+        android:visibility="invisible" />
+
+</RelativeLayout>

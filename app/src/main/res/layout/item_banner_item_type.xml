@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivPicture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvLabel"
+        android:layout_width="36dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/shape_label_radius_black_alpha_70_2dp_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:typeface="fzdb1Typeface"
+        tools:text="@string/advert" />
+
+</RelativeLayout>
+

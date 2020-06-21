@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.commend.CommendFragment">
+
+    <ImageView
+        android:id="@+id/ivCover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/coverSize"
+        android:scaleType="fitXY"
+        tools:src="@color/blackAlpha50" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_information_card_radius_gray_4dp_bg"
+        tools:listitem="@layout/item_information_card_type_item" />
+
+</LinearLayout>

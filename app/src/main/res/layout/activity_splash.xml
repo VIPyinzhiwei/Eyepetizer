@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SplashActivity">
+
+    <ImageView
+        android:id="@+id/ivSplashPicture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_splash" />
+
+    <ImageView
+        android:id="@+id/ivSlogan"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_logo_slogan" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvDescription"
+        android:layout_centerHorizontal="true"
+        android:text="@string/slogan_two"
+        android:textColor="#ccffffff"
+        android:textSize="15sp"
+        app:typeface="lobsterTypeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="49dp"
+        android:text="@string/slogan_description_two"
+        android:textColor="@color/whiteAlpha20"
+        android:textSize="13sp"
+        app:typeface="fzlLTypeface" />
+
+</RelativeLayout>

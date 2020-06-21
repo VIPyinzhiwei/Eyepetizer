@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.discovery.DiscoveryFragment"
+    tools:visibility="visible">
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:textSize="22sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="五分钟新知" />
+
+    <ImageView
+        android:id="@+id/ivInto5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/tvTitle5"
+        android:layout_alignBottom="@id/tvTitle5"
+        android:layout_toEndOf="@id/tvTitle5"
+        android:padding="5dp"
+        android:src="@drawable/ic_into_gray_24dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvTitle5"
+        android:layout_alignBottom="@id/tvTitle5"
+        android:layout_alignParentEnd="true">
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvFollow"
+            style="@style/Eyepetizer.FollowTextView"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>

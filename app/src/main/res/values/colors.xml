@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fafafa</color>
+    <color name="colorPrimaryDark">#fafafa</color>
+    <color name="colorAccent">#61f2d4</color>
+
+    <color name="colorAccentAlpha60">#6661f2d4</color>
+    <color name="colorTextPrimary">#444444</color>
+    <color name="colorTextPrimaryDark">#333333</color>
+    <color name="colorTextSecondary">#888888</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="whiteAlpha85">#26ffffff</color>
+    <color name="whiteAlpha80">#33ffffff</color>
+    <color name="whiteAlpha60">#66ffffff</color>
+    <color name="whiteAlpha50">#80ffffff</color>
+    <color name="whiteAlpha35">#a6ffffff</color>
+    <color name="whiteAlpha25">#bfffffff</color>
+    <color name="whiteAlpha20">#ccffffff</color>
+    <color name="whiteAlpha10">#e6ffffff</color>
+    <color name="blackAlpha95">#0d000000</color>
+    <color name="blackAlpha85">#26000000</color>
+    <color name="blackAlpha80">#33000000</color>
+    <color name="blackAlpha70">#4d000000</color>
+    <color name="blackAlpha60">#66000000</color>
+    <color name="blackAlpha55">#73000000</color>
+    <color name="blackAlpha50">#80000000</color>
+    <color name="blackAlpha45">#8c000000</color>
+    <color name="blackAlpha20">#cc000000</color>
+    <color name="black">#000000</color>
+    <color name="blue">#4687d7</color>
+    <color name="gray">#ededed</color>
+    <color name="grayDark">#adadad</color>
+    <color name="loading">#cdcdcd</color>
+
+</resources>

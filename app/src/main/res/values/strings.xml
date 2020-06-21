@@ -1,0 +1,150 @@
+<resources>
+    <!-- 全局 -->
+    <string name="app_name">Eyepetizer</string>
+    <string name="homepage">首页</string>
+    <string name="community">社区</string>
+    <string name="notification">通知</string>
+    <string name="mine">我的</string>
+    <string name="discovery">发现</string>
+    <string name="commend">推荐</string>
+    <string name="daily">日报</string>
+    <string name="follow">关注</string>
+    <string name="push">推送</string>
+    <string name="interaction">互动</string>
+    <string name="inbox">私信</string>
+
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="delete">删除</string>
+    <string name="settings">设置</string>
+    <string name="share">分享</string>
+    <string name="search">搜索</string>
+    <string name="advert">广告</string>
+    <string name="reply">回复</string>
+    <string name="plus_follow">+关注</string>
+    <string name="unknown_error">发生未知错误</string>
+    <string name="show_conversation">查看对话</string>
+    <string name="srl_footer_nothing">没有更多数据了</string>
+    <string name="press_again_to_exit">再按一次退出%1$s</string>
+    <string name="build_type">build_type:%1$s</string>
+    <string name="currently_not_supported">该功能即将开放，敬请期待</string>
+    <string name="jump_page_unknown_error">跳转界面出现未知异常</string>
+    <string name="your_phone_does_not_install_qq">您的手机还没有安装QQ</string>
+    <string name="your_phone_does_not_install_wechat">您的手机还没有安装微信</string>
+    <string name="your_phone_does_not_install_weibo">您的手机还没有安装微博</string>
+    <string name="your_phone_does_not_install_qq_zone">您的手机还没有安装QQ空间</string>
+    <string name="request_permission_picture_processing">需要存储权限来处理您的图片信息</string>
+    <string name="request_permission_access_phone_info">开眼视频推荐和观看记录等功能，需要访问手机识别码等信息</string>
+    <string name="slogan">- Your contribution is highly appreciated! -</string>
+    <string name="slogan_two">Daily appetizersfor your eyes. Bon eyepétit.</string>
+    <string name="slogan_description">让每一个人都开眼，开了又开。</string>
+    <string name="slogan_description_two">每日精选视频推介，让你大开眼界。</string>
+
+    <!-- 网络 -->
+    <string name="network_error">网络错误</string>
+    <string name="error_view_tip">点击屏幕重试</string>
+    <string name="json_data_error">数据解析异常</string>
+    <string name="network_connect_error">网络连接异常</string>
+    <string name="network_connect_timeout">网络连接超时</string>
+    <string name="no_route_to_host">无法连接到服务器</string>
+    <string name="network_response_code_error">服务器状态码异常：</string>
+
+    <!-- 时间和日期 -->
+    <string name="minutes_ago">分钟前</string>
+    <string name="hours_ago">小时前</string>
+    <string name="days_ago">天前</string>
+    <string name="weeks_ago">周前</string>
+    <string name="year">年</string>
+    <string name="month">个月</string>
+    <string name="day">天</string>
+    <string name="hour">小时</string>
+    <string name="minute">分钟</string>
+
+    <!-- 设置 -->
+    <string name="daily_update_hint">- 日报更新提醒 -</string>
+    <string name="wifi_follow_auto_play">- Wi-Fi 关注页自动播放 -</string>
+    <string name="split_line">|</string>
+    <string name="translate">- 翻译 -</string>
+    <string name="clear_all_cache">清除所有缓存</string>
+    <string name="option_cache_path">选择缓存路径</string>
+    <string name="option_play_definition">选择播放清晰度</string>
+    <string name="optian_cache_definition">选择缓存清晰度</string>
+    <string name="check_version">检查版本更新</string>
+    <string name="user_agreemnt">用户协议</string>
+    <string name="legal_notices">隐私政策</string>
+    <string name="video_fun_statement">视频功能声明</string>
+    <string name="copyright_report">版权举报</string>
+    <string name="clear_cache_succeed">缓存清除成功</string>
+
+    <!-- 我的 -->
+    <string name="guide_login_tips">点击登录即可评论及发布内容</string>
+    <string name="favorites">收藏</string>
+    <string name="cache">缓存</string>
+    <string name="my_follow">我的关注</string>
+    <string name="watch_record">观看记录</string>
+    <string name="notification_toggle">通知开关</string>
+    <string name="my_badge">我的徽章</string>
+    <string name="feedback">意见反馈</string>
+    <string name="want_contribute">我要投稿</string>
+    <string name="version_show">Version %1$s</string>
+
+    <!-- 登录 -->
+    <string name="forgot_password">找回密码</string>
+    <string name="login_tips">登录后即可关注作者、\n发表评论、同步收藏视频和播放记录</string>
+    <string name="Input_iphone_or_email_tips">请输入手机号/邮箱地址</string>
+    <string name="input_password_tips">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="user_register">用户注册</string>
+    <string name="author_login">作者登录</string>
+    <string name="login_register_agree_tips">登录或注册即同意开眼</string>
+    <string name="user_service_agreement">用户服务协议</string>
+    <string name="guide_login_tips_two">登录后即可查看评论回复、点赞及关注等通知信息</string>
+    <string name="guide_login_tips_three">别错过重要的信息</string>
+    <string name="guide_login_tips_four">点击登录后可关注主题和作者</string>
+
+    <!-- 搜索 -->
+    <string name="hot_keywords">热搜关键词</string>
+    <string name="input_keywords_tips">请输入搜索关键字</string>
+    <string name="search_own">搜索视频、作者、用户及标签</string>
+
+    <!-- 社区 -->
+    <string name="release">发布：</string>
+    <string name="release_works_daily">发布你的作品和日常</string>
+    <string name="theme_square">主题创作广场</string>
+    <string name="refresh_commend">刷新推荐</string>
+    <string name="private_letter">私信</string>
+    <string name="choiceness">精选</string>
+    <string name="split_line_two">/</string>
+    <string name="photo_count">%1$d/%2$d</string>
+    <string name="image_size_error">图片尺寸异常</string>
+
+    <!-- 视频详情 -->
+    <string name="pull_down_close_page">下 拉 关 闭 页 面</string>
+    <string name="click_send_comment">点 击 发 表 你 的 评 论</string>
+    <string name="reply_target">回复 @%1$s</string>
+
+    <!--关于-->
+    <string name="about">关于</string>
+    <string name="version">版本</string>
+    <string name="open_source_project_list">开源项目列表</string>
+    <string name="thanks_to">%1$s 的完成离不开以下开源项目的卓越贡献，在此对这些开源项目表示特别感谢。</string>
+
+    <!-- 分享 -->
+    <string name="share_to">分享到</string>
+    <string name="wechat">微信</string>
+    <string name="wechat_memory">朋友圈</string>
+    <string name="qq_friends">QQ</string>
+    <string name="qq_zone">QQ空间</string>
+    <string name="weibo">微博</string>
+    <string name="more">更多</string>
+    <string name="share_unknown_error">分享出现未知异常</string>
+
+    <!-- 鼓励弹框提示 -->
+    <string name="give_good_review">- 给个好评呗 -</string>
+    <string name="encourage">鼓励一下</string>
+    <string name="not_encourage">我就不给</string>
+    <string name="encourage_message">如果你喜欢 %1$s 的设计，感觉本项目的源代码对你的学习有所帮助，可以给个 \"Star\" 支持一下，谢谢！^_^</string>
+
+</resources>

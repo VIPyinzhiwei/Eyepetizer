@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    tools:context=".ui.login.LoginActivity">
+
+    <include layout="@layout/layout_title_bar" />
+
+    <ImageView
+        android:id="@+id/ivLogoText"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_logo_slogan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvLoginTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/login_tips"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/ivLogoText"
+        app:layout_constraintStart_toStartOf="@id/ivLogoText"
+        app:layout_constraintTop_toBottomOf="@id/ivLogoText"
+        app:typeface="fzlLTypeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceEditText
+        android:id="@+id/etPhoneNumberOrEmail"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_person_white_18dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="@string/Input_iphone_or_email_tips"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/etPassWord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleBar"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:typeface="fzlLTypeface" />
+
+    <View
+        android:id="@+id/dividerPhoneNumberOrEmail"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:background="@color/whiteAlpha85"
+        app:layout_constraintEnd_toEndOf="@id/etPhoneNumberOrEmail"
+        app:layout_constraintStart_toStartOf="@id/etPhoneNumberOrEmail"
+        app:layout_constraintTop_toBottomOf="@id/etPhoneNumberOrEmail" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceEditText
+        android:id="@+id/etPassWord"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_password_white_lock_18dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="@string/input_password_tips"
+        android:inputType="textPassword"
+        android:paddingTop="12dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tvUserLogin"
+        app:layout_constraintEnd_toEndOf="@id/etPhoneNumberOrEmail"
+        app:layout_constraintStart_toStartOf="@id/etPhoneNumberOrEmail"
+        app:layout_constraintTop_toBottomOf="@id/etPhoneNumberOrEmail"
+        app:typeface="fzlLTypeface" />
+
+    <View
+        android:id="@+id/dividerPassWord"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:background="@color/whiteAlpha85"
+        app:layout_constraintEnd_toEndOf="@id/etPassWord"
+        app:layout_constraintStart_toStartOf="@id/etPassWord"
+        app:layout_constraintTop_toBottomOf="@id/etPassWord" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvUserLogin"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/whiteAlpha50"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textColor="@color/blackAlpha85"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tvUserRegister"
+        app:layout_constraintEnd_toEndOf="@id/etPassWord"
+        app:layout_constraintStart_toStartOf="@id/etPassWord"
+        app:layout_constraintTop_toBottomOf="@id/etPassWord"
+        app:typeface="fzdb1Typeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvUserRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/user_register"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvUserLogin"
+        app:layout_constraintEnd_toStartOf="@id/tvAuthorLogin"
+        app:layout_constraintStart_toStartOf="@id/tvUserLogin"
+        app:layout_constraintTop_toBottomOf="@id/tvUserLogin"
+        app:typeface="fzdb1Typeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvAuthorLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/author_login"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvUserRegister"
+        app:layout_constraintEnd_toEndOf="@id/tvUserLogin"
+        app:layout_constraintStart_toEndOf="@id/tvUserRegister"
+        app:layout_constraintTop_toTopOf="@id/tvUserRegister"
+        app:typeface="fzdb1Typeface" />
+
+    <ImageView
+        android:id="@+id/ivWechat"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/ic_account_login_wechat"
+        app:layout_constraintBottom_toTopOf="@id/group"
+        app:layout_constraintEnd_toStartOf="@id/ivSina"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivSina"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_account_login_weibo"
+        app:layout_constraintBottom_toBottomOf="@id/ivWechat"
+        app:layout_constraintEnd_toStartOf="@id/ivQQ"
+        app:layout_constraintStart_toEndOf="@id/ivWechat"
+        app:layout_constraintTop_toTopOf="@id/ivWechat" />
+
+    <ImageView
+        android:id="@+id/ivQQ"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_account_login_qq"
+        app:layout_constraintBottom_toBottomOf="@id/ivWechat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivSina"
+        app:layout_constraintTop_toTopOf="@id/ivWechat" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="#120b1a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_register_agree_tips"
+        android:textColor="#403b47"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/group"
+        app:layout_constraintEnd_toStartOf="@id/tvUserAgreement"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/group"
+        app:layout_constraintTop_toTopOf="@id/group"
+        app:typeface="fzlLTypeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvUserAgreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/user_service_agreement"
+        android:textColor="@color/whiteAlpha10"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvDescription"
+        app:layout_constraintEnd_toEndOf="@id/group"
+        app:layout_constraintStart_toEndOf="@id/tvDescription"
+        app:layout_constraintTop_toTopOf="@id/tvDescription"
+        app:typeface="fzdb1Typeface" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

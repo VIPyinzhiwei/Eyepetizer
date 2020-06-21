@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    tools:background="@color/blackAlpha50"
+    tools:context=".ui.newdetail.NewDetailActivity"
+    tools:visibility="visible">
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="相关推荐" />
+
+    <ImageView
+        android:id="@+id/ivInto4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom"
+        android:padding="5dp"
+        android:src="@drawable/ic_into_gray_24dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

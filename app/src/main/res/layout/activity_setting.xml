@@ -1,0 +1,240 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.eyepetizer.android.ui.setting.SettingViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.setting.SettingActivity">
+
+        <include layout="@layout/layout_title_bar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llScrollViewContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:onClick="@{(view) -> viewModel.onClick(view)}"
+                android:orientation="vertical">
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="45dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/daily_update_hint"
+                    android:textSize="12sp"
+                    app:typeface="fzlLTypeface" />
+
+                <RadioGroup
+                    android:id="@+id/rgDailySwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceRadioButton
+                        android:id="@+id/rbDailyOpen"
+                        style="@style/Eyepetizer.SettingRadioButton"
+                        android:checked="@={viewModel.rbDailyOpen}"
+                        android:text="@string/open" />
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:text="@string/split_line"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        app:typeface="fzlLTypeface" />
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceRadioButton
+                        android:id="@+id/rbDailyClose"
+                        style="@style/Eyepetizer.SettingRadioButton"
+                        android:checked="@={!viewModel.rbDailyOpen}"
+                        android:text="@string/close" />
+                </RadioGroup>
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="45dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/wifi_follow_auto_play"
+                    android:textSize="12sp"
+                    app:typeface="fzlLTypeface" />
+
+                <RadioGroup
+                    android:id="@+id/rgWiFiSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceRadioButton
+                        android:id="@+id/rbWiFiOpen"
+                        style="@style/Eyepetizer.SettingRadioButton"
+                        android:checked="@={viewModel.rbWiFiOpen}"
+                        android:text="@string/open" />
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:text="@string/split_line"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        app:typeface="fzlLTypeface" />
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceRadioButton
+                        android:id="@+id/rbWiFiClose"
+                        style="@style/Eyepetizer.SettingRadioButton"
+                        android:checked="@={!viewModel.rbWiFiOpen}"
+                        android:text="@string/close" />
+
+                </RadioGroup>
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="45dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/translate"
+                    android:textSize="12sp"
+                    app:typeface="fzlLTypeface" />
+
+                <RadioGroup
+                    android:id="@+id/rgTranslateSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceRadioButton
+                        android:id="@+id/rbTranslateOpen"
+                        style="@style/Eyepetizer.SettingRadioButton"
+                        android:checked="@={viewModel.rbTranslateOpen}"
+                        android:text="@string/open" />
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:text="@string/split_line"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        app:typeface="fzlLTypeface" />
+
+                    <com.eyepetizer.android.ui.common.view.TypefaceRadioButton
+                        android:id="@+id/rbTranslateClose"
+                        style="@style/Eyepetizer.SettingRadioButton"
+                        android:checked="@={!viewModel.rbTranslateOpen}"
+                        android:text="@string/close" />
+
+                </RadioGroup>
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvClearCache"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/clear_all_cache" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvOptionCachePath"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/option_cache_path" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvOptionPlayDefinition"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/option_play_definition" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvOptionCacheDefinition"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/optian_cache_definition" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvCheckVersion"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/check_version" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvUserAgreement"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/user_agreemnt" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvLegalNotices"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/legal_notices" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvVideoFunStatement"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/video_fun_statement" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvCopyrightReport"
+                    style="@style/Eyepetizer.SettingTextView"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/copyright_report" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvSlogan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="45dp"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/slogan"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="13sp"
+                    app:typeface="lobsterTypeface" />
+
+                <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginBottom="80dp"
+                    android:onClick="@{(view) -> viewModel.onClick(view)}"
+                    android:text="@string/slogan_description"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="12sp"
+                    app:typeface="fzlLTypeface" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

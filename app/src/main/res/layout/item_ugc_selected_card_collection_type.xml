@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.commend.CommendFragment">
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.home.discovery.DiscoveryFragment">
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:textColor="@color/colorTextPrimaryDark"
+            android:textSize="22sp"
+            app:typeface="fzdb1Typeface"
+            tools:text="社区精选" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvRightText"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@id/tvTitle"
+            android:layout_marginTop="10dp"
+            android:layout_toStartOf="@id/ivInto"
+            android:layout_toEndOf="@id/tvTitle"
+            android:gravity="center_vertical|end"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:typeface="fzdb1Typeface"
+            tools:text="查看全部" />
+
+        <ImageView
+            android:id="@+id/ivInto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvRightText"
+            android:layout_alignBottom="@id/tvRightText"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_into_blue_24dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivCoverLeft"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/coverSize"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@id/ivCoverRightTop"
+        app:layout_constraintStart_toStartOf="@id/rlHeader"
+        app:layout_constraintTop_toBottomOf="@id/rlHeader"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/ivLayersLeft"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/ic_layers_white_15dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverLeft"
+        app:layout_constraintTop_toTopOf="@id/ivCoverLeft"
+        tools:visibility="visible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatarLeft"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCoverLeft"
+        app:layout_constraintEnd_toStartOf="@id/tvNicknameLeft"
+        tools:src="@drawable/ic_avatar_gray_76dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvNicknameLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatarLeft"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverLeft"
+        app:layout_constraintTop_toTopOf="@id/ivAvatarLeft"
+        app:typeface="fzdb1Typeface"
+        tools:text="vipyinzhiwei" />
+
+    <ImageView
+        android:id="@+id/ivCoverRightTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/ivCoverRightBottom"
+        app:layout_constraintEnd_toEndOf="@id/rlHeader"
+        app:layout_constraintStart_toEndOf="@id/ivCoverLeft"
+        app:layout_constraintTop_toTopOf="@id/ivCoverLeft"
+        tools:src="@drawable/bg_splash_background" />
+
+    <ImageView
+        android:id="@+id/ivLayersRightTop"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/ic_layers_white_15dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverRightTop"
+        app:layout_constraintTop_toTopOf="@id/ivCoverRightTop"
+        tools:visibility="visible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatarRightTop"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCoverRightTop"
+        app:layout_constraintEnd_toStartOf="@id/tvNicknameRightTop"
+        tools:src="@drawable/ic_avatar_gray_76dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvNicknameRightTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatarRightTop"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverRightTop"
+        app:layout_constraintTop_toTopOf="@id/ivAvatarRightTop"
+        app:typeface="fzdb1Typeface"
+        tools:text="vipyinzhiwei" />
+
+    <ImageView
+        android:id="@+id/ivCoverRightBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverRightTop"
+        app:layout_constraintStart_toStartOf="@id/ivCoverRightTop"
+        app:layout_constraintTop_toBottomOf="@id/ivCoverRightTop"
+        app:layout_goneMarginTop="1dp"
+        tools:src="@drawable/bg_splash_background" />
+
+    <ImageView
+        android:id="@+id/ivLayersRightBottom"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/ic_layers_white_15dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverRightBottom"
+        app:layout_constraintTop_toTopOf="@id/ivCoverRightBottom"
+        tools:visibility="visible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatarRightBottom"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCoverRightBottom"
+        app:layout_constraintEnd_toStartOf="@id/tvNicknameRightBottom"
+        tools:src="@drawable/ic_avatar_gray_76dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvNicknameRightBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatarRightBottom"
+        app:layout_constraintEnd_toEndOf="@id/ivCoverRightBottom"
+        app:layout_constraintTop_toTopOf="@id/ivAvatarRightBottom"
+        app:typeface="fzdb1Typeface"
+        tools:text="vipyinzhiwei" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llSearch"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <com.eyepetizer.android.ui.common.view.TypefaceEditText
+            android:id="@+id/etQuery"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="13dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_search_edit_text_bg"
+            android:drawableStart="@drawable/ic_search_gray_17dp"
+            android:drawablePadding="2.5dp"
+            android:gravity="center_vertical"
+            android:hint="@string/search_own"
+            android:imeOptions="actionSearch"
+            android:paddingStart="19dp"
+            android:paddingEnd="19dp"
+            android:singleLine="true"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/grayDark"
+            android:textSize="12sp"
+            app:typeface="fzlLTypeface" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceEditText
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="17dp"
+            android:paddingEnd="17dp"
+            android:text="@string/cancel"
+            android:textSize="14sp"
+            app:typeface="fzlLTypeface" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_search" />
+
+</LinearLayout>

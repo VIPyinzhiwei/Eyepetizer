@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingStart="13dp"
+    android:paddingEnd="13dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:gravity="center"
+        android:text="@string/share"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvToWechatFriends"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_share_wechat_black_30dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/wechat"
+            android:textColor="@color/grayDark"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvShareToWeibo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_share_weibo_black_30dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/weibo"
+            android:textColor="@color/grayDark"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvShareToQQ"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_share_qq_black_30dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/qq_friends"
+            android:textColor="@color/grayDark"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvShareToQQzone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_share_qq_zone_black_30dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/qq_zone"
+            android:textColor="@color/grayDark"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:id="@+id/llMore"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_baseline_more_horiz_30"
+                app:civ_circle_background_color="#d9d9d9" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/more"
+                android:textColor="@color/grayDark"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="9dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textSize="14sp" />
+
+</LinearLayout>

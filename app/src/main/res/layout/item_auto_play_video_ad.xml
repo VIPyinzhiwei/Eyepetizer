@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.discovery.DiscoveryFragment">
+
+    <com.eyepetizer.android.ui.common.view.AutoPlayerVideoPlayer
+        android:id="@+id/videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="36dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/shape_label_radius_black_alpha_70_2dp_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        app:layout_constraintTop_toTopOf="@id/videoPlayer"
+        android:text="@string/advert" />
+
+    <Space
+        android:id="@+id/spaceContainer"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        app:layout_constraintStart_toStartOf="@id/videoPlayer"
+        app:layout_constraintTop_toBottomOf="@id/videoPlayer" />
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/spaceContainer"
+        app:layout_constraintStart_toStartOf="@id/spaceContainer"
+        app:layout_constraintTop_toTopOf="@id/spaceContainer"
+        tools:src="@drawable/ic_avatar_gray_76dp" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="35dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvDescription"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        app:layout_constraintStart_toEndOf="@id/ivAvatar"
+        app:layout_constraintTop_toTopOf="@id/ivAvatar"
+        tools:text="J12. IT’S ALL ABOUT SECONDS*" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+        app:layout_constraintEnd_toEndOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="*J12腕表 分秒背后" />
+
+    <Space
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintEnd_toEndOf="@id/videoPlayer"
+        app:layout_constraintStart_toStartOf="@id/videoPlayer"
+        app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

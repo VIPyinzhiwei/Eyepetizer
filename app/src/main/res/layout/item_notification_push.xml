@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.notification.push.PushFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="#cdcdcd"
+        app:civ_border_width="1dp"
+        app:civ_circle_background_color="@color/white" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivAvatar"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/ivInto"
+        android:layout_toEndOf="@+id/ivAvatar"
+        android:maxLines="1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:typeface="fzdb1Typeface"
+        tools:text="今天最值得关注的5件全球新鲜事" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_alignEnd="@+id/tvTitle"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:typeface="fzlLTypeface"
+        tools:text="14:50" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTime"
+        android:layout_alignStart="@+id/tvTime"
+        android:layout_alignEnd="@+id/tvTime"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        app:typeface="fzlLTypeface"
+        tools:text="当前版本暂不支持查看此消息，请在手机上查看。当前版本暂不支持查看此消息，请在手机上查看。当前版本暂不支持查看此消息，当前版本暂不支持查看此消息，请在手机上查看。当前版本暂不支持查看此消息，请在手机上查看。当前版本暂不支持查看此消息，请在手机上查看。当前版本暂不支持查看此消息，当前版本暂不支持查看此消息，请在手机上查看。" />
+
+    <ImageView
+        android:id="@+id/ivInto"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="12dp"
+        android:src="@drawable/ic_into_black_24dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tvContent"
+        android:layout_alignStart="@+id/tvContent"
+        android:layout_marginTop="14dp"
+        android:background="@color/gray" />
+
+</RelativeLayout>

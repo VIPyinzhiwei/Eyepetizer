@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.community.commend.CommendFragment">
+
+    <ImageView
+        android:id="@+id/ivBgPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitXY"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvChoiceness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_choiceness_radius_black_2dp_bg"
+        android:paddingStart="10dp"
+        android:paddingTop="3.5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="3.5dp"
+        android:text="@string/choiceness"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:typeface="fzdb1Typeface"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ivLayers"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="6dp"
+        android:paddingTop="9dp"
+        android:paddingEnd="9dp"
+        android:src="@drawable/ic_layers_white_30dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivPlay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="4.5dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4.5dp"
+        android:src="@drawable/ic_play_white_24dp"
+        android:visibility="gone"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1.5dp"
+        app:civ_circle_background_color="@color/blackAlpha80"
+        tools:visibility="visible" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivBgPicture"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.3"
+        android:maxLines="3"
+        android:textColor="@color/colorTextPrimaryDark"
+        android:textSize="12sp"
+        app:typeface="fzlLTypeface"
+        tools:text="“When you look into the abyss, I look into you.” “The flowers of the underworld grow on pale bones.”— Hades   “当你凝视深渊的时候，我也凝视着你。” “冥界的花长在苍白的骨头上。”— 幽冥神 哈迪斯" />
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvDescription"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/btn_release_normal"
+        android:visibility="invisible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivRoundAvatar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvDescription"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:civ_border_color="#cdcdcd"
+        app:civ_border_width="1dp"
+        app:civ_circle_background_color="@color/gray"
+        tools:src="@drawable/ic_logo_black_76dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivAvatar"
+        android:layout_alignBottom="@+id/ivAvatar"
+        android:layout_marginStart="5dp"
+        android:layout_toStartOf="@+id/tvCollectionCount"
+        android:layout_toEndOf="@+id/ivAvatar"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:typeface="fzlLTypeface"
+        tools:text="🦀mini" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvCollectionCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivAvatar"
+        android:layout_alignBottom="@+id/ivAvatar"
+        android:layout_alignParentEnd="true"
+        android:drawableEnd="@drawable/ic_favorite_border_black_20dp"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:textColor="@color/colorTextPrimaryDark"
+        android:textSize="13sp"
+        app:typeface="fzlLTypeface"
+        tools:text="201" />
+</RelativeLayout>

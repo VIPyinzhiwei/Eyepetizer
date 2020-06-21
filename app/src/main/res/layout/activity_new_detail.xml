@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blackAlpha50"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.newdetail.NewDetailActivity">
+
+    <ImageView
+        android:id="@+id/ivBlurredBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/bg_splash" />
+
+    <com.eyepetizer.android.ui.newdetail.NewDetailVideoPlayer
+        android:id="@+id/videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/videoPlayerSize" />
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rlComment"
+        android:layout_below="@id/videoPlayer"
+        android:background="@color/blackAlpha55">
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="8dp"
+            android:text="@string/pull_down_close_page"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            app:typeface="fzlLTypeface" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_new_detail_custom_header_type" />
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlComment"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/blackAlpha45">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_logo_black_76dp"
+            app:civ_border_color="@color/blackAlpha55"
+            app:civ_border_width="1dp"
+            app:civ_circle_background_color="@color/white" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceEditText
+            android:id="@+id/etComment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/ivReply"
+            android:layout_toEndOf="@id/ivAvatar"
+            android:background="@drawable/shape_comment_edit_text_bg"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:hint="@string/click_send_comment"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColorHint="@color/whiteAlpha20"
+            android:textSize="12sp"
+            app:typeface="fzlLTypeface" />
+
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toStartOf="@id/tvReplyCount"
+            android:src="@drawable/ic_reply_white_20dp" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvReplyCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/whiteAlpha20"
+            android:textSize="12sp"
+            app:typeface="fzlLTypeface"
+            tools:text="25" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/flHeader"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPullDown"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_pull_down_white_30dp"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="4dp"
+            app:civ_circle_background_color="#dedede" />
+
+        <ImageView
+            android:id="@+id/ivMore"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:padding="13dp"
+            android:src="@drawable/ic_more_white_19dp" />
+
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_toStartOf="@id/ivMore"
+            android:padding="11dp"
+            android:src="@drawable/ic_share_white_20dp" />
+
+        <ImageView
+            android:id="@+id/ivCollection"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_toStartOf="@id/ivShare"
+            android:padding="11dp"
+            android:src="@drawable/ic_favorite_border_white_20dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llShares"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_alignBottom="@id/videoPlayer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/shape_radius_black_alpha_60_4dp_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivToWechatFriends"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_share_wechat_white_30dp" />
+
+        <ImageView
+            android:id="@+id/ivShareToWechatMemories"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_share_wechat_memory_white_30dp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivShareToWeibo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_share_weibo_white_30dp" />
+
+        <ImageView
+            android:id="@+id/ivShareToQQ"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_share_qq_white_30dp" />
+
+        <ImageView
+            android:id="@+id/ivShareToQQzone"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_share_qq_zone_white_30dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

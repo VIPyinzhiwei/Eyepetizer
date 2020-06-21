@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:paddingStart="@dimen/listSpaceSize"
+    android:paddingEnd="@dimen/listSpaceSize"
+    tools:context=".ui.home.discovery.DiscoveryFragment"
+    tools:visibility="visible">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <FrameLayout
+        android:id="@+id/flRefresh"
+        android:layout_width="92dp"
+        android:layout_height="42dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp">
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_refresh_chat_bg"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/refresh_commend"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:typeface="fzdb1Typeface" />
+
+    </FrameLayout>
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvFooterRightText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_toStartOf="@id/ivTooterInto3"
+        android:layout_toEndOf="@id/flRefresh"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/blue"
+        android:textSize="14sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="查看全部" />
+
+    <ImageView
+        android:id="@+id/ivTooterInto3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvFooterRightText3"
+        android:layout_alignBottom="@id/tvFooterRightText3"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_into_blue_24dp" />
+
+</RelativeLayout>

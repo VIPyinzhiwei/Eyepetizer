@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/blackAlpha50"
+    tools:context=".ui.newdetail.NewDetailActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        app:civ_border_color="@color/whiteAlpha80"
+        app:civ_border_width="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_avatar_gray_76dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvNickName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="13dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@id/tvLikeCount"
+        app:layout_constraintStart_toEndOf="@id/ivAvatar"
+        app:layout_constraintTop_toTopOf="@id/ivAvatar"
+        app:typeface="fzdb1Typeface"
+        tools:text="香柠气泡" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivLike"
+        app:layout_constraintEnd_toStartOf="@id/ivLike"
+        app:layout_constraintTop_toTopOf="@id/ivLike"
+        app:typeface="fzlLTypeface"
+        tools:text="29" />
+
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="14dp"
+        android:paddingStart="5dp"
+        android:src="@drawable/ic_like"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvReplyUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/whiteAlpha35"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tvNickName"
+        app:layout_constraintTop_toBottomOf="@id/tvNickName"
+        app:typeface="fzlLTypeface"
+        tools:text="回复 @vipyinzhiwei" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@id/ivLike"
+        app:layout_constraintStart_toStartOf="@id/tvNickName"
+        app:layout_constraintTop_toBottomOf="@id/tvReplyUser"
+        app:typeface="fzlLTypeface"
+        tools:text="噜啦啦噜啦啦来了" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupReply"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_radius_black_alpha_85_4dp_bg"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvReplyUser,ivReplyAvatar,tvReplyNickName,tvReplyMessage,spaceReplyEnd,tvShowConversation"
+        app:layout_constraintBottom_toBottomOf="@id/spaceReplyEnd"
+        app:layout_constraintEnd_toEndOf="@id/ivLike"
+        app:layout_constraintStart_toStartOf="@id/tvMessage"
+        app:layout_constraintTop_toBottomOf="@id/tvMessage" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivReplyAvatar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="11dp"
+        app:civ_border_color="@color/gray"
+        app:civ_border_width="1px"
+        app:layout_constraintStart_toStartOf="@id/groupReply"
+        app:layout_constraintTop_toTopOf="@id/groupReply"
+        tools:src="@drawable/ic_avatar_gray_76dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvReplyNickName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="13dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/whiteAlpha10"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@id/groupReply"
+        app:layout_constraintStart_toEndOf="@id/ivReplyAvatar"
+        app:layout_constraintTop_toTopOf="@id/ivReplyAvatar"
+        app:typeface="fzdb1Typeface"
+        tools:text="那么稻草" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvReplyMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/whiteAlpha25"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/groupReply"
+        app:layout_constraintStart_toStartOf="@id/tvReplyNickName"
+        app:layout_constraintTop_toBottomOf="@id/tvReplyNickName"
+        app:typeface="fzlLTypeface"
+        tools:text="时代在变，思想不能固话。接受多元化，惟愿我们都心怀善意。" />
+
+    <Space
+        android:id="@+id/spaceReplyEnd"
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        app:layout_constraintEnd_toEndOf="@id/groupReply"
+        app:layout_constraintStart_toStartOf="@id/groupReply"
+        app:layout_constraintTop_toBottomOf="@id/tvReplyMessage" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvShowConversation"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/show_conversation"
+        android:textColor="@color/whiteAlpha25"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvReply"
+        app:layout_constraintStart_toStartOf="@id/tvMessage"
+        app:layout_constraintTop_toTopOf="@id/tvReply"
+        app:typeface="fzdb1Typeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvReply"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="@string/reply"
+        android:textColor="@color/whiteAlpha25"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/tvShowConversation"
+        app:layout_constraintTop_toBottomOf="@id/groupReply"
+        app:layout_goneMarginStart="0dp"
+        app:layout_goneMarginTop="6dp"
+        app:typeface="fzdb1Typeface" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/whiteAlpha20"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvReply"
+        app:layout_constraintStart_toEndOf="@id/tvReply"
+        app:layout_constraintTop_toTopOf="@id/tvReply"
+        app:typeface="fzlLTypeface"
+        tools:text="13:42" />
+
+    <ImageView
+        android:id="@+id/ivMore"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/ic_more_horiz_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTime" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginTop="6dp"
+        android:background="@color/whiteAlpha85"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvNickName"
+        app:layout_constraintTop_toBottomOf="@id/tvReply" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

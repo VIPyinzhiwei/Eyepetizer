@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llContainer"
+    android:layout_width="match_parent"
+    android:layout_height="207dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.home.discovery.DiscoveryFragment">
+
+    <com.zhpan.bannerview.BannerViewPager
+        android:id="@+id/bannerViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+        android:layout_weight="1" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginEnd="@dimen/listSpaceSize"
+        android:background="@color/gray" />
+
+</LinearLayout>
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="285dp"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/listSpaceSize"
+    tools:context=".ui.home.discovery.DiscoveryFragment">
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:textColor="@color/colorTextPrimaryDark"
+        android:textSize="22sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="热门分类" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvRightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvTitle"
+        android:layout_alignBottom="@id/tvTitle"
+        android:layout_toStartOf="@id/ivInto"
+        android:layout_toEndOf="@id/tvTitle"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/blue"
+        android:textSize="14sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="查看全部分类" />
+
+    <ImageView
+        android:id="@+id/ivInto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvRightText"
+        android:layout_alignBottom="@id/tvRightText"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_into_blue_24dp" />
+
+    <com.eyepetizer.android.ui.common.view.HorizontalRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/divider"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginBottom="12dp"
+        tools:itemCount="16"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_special_square_card_collection_type_item"
+        tools:orientation="horizontal"
+        tools:spanCount="2" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/listSpaceSize"
+        android:background="@color/gray" />
+
+</RelativeLayout>
+

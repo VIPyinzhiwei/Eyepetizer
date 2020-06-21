@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".ui.community.follow.FollowFragment">
+
+    <RelativeLayout
+        android:id="@+id/rvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="52dp"
+            android:src="@drawable/ic_avatar_gray_76dp" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivAvatar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="50dp"
+            android:text="@string/guide_login_tips_four"
+            android:textColor="@color/grayDark"
+            android:textSize="12sp"
+            app:typeface="fzlLTypeface" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/gray" />
+
+</LinearLayout>

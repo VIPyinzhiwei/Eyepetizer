@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/titleBar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/ivNavigateBefore"
+        android:layout_width="@dimen/actionBarSize"
+        android:layout_height="@dimen/actionBarSize"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="14dp"
+        android:src="@drawable/ic_navigate_before_black_44dp" />
+
+    <com.eyepetizer.android.ui.common.view.TypefaceTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:typeface="fzdb1Typeface"
+        tools:text="标题" />
+
+    <TextView
+        android:id="@+id/tvRightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="9dp"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="右侧文字" />
+
+    <ImageView
+        android:id="@+id/ivShare"
+        android:layout_width="@dimen/actionBarSize"
+        android:layout_height="@dimen/actionBarSize"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="16dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_share_black_20dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray" />
+
+</RelativeLayout>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.ugcdetail.UgcDetailActivity">
+
+    <com.eyepetizer.android.ui.ugcdetail.UgcDetailVideoPlayer
+        android:id="@+id/videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="51dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/flHeader"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPullDown"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_pull_down_white_30dp"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="4dp"
+            app:civ_circle_background_color="#dedede" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvPhotoCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="19dp"
+            android:background="@drawable/shape_black_alpha_50_4dp_bg"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:visibility="gone"
+            app:typeface="fzdb1Typeface"
+            tools:text="1/4"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/llUgcInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/blackAlpha50"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlUserInfo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="13dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                tools:src="@drawable/ic_avatar_gray_76dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivAvatarStar"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignEnd="@id/ivAvatar"
+                android:layout_alignBottom="@id/ivAvatar"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_star_white_15dp"
+                android:visibility="gone"
+                app:civ_border_color="@color/gray"
+                app:civ_border_width="1px"
+                app:civ_circle_background_color="@color/blue"
+                tools:visibility="visible" />
+
+            <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                android:id="@+id/tvNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6dp"
+                android:layout_toStartOf="@id/tvPrivateLetter"
+                android:layout_toEndOf="@id/ivAvatar"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:typeface="fzdb1Typeface"
+                tools:text="vipyinzhiwei" />
+
+            <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                android:id="@+id/tvFollow"
+                style="@style/Eyepetizer.FollowTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="13dp"
+                android:background="@drawable/shape_follow_radius_white_4dp_bg"
+                android:textColor="@color/white" />
+
+            <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                android:id="@+id/tvPrivateLetter"
+                android:layout_width="44dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="13dp"
+                android:layout_toStartOf="@id/tvFollow"
+                android:background="@drawable/shape_blue_4dp_bg"
+                android:gravity="center"
+                android:text="@string/private_letter"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:typeface="fzdb1Typeface" />
+        </RelativeLayout>
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:typeface="fzlLTypeface"
+            tools:text="洞察人间" />
+
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
+            android:id="@+id/tvTagName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_gray_4dp_bg"
+            android:ellipsize="end"
+            android:paddingStart="5dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="2dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:typeface="fzlLTypeface"
+            tools:text="用旅行穿越生活…" />
+
+        <View
+            android:id="@+id/dividerConsumption"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="14dp"
+            android:background="#7f7f7f" />
+
+        <LinearLayout
+            android:id="@+id/llConsumption"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="14dp">
+
+            <ImageView
+                android:id="@+id/ivCollectionCount"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_favorite_border_white_20dp" />
+
+            <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                android:id="@+id/tvCollectionCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:gravity="top"
+                android:paddingStart="9dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCollectionCount"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:typeface="fzdb1Typeface"
+                tools:text="0" />
+
+            <ImageView
+                android:id="@+id/ivReply"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_reply_white_20dp" />
+
+            <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                android:id="@+id/tvReplyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:gravity="top"
+                android:paddingStart="9dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:typeface="fzdb1Typeface"
+                tools:text="0" />
+
+            <ImageView
+                android:id="@+id/ivFavorites"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_star_white_20dp" />
+
+            <com.eyepetizer.android.ui.common.view.TypefaceTextView
+                android:id="@+id/tvFavorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingStart="9dp"
+                android:text="@string/favorites"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:typeface="fzdb1Typeface" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/ivShare"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:src="@drawable/ic_share_white_20dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

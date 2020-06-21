@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.eyepetizer.android.ui.common.view.TypefaceTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvNews"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="13dp"
+    android:paddingEnd="13dp"
+    android:textColor="@color/colorTextPrimaryDark"
+    android:textSize="12sp"
+    app:typeface="fzlLTypeface"
+    tools:context=".ui.home.commend.CommendFragment"
+    tools:text="Netfix | 因社会戾气沉重，[黑镜]第六季或延迟推出" />

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- 常见界面标题栏大小 -->
+    <dimen name="actionBarSize">48dp</dimen>
+
+    <!-- 其他界面标题栏大小 -->
+    <dimen name="actionBarSizeSecondary">44dp</dimen>
+
+    <!-- 常见列表左边or右边，距离屏幕间隔。 -->
+    <dimen name="listSpaceSize">14dp</dimen>
+
+    <!-- 常见列表封面高度 -->
+    <dimen name="coverSize">183dp</dimen>
+
+    <!-- 视频详情页，播放器高度 -->
+    <dimen name="videoPlayerSize">202dp</dimen>
+
+</resources>
