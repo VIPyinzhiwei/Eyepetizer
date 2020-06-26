@@ -1,3 +1,5 @@
+中文 | [English](README-en.md)
+
 # Eyepetizer
 基于 [Kotlin][1] 语言仿写「[开眼 Eyepetizer][2]」的一个短视频 Android 客户端项目，采用 [Jetpack][3] + [协程][30]实现的 MVVM 架构。
 
@@ -46,7 +48,8 @@
 ## 关于我
 - RealName : 殷志威
 - NickName : vipyinzhiwei
-- Email : vipyinzhiwei@gmail.com
+- WeChat : vipyinzhiwei
+- Email : <vipyinzhiwei@gmail.com>
 - Blog : <https://www.vipyinzhiwei.com>
 
 ## 鼓励
@@ -122,5 +125,3 @@ limitations under the License.
 [28]:https://github.com/Tencent/VasSonic
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
-
-
