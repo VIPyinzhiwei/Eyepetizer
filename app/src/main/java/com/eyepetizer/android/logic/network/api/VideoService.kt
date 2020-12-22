@@ -20,7 +20,6 @@ import com.eyepetizer.android.logic.model.VideoBeanForClient
 import com.eyepetizer.android.logic.model.VideoRelated
 import com.eyepetizer.android.logic.model.VideoReplies
 import com.eyepetizer.android.logic.network.ServiceCreator
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -38,19 +37,19 @@ interface VideoService {
      * 视频详情-视频信息
      */
     @GET("api/v2/video/{id}")
-    fun getVideoBeanForClient(@Path("id") videoId: Long): Call<VideoBeanForClient>
+    suspend fun getVideoBeanForClient(@Path("id") videoId: Long): VideoBeanForClient
 
     /**
      * 视频详情-推荐列表
      */
     @GET("api/v4/video/related")
-    fun getVideoRelated(@Query("id") videoId: Long): Call<VideoRelated>
+    suspend fun getVideoRelated(@Query("id") videoId: Long): VideoRelated
 
     /**
      * 视频详情-评论列表
      */
     @GET
-    fun getVideoReplies(@Url url: String): Call<VideoReplies>
+    suspend fun getVideoReplies(@Url url: String): VideoReplies
 
     companion object {
 

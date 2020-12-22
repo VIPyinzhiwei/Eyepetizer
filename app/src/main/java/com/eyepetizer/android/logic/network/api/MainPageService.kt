@@ -18,7 +18,6 @@ package com.eyepetizer.android.logic.network.api
 
 import com.eyepetizer.android.logic.model.*
 import com.eyepetizer.android.logic.network.ServiceCreator
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
 
@@ -34,43 +33,43 @@ interface MainPageService {
      * 首页-发现列表
      */
     @GET
-    fun getDiscovery(@Url url: String): Call<Discovery>
+    suspend fun getDiscovery(@Url url: String): Discovery
 
     /**
      * 首页-推荐列表
      */
     @GET
-    fun getHomePageRecommend(@Url url: String): Call<HomePageRecommend>
+    suspend fun getHomePageRecommend(@Url url: String): HomePageRecommend
 
     /**
      * 首页-日报列表
      */
     @GET
-    fun getDaily(@Url url: String): Call<Daily>
+    suspend fun getDaily(@Url url: String): Daily
 
     /**
      * 社区-推荐列表
      */
     @GET
-    fun getCommunityRecommend(@Url url: String): Call<CommunityRecommend>
+    suspend fun getCommunityRecommend(@Url url: String): CommunityRecommend
 
     /**
      * 社区-关注列表
      */
     @GET
-    fun gethFollow(@Url url: String): Call<Follow>
+    suspend fun gethFollow(@Url url: String): Follow
 
     /**
      * 通知-推送列表
      */
     @GET
-    fun getPushMessage(@Url url: String): Call<PushMessage>
+    suspend fun getPushMessage(@Url url: String): PushMessage
 
     /**
      * 搜索-热搜关键词
      */
     @GET("api/v3/queries/hot")
-    fun getHotSearch(): Call<List<String>>
+    suspend fun getHotSearch(): List<String>
 
     companion object {
 
