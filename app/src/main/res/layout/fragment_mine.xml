@@ -107,8 +107,7 @@
             <com.eyepetizer.android.ui.common.view.TypefaceTextView
                 android:id="@+id/tvFollow"
                 style="@style/Eyepetizer.MineTextView"
-                android:paddingStart="13dp"
-                android:paddingEnd="13dp"
+                android:paddingHorizontal="13dp"
                 android:text="@string/my_follow" />
 
             <com.eyepetizer.android.ui.common.view.TypefaceTextView
@@ -143,8 +142,7 @@
                 android:layout_marginTop="45dp"
                 android:layout_marginBottom="15dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
+                android:paddingHorizontal="5dp"
                 android:textColor="@color/grayDark"
                 android:textSize="11sp"
                 app:typeface="fzlLTypeface"

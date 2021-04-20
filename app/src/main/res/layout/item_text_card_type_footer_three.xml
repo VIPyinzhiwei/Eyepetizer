@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="53dp"
-    android:paddingStart="@dimen/listSpaceSize"
-    android:paddingEnd="@dimen/listSpaceSize"
+    android:paddingHorizontal="@dimen/listSpaceSize"
     tools:context=".ui.home.discovery.DiscoveryFragment"
     tools:visibility="visible">
 
@@ -30,8 +29,7 @@
             android:background="@drawable/ic_refresh_chat_bg"
             android:elevation="5dp"
             android:gravity="center"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:paddingHorizontal="12dp"
             android:text="@string/refresh_commend"
             android:textColor="@color/white"
             android:textSize="14sp"

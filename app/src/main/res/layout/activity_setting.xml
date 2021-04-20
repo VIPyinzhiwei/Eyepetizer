@@ -37,8 +37,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="45dp"
                     android:gravity="center"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
+                    android:paddingHorizontal="5dp"
                     android:text="@string/daily_update_hint"
                     android:textSize="12sp"
                     app:typeface="fzlLTypeface" />
@@ -59,8 +58,7 @@
                     <com.eyepetizer.android.ui.common.view.TypefaceTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_marginEnd="9dp"
+                        android:layout_marginHorizontal="9dp"
                         android:text="@string/split_line"
                         android:textColor="@color/black"
                         android:textSize="13sp"
@@ -78,8 +76,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="45dp"
                     android:gravity="center"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
+                    android:paddingHorizontal="5dp"
                     android:text="@string/wifi_follow_auto_play"
                     android:textSize="12sp"
                     app:typeface="fzlLTypeface" />
@@ -100,8 +97,7 @@
                     <com.eyepetizer.android.ui.common.view.TypefaceTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_marginEnd="9dp"
+                        android:layout_marginHorizontal="9dp"
                         android:text="@string/split_line"
                         android:textColor="@color/black"
                         android:textSize="13sp"
@@ -120,8 +116,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="45dp"
                     android:gravity="center"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
+                    android:paddingHorizontal="5dp"
                     android:text="@string/translate"
                     android:textSize="12sp"
                     app:typeface="fzlLTypeface" />
@@ -142,8 +137,7 @@
                     <com.eyepetizer.android.ui.common.view.TypefaceTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_marginEnd="9dp"
+                        android:layout_marginHorizontal="9dp"
                         android:text="@string/split_line"
                         android:textColor="@color/black"
                         android:textSize="13sp"

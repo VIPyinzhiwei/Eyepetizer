@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="53dp"
-    android:paddingStart="@dimen/listSpaceSize"
-    android:paddingEnd="@dimen/listSpaceSize"
+    android:paddingHorizontal="@dimen/listSpaceSize"
     tools:context=".ui.home.discovery.DiscoveryFragment"
     tools:visibility="visible">
 

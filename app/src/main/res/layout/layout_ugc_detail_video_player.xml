@@ -59,8 +59,7 @@
             android:max="100"
             android:maxHeight="2dp"
             android:minHeight="2dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingVertical="8dp"
             android:progressDrawable="@drawable/video_seek_progress"
             android:thumb="@drawable/video_seek_thumb" />
 

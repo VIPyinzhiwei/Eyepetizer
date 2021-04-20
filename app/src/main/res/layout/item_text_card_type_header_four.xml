@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="14dp"
-    android:paddingEnd="14dp"
+    android:paddingHorizontal="@dimen/listSpaceSize"
     tools:background="@color/blackAlpha50"
     tools:context=".ui.newdetail.NewDetailActivity"
     tools:visibility="visible">

@@ -49,10 +49,8 @@
         android:layout_width="@dimen/actionBarSize"
         android:layout_height="@dimen/actionBarSize"
         android:layout_alignParentEnd="true"
-        android:paddingStart="16dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="15dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="15dp"
         android:src="@drawable/ic_share_black_20dp"
         android:visibility="gone"
         tools:visibility="visible" />
