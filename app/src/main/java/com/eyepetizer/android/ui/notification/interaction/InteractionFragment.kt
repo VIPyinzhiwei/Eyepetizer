@@ -37,8 +37,8 @@ class InteractionFragment : BaseFragment() {
         return super.onCreateView(inflater.inflate(R.layout.fragment_notification_login_tips, container, false))
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         tvLogin.setOnClickListener { LoginActivity.start(activity) }
     }
 

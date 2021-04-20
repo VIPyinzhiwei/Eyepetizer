@@ -79,7 +79,7 @@ open class BaseFragment : Fragment(), RequestLifecycle {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         // 缓存当前依附的activity
-        activity = getActivity()!!
+        activity = requireActivity()
         logD(TAG, "BaseFragment-->onAttach()")
     }
 

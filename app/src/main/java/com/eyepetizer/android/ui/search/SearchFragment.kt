@@ -63,8 +63,8 @@ class SearchFragment : BaseFragment() {
         return super.onCreateView(inflater.inflate(R.layout.fragment_search, container, false))
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         llSearch.visibleAlphaAnimation(500)
         etQuery.setDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_search_gray_17dp), 14f, 14f)
         etQuery.setOnEditorActionListener(EditorActionListener())

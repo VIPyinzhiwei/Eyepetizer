@@ -55,8 +55,8 @@ class HomePageFragment : BaseViewPagerFragment() {
         return super.onCreateView(inflater.inflate(R.layout.fragment_main_container, container, false))
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         ivCalendar.visibility = View.VISIBLE
         viewPager?.currentItem = 1
     }

@@ -49,8 +49,8 @@ open class ShareDialogFragment : BottomSheetDialogFragment() {
         return inflater.inflate(R.layout.fragment_share_dialog, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         activity?.let { act ->
             attachedActivity = act

@@ -47,8 +47,8 @@ class MineFragment : BaseFragment() {
         return super.onCreateView(inflater.inflate(R.layout.fragment_mine, container, false))
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         tvVersionNumber.text = String.format(GlobalUtil.getString(R.string.version_show), GlobalUtil.eyepetizerVersionName)
         setOnClickListener(
             ivMore, ivAvatar, tvLoginTips, tvFavorites, tvCache, tvFollow, tvWatchRecord, tvNotificationToggle,

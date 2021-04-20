@@ -17,6 +17,7 @@
 package com.eyepetizer.android.ui.common.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -44,7 +45,7 @@ abstract class BaseViewPagerFragment : BaseFragment() {
 
     protected var pageChangeCallback: PageChangeCallback? = null
 
-    protected val adapter: VpAdapter by lazy { VpAdapter(getActivity()!!).apply { addFragments(createFragments) } }
+    protected val adapter: VpAdapter by lazy { VpAdapter(requireActivity()).apply { addFragments(createFragments) } }
 
     protected var offscreenPageLimit = 1
 
@@ -52,8 +53,8 @@ abstract class BaseViewPagerFragment : BaseFragment() {
 
     abstract val createFragments: Array<Fragment>
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupViews()
     }
 

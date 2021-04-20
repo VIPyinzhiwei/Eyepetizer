@@ -55,8 +55,8 @@ class FollowFragment : BaseFragment() {
         return super.onCreateView(inflater.inflate(R.layout.fragment_refresh_layout, container, false))
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         adapter = FollowAdapter(this, viewModel.dataList)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
