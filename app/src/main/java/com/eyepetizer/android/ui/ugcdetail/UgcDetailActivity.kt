@@ -22,6 +22,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivityUgcDetailBinding
 import com.eyepetizer.android.extension.showToast
 import com.eyepetizer.android.logic.model.CommunityRecommend
 import com.eyepetizer.android.ui.common.callback.AutoPlayPageChangeListener
@@ -29,8 +30,6 @@ import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.util.GlobalUtil
 import com.eyepetizer.android.util.IntentDataHolderUtil
 import com.shuyu.gsyvideoplayer.GSYVideoManager
-import kotlinx.android.synthetic.main.activity_ugc_detail.*
-
 
 /**
  * 社区-推荐详情页。
@@ -40,13 +39,20 @@ import kotlinx.android.synthetic.main.activity_ugc_detail.*
  */
 class UgcDetailActivity : BaseActivity() {
 
+    var _binding: ActivityUgcDetailBinding? = null
+
+    val binding: ActivityUgcDetailBinding
+        get() = _binding!!
+
     private val viewModel by lazy { ViewModelProvider(this).get(UgcDetailViewModel::class.java) }
 
     private lateinit var adapter: UgcDetailAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ugc_detail)
+        _binding = ActivityUgcDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -69,6 +75,7 @@ class UgcDetailActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         GSYVideoManager.releaseAllVideos()
+        _binding = null
     }
 
     override fun finish() {
@@ -87,11 +94,11 @@ class UgcDetailActivity : BaseActivity() {
             finish()
         } else {
             adapter = UgcDetailAdapter(this, viewModel.dataList!!)
-            viewPager.adapter = adapter
-            viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
-            viewPager.offscreenPageLimit = 1
-            viewPager.registerOnPageChangeCallback(AutoPlayPageChangeListener(viewPager, viewModel.itemPosition, R.id.videoPlayer))
-            viewPager.setCurrentItem(viewModel.itemPosition, false)
+            binding.viewPager.adapter = adapter
+            binding.viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
+            binding.viewPager.offscreenPageLimit = 1
+            binding.viewPager.registerOnPageChangeCallback(AutoPlayPageChangeListener(binding.viewPager, viewModel.itemPosition, R.id.videoPlayer))
+            binding.viewPager.setCurrentItem(viewModel.itemPosition, false)
         }
     }
 

@@ -28,6 +28,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.FragmentRefreshLayoutBinding
 import com.eyepetizer.android.event.MessageEvent
 import com.eyepetizer.android.event.RefreshEvent
 import com.eyepetizer.android.extension.dp2px
@@ -37,7 +38,6 @@ import com.eyepetizer.android.util.GlobalUtil
 import com.eyepetizer.android.util.InjectorUtil
 import com.eyepetizer.android.util.ResponseHandler
 import com.scwang.smart.refresh.layout.constant.RefreshState
-import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
 /**
  * 社区-推荐列表界面。
@@ -46,6 +46,11 @@ import kotlinx.android.synthetic.main.fragment_refresh_layout.*
  * @since  2020/5/1
  */
 class CommendFragment : BaseFragment() {
+
+    private var _binding: FragmentRefreshLayoutBinding? = null
+
+    private val binding
+        get() = _binding!!
 
     /**
      * 列表左or右间距
@@ -56,6 +61,7 @@ class CommendFragment : BaseFragment() {
      * 列表中间内间距，左or右。
      */
     val middleSpace = dp2px(3f)
+
 
     /**
      * 通过获取屏幕宽度来计算出每张图片最大的宽度。
@@ -76,7 +82,8 @@ class CommendFragment : BaseFragment() {
     private lateinit var adapter: CommendAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater.inflate(R.layout.fragment_refresh_layout, container, false))
+        _binding = FragmentRefreshLayoutBinding.inflate(layoutInflater, container, false)
+        return super.onCreateView(binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,14 +91,19 @@ class CommendFragment : BaseFragment() {
         adapter = CommendAdapter(this, viewModel.dataList)
         val mainLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         mainLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        recyclerView.layoutManager = mainLayoutManager
-        recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(CommendAdapter.ItemDecoration(this))
-        recyclerView.setHasFixedSize(true)
-        recyclerView.itemAnimator = null
-        refreshLayout.setOnRefreshListener { viewModel.onRefresh() }
-        refreshLayout.setOnLoadMoreListener { viewModel.onLoadMore() }
+        binding.recyclerView.layoutManager = mainLayoutManager
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(CommendAdapter.ItemDecoration(this))
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.itemAnimator = null
+        binding.refreshLayout.setOnRefreshListener { viewModel.onRefresh() }
+        binding.refreshLayout.setOnLoadMoreListener { viewModel.onLoadMore() }
         observe()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun loadDataOnce() {
@@ -113,8 +125,8 @@ class CommendFragment : BaseFragment() {
     override fun onMessageEvent(messageEvent: MessageEvent) {
         super.onMessageEvent(messageEvent)
         if (messageEvent is RefreshEvent && javaClass == messageEvent.activityClass) {
-            refreshLayout.autoRefresh()
-            if (recyclerView.adapter?.itemCount ?: 0 > 0) recyclerView.scrollToPosition(0)
+            binding.refreshLayout.autoRefresh()
+            if (binding.recyclerView.adapter?.itemCount ?: 0 > 0) binding.recyclerView.scrollToPosition(0)
         }
     }
 
@@ -123,20 +135,20 @@ class CommendFragment : BaseFragment() {
             val response = result.getOrNull()
             if (response == null) {
                 ResponseHandler.getFailureTips(result.exceptionOrNull()).let { if (viewModel.dataList.isNullOrEmpty()) loadFailed(it) else it.showToast() }
-                refreshLayout.closeHeaderOrFooter()
+                binding.refreshLayout.closeHeaderOrFooter()
                 return@Observer
             }
             loadFinished()
             viewModel.nextPageUrl = response.nextPageUrl
             if (response.itemList.isNullOrEmpty() && viewModel.dataList.isEmpty()) {
-                refreshLayout.closeHeaderOrFooter()
+                binding.refreshLayout.closeHeaderOrFooter()
                 return@Observer
             }
             if (response.itemList.isNullOrEmpty() && viewModel.dataList.isNotEmpty()) {
-                refreshLayout.finishLoadMoreWithNoMoreData()
+                binding.refreshLayout.finishLoadMoreWithNoMoreData()
                 return@Observer
             }
-            when (refreshLayout.state) {
+            when (binding.refreshLayout.state) {
                 RefreshState.None, RefreshState.Refreshing -> {
                     viewModel.dataList.clear()
                     viewModel.dataList.addAll(response.itemList)
@@ -151,9 +163,9 @@ class CommendFragment : BaseFragment() {
                 }
             }
             if (response.nextPageUrl.isNullOrEmpty()) {
-                refreshLayout.finishLoadMoreWithNoMoreData()
+                binding.refreshLayout.finishLoadMoreWithNoMoreData()
             } else {
-                refreshLayout.closeHeaderOrFooter()
+                binding.refreshLayout.closeHeaderOrFooter()
             }
         })
     }

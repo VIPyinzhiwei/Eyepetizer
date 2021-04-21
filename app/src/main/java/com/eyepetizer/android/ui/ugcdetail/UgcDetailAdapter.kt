@@ -37,7 +37,6 @@ import com.github.chrisbanes.photoview.PhotoView
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.item_ugc_detail.view.*
 
 class UgcDetailAdapter(val activity: UgcDetailActivity, var dataList: List<CommunityRecommend.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -56,7 +55,9 @@ class UgcDetailAdapter(val activity: UgcDetailActivity, var dataList: List<Commu
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
         CommendAdapter.FOLLOW_CARD_TYPE -> FollowCardViewHolder(R.layout.item_ugc_detail.inflate(parent))
-        else -> EmptyViewHolder(View(parent.context).apply { layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT) })
+        else -> EmptyViewHolder(View(parent.context).apply {
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        })
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

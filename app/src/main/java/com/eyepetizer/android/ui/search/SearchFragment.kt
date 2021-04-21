@@ -35,6 +35,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.FragmentSearchBinding
 import com.eyepetizer.android.extension.logW
 import com.eyepetizer.android.extension.setDrawable
 import com.eyepetizer.android.extension.showToast
@@ -43,9 +44,6 @@ import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.ui.common.ui.BaseFragment
 import com.eyepetizer.android.util.InjectorUtil
 import com.umeng.analytics.MobclickAgent
-import kotlinx.android.synthetic.main.fragment_refresh_layout.recyclerView
-import kotlinx.android.synthetic.main.fragment_search.*
-
 
 /**
  * 搜索界面。
@@ -55,27 +53,33 @@ import kotlinx.android.synthetic.main.fragment_search.*
  */
 class SearchFragment : BaseFragment() {
 
+    var _binding: FragmentSearchBinding? = null
+
+    val binding: FragmentSearchBinding
+        get() = _binding!!
+
     private val viewModel by lazy { ViewModelProvider(this, InjectorUtil.getSearchViewModelFactory()).get(SearchViewModel::class.java) }
 
     private lateinit var adapter: HotSearchAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater.inflate(R.layout.fragment_search, container, false))
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return super.onCreateView(binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        llSearch.visibleAlphaAnimation(500)
-        etQuery.setDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_search_gray_17dp), 14f, 14f)
-        etQuery.setOnEditorActionListener(EditorActionListener())
-        tvCancel.setOnClickListener {
+        binding.llSearch.visibleAlphaAnimation(500)
+        binding.etQuery.setDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_search_gray_17dp), 14f, 14f)
+        binding.etQuery.setOnEditorActionListener(EditorActionListener())
+        binding.tvCancel.setOnClickListener {
             hideSoftKeyboard()
             removeFragment(activity, this)
         }
         val layoutManager = LinearLayoutManager(activity)
-        recyclerView.layoutManager = layoutManager
+        binding.recyclerView.layoutManager = layoutManager
         adapter = HotSearchAdapter(this, viewModel.dataList)
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
         viewModel.onRefresh()
         observe()
     }
@@ -83,6 +87,7 @@ class SearchFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         hideSoftKeyboard()
+        _binding = null
     }
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
@@ -95,7 +100,7 @@ class SearchFragment : BaseFragment() {
 
     private fun observe() {
         viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
-            etQuery.showSoftKeyboard()
+            binding.etQuery.showSoftKeyboard()
             val response = result.getOrNull()
             if (response == null) {
                 result.exceptionOrNull()?.printStackTrace()
@@ -146,7 +151,7 @@ class SearchFragment : BaseFragment() {
         override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 MobclickAgent.onEvent(activity, Const.Mobclick.EVENT3)
-                if (etQuery.text.toString().isEmpty()) {
+                if (binding.etQuery.text.toString().isEmpty()) {
                     R.string.input_keywords_tips.showToast()
                     return false
                 }

@@ -25,7 +25,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.webkit.*
-import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivityWebViewBinding
 import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.extension.preCreateSession
 import com.eyepetizer.android.extension.visible
@@ -35,8 +35,6 @@ import com.eyepetizer.android.ui.common.ui.vassonic.SonicRuntimeImpl
 import com.eyepetizer.android.ui.common.ui.vassonic.SonicSessionClientImpl
 import com.eyepetizer.android.util.GlobalUtil
 import com.tencent.sonic.sdk.*
-import kotlinx.android.synthetic.main.activity_web_view.*
-import kotlinx.android.synthetic.main.layout_title_bar.*
 
 
 /**
@@ -46,6 +44,11 @@ import kotlinx.android.synthetic.main.layout_title_bar.*
  * @since  2020/5/22
  */
 class WebViewActivity : BaseActivity() {
+
+    var _binding: ActivityWebViewBinding? = null
+
+    val binding: ActivityWebViewBinding
+        get() = _binding!!
 
     private var title: String = ""
 
@@ -65,7 +68,8 @@ class WebViewActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         initParams()
         preloadInitVasSonic()
-        setContentView(R.layout.activity_web_view)
+        _binding = ActivityWebViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun setupViews() {
@@ -73,25 +77,26 @@ class WebViewActivity : BaseActivity() {
         initTitleBar()
         initWebView()
         if (sonicSessionClient != null) {
-            sonicSessionClient?.bindWebView(webView)
+            sonicSessionClient?.bindWebView(binding.webView)
             sonicSessionClient?.clientReady()
         } else {
-            webView.loadUrl(linkUrl)
+            binding.webView.loadUrl(linkUrl)
         }
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
+        if (binding.webView.canGoBack()) {
+            binding.webView.goBack()
         } else {
             finish()
         }
     }
 
     override fun onDestroy() {
-        webView.destroy()
+        binding.webView.destroy()
         sonicSession?.destroy()
         sonicSession = null
+        _binding = null
         super.onDestroy()
     }
 
@@ -104,19 +109,19 @@ class WebViewActivity : BaseActivity() {
     }
 
     private fun initTitleBar() {
-        tvTitle.text = title
-        if (isShare) ivShare.visible()
-        ivShare.setOnClickListener { showDialogShare("${title}:${linkUrl}") }
+        binding.titleBar.tvTitle.text = title
+        if (isShare) binding.titleBar.ivShare.visible()
+        binding.titleBar.ivShare.setOnClickListener { showDialogShare("${title}:${linkUrl}") }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
-        webView.settings.run {
+        binding.webView.settings.run {
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             javaScriptEnabled = true
-            webView.removeJavascriptInterface("searchBoxJavaBridge_")
+            binding.webView.removeJavascriptInterface("searchBoxJavaBridge_")
             intent.putExtra(SonicJavaScriptInterface.PARAM_LOAD_URL_TIME, System.currentTimeMillis())
-            webView.addJavascriptInterface(SonicJavaScriptInterface(sonicSessionClient, intent), "sonic")
+            binding.webView.addJavascriptInterface(SonicJavaScriptInterface(sonicSessionClient, intent), "sonic")
             allowContentAccess = true
             databaseEnabled = true
             domStorageEnabled = true
@@ -128,9 +133,9 @@ class WebViewActivity : BaseActivity() {
             defaultTextEncodingName = "UTF-8"
             setSupportZoom(true)
         }
-        webView.webChromeClient = UIWebChromeClient()
-        webView.webViewClient = UIWebViewClient()
-        webView.setDownloadListener { url, _, _, _, _ ->
+        binding.webView.webChromeClient = UIWebChromeClient()
+        binding.webView.webViewClient = UIWebViewClient()
+        binding.webView.setDownloadListener { url, _, _, _, _ ->
             // 调用系统浏览器下载
             val uri = Uri.parse(url)
             val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -186,14 +191,14 @@ class WebViewActivity : BaseActivity() {
             logD(TAG, "onPageStarted >>> url:${url}")
             linkUrl = url
             super.onPageStarted(view, url, favicon)
-            progressBar.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
         }
 
         override fun onPageFinished(view: WebView, url: String) {
             logD(TAG, "onPageFinished >>> url:${url}")
             super.onPageFinished(view, url)
             sonicSession?.sessionClient?.pageFinish(url)
-            progressBar.visibility = View.INVISIBLE
+            binding.progressBar.visibility = View.INVISIBLE
         }
 
         override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? {
@@ -212,7 +217,7 @@ class WebViewActivity : BaseActivity() {
             if (!isTitleFixed) {
                 title?.run {
                     this@WebViewActivity.title = this
-                    tvTitle.text = this
+                    binding.titleBar.tvTitle.text = this
                 }
             }
         }

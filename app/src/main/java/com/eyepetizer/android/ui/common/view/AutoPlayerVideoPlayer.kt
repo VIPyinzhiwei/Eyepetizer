@@ -23,7 +23,6 @@ import com.eyepetizer.android.extension.gone
 import com.eyepetizer.android.extension.logD
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView
-import kotlinx.android.synthetic.main.layout_auto_play_video_player.view.*
 
 /**
  * 常见列表，视频播放器。
@@ -33,13 +32,20 @@ import kotlinx.android.synthetic.main.layout_auto_play_video_player.view.*
  */
 class AutoPlayerVideoPlayer : StandardGSYVideoPlayer {
 
-    constructor(context: Context) : super(context)
+    var start: ImageView? = null
 
-    constructor(context: Context, fullFlag: Boolean?) : super(context, fullFlag)
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
+    constructor(context: Context, fullFlag: Boolean?) : super(context, fullFlag)
+
     override fun getLayoutId() = R.layout.layout_auto_play_video_player
+
+    override fun init(context: Context?) {
+        super.init(context)
+        start = findViewById(R.id.start)
+    }
 
     override fun touchSurfaceMoveFullLogic(absDeltaX: Float, absDeltaY: Float) {
         super.touchSurfaceMoveFullLogic(absDeltaX, absDeltaY)
@@ -90,7 +96,7 @@ class AutoPlayerVideoPlayer : StandardGSYVideoPlayer {
         super.changeUiToPlayingShow()
         logD(javaClass.simpleName, "changeUiToPlayingShow")
         mBottomContainer.gone()
-        start.gone()
+        start?.gone()
     }
 
     //开始缓冲

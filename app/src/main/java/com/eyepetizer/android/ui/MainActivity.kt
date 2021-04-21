@@ -25,6 +25,7 @@ import androidx.lifecycle.Observer
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivityMainBinding
 import com.eyepetizer.android.event.MessageEvent
 import com.eyepetizer.android.event.RefreshEvent
 import com.eyepetizer.android.event.SwitchPagesEvent
@@ -40,7 +41,6 @@ import com.eyepetizer.android.ui.mine.MineFragment
 import com.eyepetizer.android.ui.notification.NotificationFragment
 import com.eyepetizer.android.util.DialogAppraiseTipsWorker
 import com.eyepetizer.android.util.GlobalUtil
-import kotlinx.android.synthetic.main.layout_bottom_navigation_bar.*
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -50,6 +50,11 @@ import org.greenrobot.eventbus.EventBus
  * @since  2020/5/29
  */
 class MainActivity : BaseActivity() {
+
+    var _binding: ActivityMainBinding? = null
+
+    val binding: ActivityMainBinding
+        get() = _binding!!
 
     private var backPressTime = 0L
 
@@ -65,29 +70,38 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun setupViews() {
         observe()
-        setOnClickListener(btnHomePage, btnCommunity, btnNotification, ivRelease, btnMine) {
+        setOnClickListener(
+            binding.navigationBar.btnHomePage, binding.navigationBar.btnCommunity, binding.navigationBar.btnNotification, binding.navigationBar.ivRelease,
+            binding.navigationBar.btnMine
+        ) {
             when (this) {
-                btnHomePage -> {
+                binding.navigationBar.btnHomePage -> {
                     notificationUiRefresh(0)
                     setTabSelection(0)
                 }
-                btnCommunity -> {
+                binding.navigationBar.btnCommunity -> {
                     notificationUiRefresh(1)
                     setTabSelection(1)
                 }
-                btnNotification -> {
+                binding.navigationBar.btnNotification -> {
                     notificationUiRefresh(2)
                     setTabSelection(2)
                 }
-                ivRelease -> {
+                binding.navigationBar.ivRelease -> {
                     LoginActivity.start(this@MainActivity)
                 }
-                btnMine -> {
+                binding.navigationBar.btnMine -> {
                     notificationUiRefresh(3)
                     setTabSelection(3)
                 }
@@ -100,7 +114,7 @@ class MainActivity : BaseActivity() {
         super.onMessageEvent(messageEvent)
         when {
             messageEvent is SwitchPagesEvent && CommendFragment::class.java == messageEvent.activityClass -> {
-                btnCommunity.performClick()
+                binding.navigationBar.btnCommunity.performClick()
             }
             else -> {
             }
@@ -131,8 +145,8 @@ class MainActivity : BaseActivity() {
             hideFragments(this)
             when (index) {
                 0 -> {
-                    ivHomePage.isSelected = true
-                    tvHomePage.isSelected = true
+                    binding.navigationBar.ivHomePage.isSelected = true
+                    binding.navigationBar.tvHomePage.isSelected = true
                     if (homePageFragment == null) {
                         homePageFragment = HomePageFragment.newInstance()
                         add(R.id.homeActivityFragContainer, homePageFragment!!)
@@ -141,8 +155,8 @@ class MainActivity : BaseActivity() {
                     }
                 }
                 1 -> {
-                    ivCommunity.isSelected = true
-                    tvCommunity.isSelected = true
+                    binding.navigationBar.ivCommunity.isSelected = true
+                    binding.navigationBar.tvCommunity.isSelected = true
                     if (communityFragment == null) {
                         communityFragment = CommunityFragment()
                         add(R.id.homeActivityFragContainer, communityFragment!!)
@@ -151,8 +165,8 @@ class MainActivity : BaseActivity() {
                     }
                 }
                 2 -> {
-                    ivNotification.isSelected = true
-                    tvNotification.isSelected = true
+                    binding.navigationBar.ivNotification.isSelected = true
+                    binding.navigationBar.tvNotification.isSelected = true
                     if (notificationFragment == null) {
                         notificationFragment = NotificationFragment()
                         add(R.id.homeActivityFragContainer, notificationFragment!!)
@@ -161,8 +175,8 @@ class MainActivity : BaseActivity() {
                     }
                 }
                 3 -> {
-                    ivMine.isSelected = true
-                    tvMine.isSelected = true
+                    binding.navigationBar.ivMine.isSelected = true
+                    binding.navigationBar.tvMine.isSelected = true
                     if (mineFragment == null) {
                         mineFragment = MineFragment.newInstance()
                         add(R.id.homeActivityFragContainer, mineFragment!!)
@@ -171,8 +185,8 @@ class MainActivity : BaseActivity() {
                     }
                 }
                 else -> {
-                    ivHomePage.isSelected = true
-                    tvHomePage.isSelected = true
+                    binding.navigationBar.ivHomePage.isSelected = true
+                    binding.navigationBar.tvHomePage.isSelected = true
                     if (homePageFragment == null) {
                         homePageFragment = HomePageFragment.newInstance()
                         add(R.id.homeActivityFragContainer, homePageFragment!!)
@@ -185,14 +199,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun clearAllSelected() {
-        ivHomePage.isSelected = false
-        tvHomePage.isSelected = false
-        ivCommunity.isSelected = false
-        tvCommunity.isSelected = false
-        ivNotification.isSelected = false
-        tvNotification.isSelected = false
-        ivMine.isSelected = false
-        tvMine.isSelected = false
+        binding.navigationBar.ivHomePage.isSelected = false
+        binding.navigationBar.tvHomePage.isSelected = false
+        binding.navigationBar.ivCommunity.isSelected = false
+        binding.navigationBar.tvCommunity.isSelected = false
+        binding.navigationBar.ivNotification.isSelected = false
+        binding.navigationBar.tvNotification.isSelected = false
+        binding.navigationBar.ivMine.isSelected = false
+        binding.navigationBar.tvMine.isSelected = false
     }
 
     private fun hideFragments(transaction: FragmentTransaction) {
@@ -207,16 +221,16 @@ class MainActivity : BaseActivity() {
     private fun notificationUiRefresh(selectionIndex: Int) {
         when (selectionIndex) {
             0 -> {
-                if (ivHomePage.isSelected) EventBus.getDefault().post(RefreshEvent(HomePageFragment::class.java))
+                if (binding.navigationBar.ivHomePage.isSelected) EventBus.getDefault().post(RefreshEvent(HomePageFragment::class.java))
             }
             1 -> {
-                if (ivCommunity.isSelected) EventBus.getDefault().post(RefreshEvent(CommunityFragment::class.java))
+                if (binding.navigationBar.ivCommunity.isSelected) EventBus.getDefault().post(RefreshEvent(CommunityFragment::class.java))
             }
             2 -> {
-                if (ivNotification.isSelected) EventBus.getDefault().post(RefreshEvent(NotificationFragment::class.java))
+                if (binding.navigationBar.ivNotification.isSelected) EventBus.getDefault().post(RefreshEvent(NotificationFragment::class.java))
             }
             3 -> {
-                if (ivMine.isSelected) EventBus.getDefault().post(RefreshEvent(MineFragment::class.java))
+                if (binding.navigationBar.ivMine.isSelected) EventBus.getDefault().post(RefreshEvent(MineFragment::class.java))
             }
         }
     }

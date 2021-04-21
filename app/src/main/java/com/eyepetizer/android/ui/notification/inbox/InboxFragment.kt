@@ -20,10 +20,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.FragmentNotificationLoginTipsBinding
 import com.eyepetizer.android.ui.common.ui.BaseFragment
 import com.eyepetizer.android.ui.login.LoginActivity
-import kotlinx.android.synthetic.main.fragment_notification_login_tips.*
 
 /**
  * 通知-私信列表界面。
@@ -33,13 +32,24 @@ import kotlinx.android.synthetic.main.fragment_notification_login_tips.*
  */
 class InboxFragment : BaseFragment() {
 
+    var _binding: FragmentNotificationLoginTipsBinding? = null
+
+    val binding: FragmentNotificationLoginTipsBinding
+        get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater.inflate(R.layout.fragment_notification_login_tips, container, false))
+        _binding = FragmentNotificationLoginTipsBinding.inflate(inflater, container, false)
+        return super.onCreateView(binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvLogin.setOnClickListener { LoginActivity.start(activity) }
+        binding.tvLogin.setOnClickListener { LoginActivity.start(activity) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

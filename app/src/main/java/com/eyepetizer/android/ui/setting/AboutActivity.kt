@@ -23,14 +23,13 @@ import android.os.Bundle
 import android.text.Html
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivityAboutBinding
 import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.ui.common.ui.WebViewActivity
 import com.eyepetizer.android.ui.common.ui.WebViewActivity.Companion.DEFAULT_TITLE
 import com.eyepetizer.android.ui.common.ui.WebViewActivity.Companion.DEFAULT_URL
 import com.eyepetizer.android.util.GlobalUtil
 import com.umeng.analytics.MobclickAgent
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.layout_title_bar.*
 
 /**
  * 关于界面。
@@ -40,29 +39,40 @@ import kotlinx.android.synthetic.main.layout_title_bar.*
  */
 class AboutActivity : BaseActivity() {
 
+    var _binding: ActivityAboutBinding? = null
+
+    val binding: ActivityAboutBinding
+        get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        _binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun setupViews() {
         super.setupViews()
-        tvTitle.text = GlobalUtil.getString(R.string.about)
+        binding.titleBar.tvTitle.text = GlobalUtil.getString(R.string.about)
         val version = "${GlobalUtil.getString(R.string.version)} ${GlobalUtil.appVersionName}"
-        tvAboutVersion.text = version
-        tvThanksTips.text = String.format(GlobalUtil.getString(R.string.thanks_to), GlobalUtil.appName)
+        binding.tvAboutVersion.text = version
+        binding.tvThanksTips.text = String.format(GlobalUtil.getString(R.string.thanks_to), GlobalUtil.appName)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tvOpenSourceList.text = Html.fromHtml("<u>" + GlobalUtil.getString(R.string.open_source_project_list) + "</u>", 0)
+            binding.tvOpenSourceList.text = Html.fromHtml("<u>" + GlobalUtil.getString(R.string.open_source_project_list) + "</u>", 0)
         } else {
-            tvOpenSourceList.text = Html.fromHtml("<u>" + GlobalUtil.getString(R.string.open_source_project_list) + "</u>")
+            binding.tvOpenSourceList.text = Html.fromHtml("<u>" + GlobalUtil.getString(R.string.open_source_project_list) + "</u>")
         }
-        ivLogo.setImageDrawable(GlobalUtil.getAppIcon())
+        binding.ivLogo.setImageDrawable(GlobalUtil.getAppIcon())
 
-        btnEncourage.setOnClickListener {
+        binding.btnEncourage.setOnClickListener {
             MobclickAgent.onEvent(activity, Const.Mobclick.EVENT5)
             WebViewActivity.start(this, DEFAULT_TITLE, DEFAULT_URL, true)
         }
-        tvOpenSourceList.setOnClickListener {
+        binding.tvOpenSourceList.setOnClickListener {
             OpenSourceProjectsActivity.start(this@AboutActivity)
         }
     }

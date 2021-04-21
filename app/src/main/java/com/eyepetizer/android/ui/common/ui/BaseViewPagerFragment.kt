@@ -18,6 +18,7 @@ package com.eyepetizer.android.ui.common.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -29,7 +30,6 @@ import com.eyepetizer.android.ui.search.SearchFragment
 import com.flyco.tablayout.CommonTabLayout
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
-import kotlinx.android.synthetic.main.layout_main_page_title_bar.*
 
 /**
  * Fragment基类，适用场景：页面含有ViewPager+TabLayout的界面。
@@ -38,6 +38,10 @@ import kotlinx.android.synthetic.main.layout_main_page_title_bar.*
  * @since  2020/5/1
  */
 abstract class BaseViewPagerFragment : BaseFragment() {
+
+    protected var ivCalendar: ImageView? = null
+
+    protected var ivSearch: ImageView? = null
 
     protected var viewPager: ViewPager2? = null
 
@@ -65,7 +69,8 @@ abstract class BaseViewPagerFragment : BaseFragment() {
     }
 
     open fun setupViews() {
-        initVeiwPager()
+        ivCalendar = rootView?.findViewById(R.id.ivCalendar)
+        ivSearch = rootView?.findViewById(R.id.ivSearch)
         setOnClickListener(ivCalendar, ivSearch) {
             if (this == ivCalendar) {
                 R.string.currently_not_supported.showToast()
@@ -73,6 +78,7 @@ abstract class BaseViewPagerFragment : BaseFragment() {
                 SearchFragment.switchFragment(activity)
             }
         }
+        initVeiwPager()
     }
 
     protected fun initVeiwPager() {

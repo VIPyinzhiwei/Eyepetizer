@@ -18,6 +18,8 @@
         android:layout_height="1px"
         android:background="@color/grayDark" />
 
-    <include layout="@layout/layout_bottom_navigation_bar" />
+    <include
+        android:id="@+id/navigationBar"
+        layout="@layout/layout_bottom_navigation_bar" />
 
 </LinearLayout>

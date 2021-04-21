@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.multidex.BuildConfig
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.FragmentMineBinding
 import com.eyepetizer.android.extension.setOnClickListener
 import com.eyepetizer.android.extension.showToast
 import com.eyepetizer.android.ui.common.ui.BaseFragment
@@ -33,7 +34,6 @@ import com.eyepetizer.android.ui.setting.AboutActivity
 import com.eyepetizer.android.ui.setting.SettingActivity
 import com.eyepetizer.android.util.GlobalUtil
 import com.umeng.analytics.MobclickAgent
-import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
  * 我的界面。
@@ -43,33 +43,39 @@ import kotlinx.android.synthetic.main.fragment_mine.*
  */
 class MineFragment : BaseFragment() {
 
+    var _binding: FragmentMineBinding? = null
+
+    val binding: FragmentMineBinding
+        get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater.inflate(R.layout.fragment_mine, container, false))
+        _binding = FragmentMineBinding.inflate(inflater, container, false)
+        return super.onCreateView(binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvVersionNumber.text = String.format(GlobalUtil.getString(R.string.version_show), GlobalUtil.eyepetizerVersionName)
+        binding.tvVersionNumber.text = String.format(GlobalUtil.getString(R.string.version_show), GlobalUtil.eyepetizerVersionName)
         setOnClickListener(
-            ivMore, ivAvatar, tvLoginTips, tvFavorites, tvCache, tvFollow, tvWatchRecord, tvNotificationToggle,
-            tvMyBadge, tvFeedback, tvContribute, tvVersionNumber, rootView, llScrollViewContent
+            binding.ivMore, binding.ivAvatar, binding.tvLoginTips, binding.tvFavorites, binding.tvCache, binding.tvFollow, binding.tvWatchRecord,
+            binding.tvNotificationToggle, binding.tvMyBadge, binding.tvFeedback, binding.tvContribute, binding.tvVersionNumber, rootView, binding.llScrollViewContent
         ) {
             when (this) {
-                ivMore -> SettingActivity.start(activity)
+                binding.ivMore -> SettingActivity.start(activity)
 
-                ivAvatar, tvLoginTips, tvFavorites, tvCache, tvFollow, tvWatchRecord, tvNotificationToggle, tvMyBadge -> {
+                binding.ivAvatar, binding.tvLoginTips, binding.tvFavorites, binding.tvCache, binding.tvFollow, binding.tvWatchRecord, binding.tvNotificationToggle, binding.tvMyBadge -> {
                     LoginActivity.start(activity)
                 }
-                tvContribute -> {
+                binding.tvContribute -> {
                     WebViewActivity.start(activity, WebViewActivity.DEFAULT_TITLE, Const.Url.AUTHOR_OPEN, false, false)
                 }
-                tvFeedback -> {
+                binding.tvFeedback -> {
                     WebViewActivity.start(activity, WebViewActivity.DEFAULT_TITLE, WebViewActivity.DEFAULT_URL, true, false, MODE_SONIC_WITH_OFFLINE_CACHE)
                 }
-                tvVersionNumber -> {
+                binding.tvVersionNumber -> {
                     WebViewActivity.start(activity, WebViewActivity.DEFAULT_TITLE, WebViewActivity.DEFAULT_URL, true, false, MODE_SONIC_WITH_OFFLINE_CACHE)
                 }
-                this@MineFragment.rootView, llScrollViewContent -> {
+                this@MineFragment.rootView, binding.llScrollViewContent -> {
                     MobclickAgent.onEvent(activity, Const.Mobclick.EVENT4)
                     AboutActivity.start(activity)
                 }
@@ -79,10 +85,15 @@ class MineFragment : BaseFragment() {
             }
         }
 
-        tvVersionNumber.setOnLongClickListener {
+        binding.tvVersionNumber.setOnLongClickListener {
             String.format(GlobalUtil.getString(R.string.build_type), BuildConfig.BUILD_TYPE).showToast()
             true
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

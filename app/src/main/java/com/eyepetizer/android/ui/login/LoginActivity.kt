@@ -22,12 +22,11 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivityLoginBinding
 import com.eyepetizer.android.extension.*
 import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.ui.common.ui.WebViewActivity
 import com.eyepetizer.android.util.GlobalUtil
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.layout_title_bar.*
 
 /**
  * 登录界面。
@@ -37,10 +36,21 @@ import kotlinx.android.synthetic.main.layout_title_bar.*
  */
 class LoginActivity : BaseActivity() {
 
+    var _binding: ActivityLoginBinding? = null
+
+    val binding: ActivityLoginBinding
+        get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        _binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusBarBackground(R.color.black)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun setupViews() {
@@ -50,36 +60,39 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun initTitleBar() {
-        titleBar.layoutParams.height = resources.getDimensionPixelSize(R.dimen.actionBarSizeSecondary)
-        titleBar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
+        binding.titleBar.titleBar.layoutParams.height = resources.getDimensionPixelSize(R.dimen.actionBarSizeSecondary)
+        binding.titleBar.titleBar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
         val padding = dp2px(9f)
-        ivNavigateBefore.setPadding(padding, padding, padding, padding)
-        ivNavigateBefore.setImageResource(R.drawable.ic_close_white_24dp)
-        tvRightText.visible()
-        tvRightText.text = GlobalUtil.getString(R.string.forgot_password)
-        tvRightText.setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
-        tvRightText.textSize = 12f
-        etPhoneNumberOrEmail.setDrawable(ContextCompat.getDrawable(this, R.drawable.ic_person_white_18dp), 18f, 18f, 0)
-        etPassWord.setDrawable(ContextCompat.getDrawable(this, R.drawable.ic_password_white_lock_18dp), 18f, 18f, 0)
-        divider.gone()
+        binding.titleBar.ivNavigateBefore.setPadding(padding, padding, padding, padding)
+        binding.titleBar.ivNavigateBefore.setImageResource(R.drawable.ic_close_white_24dp)
+        binding.titleBar.tvRightText.visible()
+        binding.titleBar.tvRightText.text = GlobalUtil.getString(R.string.forgot_password)
+        binding.titleBar.tvRightText.setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
+        binding.titleBar.tvRightText.textSize = 12f
+        binding.titleBar.divider.gone()
+        binding.etPhoneNumberOrEmail.setDrawable(ContextCompat.getDrawable(this, R.drawable.ic_person_white_18dp), 18f, 18f, 0)
+        binding.etPassWord.setDrawable(ContextCompat.getDrawable(this, R.drawable.ic_password_white_lock_18dp), 18f, 18f, 0)
     }
 
     private fun initListener() {
-        setOnClickListener(tvRightText, tvUserLogin, tvUserRegister, tvAuthorLogin, tvUserAgreement, tvUserLogin, ivWechat, ivSina, ivQQ) {
+        setOnClickListener(
+            binding.titleBar.tvRightText, binding.tvUserLogin, binding.tvUserRegister, binding.tvAuthorLogin, binding.tvUserAgreement, binding.tvUserLogin,
+            binding.ivWechat, binding.ivSina, binding.ivQQ
+        ) {
             when (this) {
-                tvRightText -> {
+                binding.titleBar.tvRightText -> {
                     WebViewActivity.start(this@LoginActivity, WebViewActivity.DEFAULT_TITLE, Const.Url.FORGET_PASSWORD, false, false)
                 }
-                tvUserRegister -> {
+                binding.tvUserRegister -> {
                     WebViewActivity.start(this@LoginActivity, WebViewActivity.DEFAULT_TITLE, Const.Url.AUTHOR_REGISTER, false, false)
                 }
-                tvAuthorLogin -> {
+                binding.tvAuthorLogin -> {
                     WebViewActivity.start(this@LoginActivity, WebViewActivity.DEFAULT_TITLE, Const.Url.AUTHOR_LOGIN, false, false)
                 }
-                tvUserAgreement -> {
+                binding.tvUserAgreement -> {
                     WebViewActivity.start(this@LoginActivity, WebViewActivity.DEFAULT_TITLE, Const.Url.USER_AGREEMENT, false, false)
                 }
-                tvUserLogin, ivWechat, ivSina, ivQQ -> {
+                binding.tvUserLogin, binding.ivWechat, binding.ivSina, binding.ivQQ -> {
                     R.string.currently_not_supported.showToast()
                 }
                 else -> {

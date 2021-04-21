@@ -17,8 +17,8 @@
 package com.eyepetizer.android.logic.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 /**
  * 视频对应的具体信息，响应实体类。

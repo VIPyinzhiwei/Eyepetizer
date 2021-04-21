@@ -7,7 +7,9 @@
     android:background="@color/white"
     tools:context=".ui.setting.AboutActivity">
 
-    <include layout="@layout/layout_title_bar" />
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/layout_title_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"

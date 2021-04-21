@@ -19,14 +19,13 @@ package com.eyepetizer.android.ui.setting
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.ActivitySettingBinding
 import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.util.GlobalUtil
-import kotlinx.android.synthetic.main.layout_title_bar.*
 
 /**
  * 设置界面
@@ -36,13 +35,21 @@ import kotlinx.android.synthetic.main.layout_title_bar.*
  */
 class SettingActivity : BaseActivity() {
 
-    private val viewModel by lazy { ViewModelProvider(this).get(SettingViewModel::class.java) }
+    var _binding: ActivitySettingBinding? = null
 
-    private val binding by lazy { ActivitySettingBinding.inflate(LayoutInflater.from(this)) }
+    val binding: ActivitySettingBinding
+        get() = _binding!!
+
+    private val viewModel by lazy { ViewModelProvider(this).get(SettingViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        _binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun setupViews() {
@@ -53,9 +60,9 @@ class SettingActivity : BaseActivity() {
     }
 
     private fun initTitle() {
-        tvTitle.text = GlobalUtil.getString(R.string.settings)
-        tvRightText.setTextColor(ContextCompat.getColor(this@SettingActivity, R.color.white))
-        tvRightText.textSize = 12f
+        binding.titleBar.tvTitle.text = GlobalUtil.getString(R.string.settings)
+        binding.titleBar.tvRightText.setTextColor(ContextCompat.getColor(this@SettingActivity, R.color.white))
+        binding.titleBar.tvRightText.textSize = 12f
     }
 
     companion object {

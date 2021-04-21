@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.FragmentMainContainerBinding
 import com.eyepetizer.android.event.MessageEvent
 import com.eyepetizer.android.event.RefreshEvent
 import com.eyepetizer.android.event.SwitchPagesEvent
@@ -32,7 +33,6 @@ import com.eyepetizer.android.ui.home.daily.DailyFragment
 import com.eyepetizer.android.ui.home.discovery.DiscoveryFragment
 import com.eyepetizer.android.util.GlobalUtil
 import com.flyco.tablayout.listener.CustomTabEntity
-import kotlinx.android.synthetic.main.layout_main_page_title_bar.*
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -43,6 +43,11 @@ import org.greenrobot.eventbus.EventBus
  */
 class HomePageFragment : BaseViewPagerFragment() {
 
+    private var _binding: FragmentMainContainerBinding? = null
+
+    private val binding
+        get() = _binding!!
+
     override val createTitles = ArrayList<CustomTabEntity>().apply {
         add(TabEntity(GlobalUtil.getString(R.string.discovery)))
         add(TabEntity(GlobalUtil.getString(R.string.commend)))
@@ -52,13 +57,19 @@ class HomePageFragment : BaseViewPagerFragment() {
     override val createFragments: Array<Fragment> = arrayOf(DiscoveryFragment.newInstance(), CommendFragment.newInstance(), DailyFragment.newInstance())
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater.inflate(R.layout.fragment_main_container, container, false))
+        _binding = FragmentMainContainerBinding.inflate(layoutInflater, container, false)
+        return super.onCreateView(binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ivCalendar.visibility = View.VISIBLE
+        binding.titleBar.ivCalendar.visibility = View.VISIBLE
         viewPager?.currentItem = 1
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onMessageEvent(messageEvent: MessageEvent) {

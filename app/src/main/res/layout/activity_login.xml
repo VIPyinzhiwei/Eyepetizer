@@ -7,7 +7,9 @@
     android:background="@drawable/bg_login"
     tools:context=".ui.login.LoginActivity">
 
-    <include layout="@layout/layout_title_bar" />
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/layout_title_bar" />
 
     <ImageView
         android:id="@+id/ivLogoText"

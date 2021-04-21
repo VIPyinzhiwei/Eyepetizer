@@ -6,7 +6,9 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomePageFragment">
 
-    <include layout="@layout/layout_main_page_title_bar" />
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/layout_main_page_title_bar" />
 
     <View
         android:id="@+id/viewHorizontalLine"

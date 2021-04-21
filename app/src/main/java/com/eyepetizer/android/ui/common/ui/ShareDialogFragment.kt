@@ -25,12 +25,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.FragmentShareDialogBinding
 import com.eyepetizer.android.extension.setDrawable
 import com.eyepetizer.android.extension.share
 import com.eyepetizer.android.util.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.umeng.analytics.MobclickAgent
-import kotlinx.android.synthetic.main.fragment_share_dialog.*
 
 
 /**
@@ -41,12 +41,24 @@ import kotlinx.android.synthetic.main.fragment_share_dialog.*
  */
 open class ShareDialogFragment : BottomSheetDialogFragment() {
 
+    private var _binding: FragmentShareDialogBinding? = null
+
+    private val binding
+        get() = _binding!!
+
+
     private lateinit var shareContent: String
 
     private lateinit var attachedActivity: Activity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_share_dialog, container, false)
+        _binding = FragmentShareDialogBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,32 +66,32 @@ open class ShareDialogFragment : BottomSheetDialogFragment() {
 
         activity?.let { act ->
             attachedActivity = act
-            tvToWechatFriends.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_wechat_black_30dp), 30f, 30f, 1)
-            tvShareToWeibo.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_weibo_black_30dp), 30f, 30f, 1)
-            tvShareToQQ.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_qq_black_30dp), 30f, 30f, 1)
-            tvShareToQQzone.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_qq_zone_black_30dp), 30f, 30f, 1)
+            binding.tvToWechatFriends.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_wechat_black_30dp), 30f, 30f, 1)
+            binding.tvShareToWeibo.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_weibo_black_30dp), 30f, 30f, 1)
+            binding.tvShareToQQ.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_qq_black_30dp), 30f, 30f, 1)
+            binding.tvShareToQQzone.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_qq_zone_black_30dp), 30f, 30f, 1)
 
-            tvShareToQQ.setOnClickListener {
+            binding.tvShareToQQ.setOnClickListener {
                 share(attachedActivity, shareContent, SHARE_QQ)
                 dismiss()
             }
-            tvToWechatFriends.setOnClickListener {
+            binding.tvToWechatFriends.setOnClickListener {
                 share(attachedActivity, shareContent, SHARE_WECHAT)
                 dismiss()
             }
-            tvShareToWeibo.setOnClickListener {
+            binding.tvShareToWeibo.setOnClickListener {
                 share(attachedActivity, shareContent, SHARE_WEIBO)
                 dismiss()
             }
-            tvShareToQQzone.setOnClickListener {
+            binding.tvShareToQQzone.setOnClickListener {
                 share(attachedActivity, shareContent, SHARE_QQZONE)
                 dismiss()
             }
-            llMore.setOnClickListener {
+            binding.llMore.setOnClickListener {
                 share(attachedActivity, shareContent, SHARE_MORE)
                 dismiss()
             }
-            tvCancel.setOnClickListener {
+            binding.tvCancel.setOnClickListener {
                 dismiss()
             }
         }

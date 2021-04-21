@@ -16,7 +16,9 @@
         android:orientation="vertical"
         tools:context=".ui.setting.SettingActivity">
 
-        <include layout="@layout/layout_title_bar" />
+        <include
+            android:id="@+id/titleBar"
+            layout="@layout/layout_title_bar" />
 
         <ScrollView
             android:layout_width="match_parent"

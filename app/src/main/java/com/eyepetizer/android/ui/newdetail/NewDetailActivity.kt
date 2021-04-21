@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivityNewDetailBinding
 import com.eyepetizer.android.extension.*
 import com.eyepetizer.android.logic.model.Author
 import com.eyepetizer.android.logic.model.Consumption
@@ -43,9 +44,8 @@ import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.synthetic.main.activity_new_detail.*
 import kotlinx.coroutines.*
+import kotlinx.parcelize.Parcelize
 
 
 /**
@@ -55,6 +55,11 @@ import kotlinx.coroutines.*
  * @since  2020/5/14
  */
 class NewDetailActivity : BaseActivity() {
+
+    var _binding: ActivityNewDetailBinding? = null
+
+    val binding: ActivityNewDetailBinding
+        get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this, InjectorUtil.getNewDetailViewModelFactory()).get(NewDetailViewModel::class.java) }
 
@@ -74,7 +79,8 @@ class NewDetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_detail)
+        _binding = ActivityNewDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -96,21 +102,22 @@ class NewDetailActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        videoPlayer.onVideoPause()
+        binding.videoPlayer.onVideoPause()
     }
 
     override fun onResume() {
         super.onResume()
-        videoPlayer.onVideoResume()
+        binding.videoPlayer.onVideoResume()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         GSYVideoADManager.releaseAllVideos()
         orientationUtils?.releaseListener()
-        videoPlayer.release()
-        videoPlayer.setVideoAllCallBack(null)
+        binding.videoPlayer.release()
+        binding.videoPlayer.setVideoAllCallBack(null)
         globalJob.cancel()
+        _binding = null
     }
 
     override fun onBackPressed() {
@@ -126,21 +133,21 @@ class NewDetailActivity : BaseActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        videoPlayer.onConfigurationChanged(this, newConfig, orientationUtils, true, true)
+        binding.videoPlayer.onConfigurationChanged(this, newConfig, orientationUtils, true, true)
     }
 
     override fun setupViews() {
         super.setupViews()
         initParams()
-        orientationUtils = OrientationUtils(this, videoPlayer)
+        orientationUtils = OrientationUtils(this, binding.videoPlayer)
         relatedAdapter = NewDetailRelatedAdapter(this, viewModel.relatedDataList, viewModel.videoInfoData)
         replyAdapter = NewDetailReplyAdapter(this, viewModel.repliesDataList)
         mergeAdapter = MergeAdapter(relatedAdapter, replyAdapter)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = mergeAdapter
-        recyclerView.setHasFixedSize(true)
-        recyclerView.itemAnimator = null
-        refreshLayout.run {
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = mergeAdapter
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.itemAnimator = null
+        binding.refreshLayout.run {
             setDragRate(0.7f)
             setHeaderTriggerRate(0.6f)
             setFooterTriggerRate(0.6f)
@@ -148,7 +155,7 @@ class NewDetailActivity : BaseActivity() {
             setEnableFooterFollowWhenNoMoreData(true)
             setEnableFooterTranslationContent(true)
             setEnableScrollContentWhenLoaded(true)
-            refreshLayout.setEnableNestedScroll(true)
+            binding.refreshLayout.setEnableNestedScroll(true)
             setFooterHeight(153f)
             setRefreshFooter(NoStatusFooter(this@NewDetailActivity).apply {
                 setAccentColorId(R.color.white)
@@ -158,8 +165,9 @@ class NewDetailActivity : BaseActivity() {
             setOnLoadMoreListener { viewModel.onLoadMore() }
         }
         setOnClickListener(
-            ivPullDown, ivMore, ivShare, ivCollection, ivToWechatFriends, ivShareToWechatMemories,
-            ivShareToWeibo, ivShareToQQ, ivShareToQQzone, ivAvatar, etComment, ivReply, tvReplyCount, listener = ClickListener()
+            binding.ivPullDown, binding.ivMore, binding.ivShare, binding.ivCollection, binding.ivToWechatFriends, binding.ivShareToWechatMemories,
+            binding.ivShareToWeibo, binding.ivShareToQQ, binding.ivShareToQQzone, binding.ivAvatar, binding.etComment, binding.ivReply, binding.tvReplyCount,
+            listener = ClickListener()
         )
         observe()
         startVideoPlayer()
@@ -181,9 +189,9 @@ class NewDetailActivity : BaseActivity() {
 
     private fun startVideoPlayer() {
         viewModel.videoInfoData?.run {
-            ivBlurredBg.load(cover.blurred)
-            tvReplyCount.text = consumption.replyCount.toString()
-            videoPlayer.startPlay()
+            binding.ivBlurredBg.load(cover.blurred)
+            binding.tvReplyCount.text = consumption.replyCount.toString()
+            binding.videoPlayer.startPlay()
         }
     }
 
@@ -212,9 +220,9 @@ class NewDetailActivity : BaseActivity() {
                 relatedAdapter.notifyDataSetChanged()
                 replyAdapter.notifyDataSetChanged()
                 when {
-                    viewModel.repliesDataList.isNullOrEmpty() -> refreshLayout.finishLoadMoreWithNoMoreData()
-                    response.videoReplies.nextPageUrl.isNullOrEmpty() -> refreshLayout.finishLoadMoreWithNoMoreData()
-                    else -> refreshLayout.closeHeaderOrFooter()
+                    viewModel.repliesDataList.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    response.videoReplies.nextPageUrl.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    else -> binding.refreshLayout.closeHeaderOrFooter()
                 }
             })
         }
@@ -238,9 +246,9 @@ class NewDetailActivity : BaseActivity() {
                 relatedAdapter.notifyDataSetChanged()
                 replyAdapter.notifyDataSetChanged()
                 when {
-                    viewModel.repliesDataList.isNullOrEmpty() -> refreshLayout.finishLoadMoreWithNoMoreData()
-                    response.videoReplies.nextPageUrl.isNullOrEmpty() -> refreshLayout.finishLoadMoreWithNoMoreData()
-                    else -> refreshLayout.closeHeaderOrFooter()
+                    viewModel.repliesDataList.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    response.videoReplies.nextPageUrl.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    else -> binding.refreshLayout.closeHeaderOrFooter()
                 }
             })
         }
@@ -260,9 +268,9 @@ class NewDetailActivity : BaseActivity() {
                 viewModel.repliesDataList.addAll(response.itemList)
                 replyAdapter.notifyItemRangeInserted(itemCount, response.itemList.size)
                 if (response.nextPageUrl.isNullOrEmpty()) {
-                    refreshLayout.finishLoadMoreWithNoMoreData()
+                    binding.refreshLayout.finishLoadMoreWithNoMoreData()
                 } else {
-                    refreshLayout.closeHeaderOrFooter()
+                    binding.refreshLayout.closeHeaderOrFooter()
                 }
             })
         }
@@ -300,31 +308,31 @@ class NewDetailActivity : BaseActivity() {
     }
 
     private fun switchTitleBarVisible() {
-        if (videoPlayer.currentPlayer.currentState == GSYVideoView.CURRENT_STATE_AUTO_COMPLETE) return
-        if (flHeader.visibility == View.VISIBLE) {
+        if (binding.videoPlayer.currentPlayer.currentState == GSYVideoView.CURRENT_STATE_AUTO_COMPLETE) return
+        if (binding.flHeader.visibility == View.VISIBLE) {
             hideTitleBar()
         } else {
-            flHeader.visibleAlphaAnimation(1000)
-            ivPullDown.visibleAlphaAnimation(1000)
-            ivCollection.visibleAlphaAnimation(1000)
-            ivMore.visibleAlphaAnimation(1000)
-            ivShare.visibleAlphaAnimation(1000)
+            binding.flHeader.visibleAlphaAnimation(1000)
+            binding.ivPullDown.visibleAlphaAnimation(1000)
+            binding.ivCollection.visibleAlphaAnimation(1000)
+            binding.ivMore.visibleAlphaAnimation(1000)
+            binding.ivShare.visibleAlphaAnimation(1000)
             delayHideTitleBar()
         }
     }
 
     private fun hideTitleBar() {
-        flHeader.invisibleAlphaAnimation(1000)
-        ivPullDown.goneAlphaAnimation(1000)
-        ivCollection.goneAlphaAnimation(1000)
-        ivMore.goneAlphaAnimation(1000)
-        ivShare.goneAlphaAnimation(1000)
+        binding.flHeader.invisibleAlphaAnimation(1000)
+        binding.ivPullDown.goneAlphaAnimation(1000)
+        binding.ivCollection.goneAlphaAnimation(1000)
+        binding.ivMore.goneAlphaAnimation(1000)
+        binding.ivShare.goneAlphaAnimation(1000)
     }
 
     private fun delayHideTitleBar() {
         hideTitleBarJob?.cancel()
         hideTitleBarJob = CoroutineScope(globalJob).launch(Dispatchers.Main) {
-            delay(videoPlayer.dismissControlTime.toLong())
+            delay(binding.videoPlayer.dismissControlTime.toLong())
             hideTitleBar()
         }
     }
@@ -332,37 +340,37 @@ class NewDetailActivity : BaseActivity() {
     private fun delayHideBottomContainer() {
         hideBottomContainerJob?.cancel()
         hideBottomContainerJob = CoroutineScope(globalJob).launch(Dispatchers.Main) {
-            delay(videoPlayer.dismissControlTime.toLong())
-            videoPlayer.getBottomContainer().gone()
-            videoPlayer.startButton.gone()
+            delay(binding.videoPlayer.dismissControlTime.toLong())
+            binding.videoPlayer.getBottomContainer().gone()
+            binding.videoPlayer.startButton.gone()
         }
     }
 
     private fun showFull() {
         orientationUtils?.run { if (isLand != 1) resolveByClick() }
-        videoPlayer.startWindowFullscreen(this, true, false)
+        binding.videoPlayer.startWindowFullscreen(this, true, false)
     }
 
     fun scrollTop() {
         if (relatedAdapter.itemCount != 0) {
-            recyclerView.scrollToPosition(0)
-            refreshLayout.invisibleAlphaAnimation(2500)
-            refreshLayout.visibleAlphaAnimation(1500)
+            binding.recyclerView.scrollToPosition(0)
+            binding.refreshLayout.invisibleAlphaAnimation(2500)
+            binding.refreshLayout.visibleAlphaAnimation(1500)
         }
     }
 
     private fun scrollRepliesTop() {
         val targetPostion = (relatedAdapter.itemCount - 1) + 2  //+相关推荐最后一项，+1评论标题，+1条评论
         if (targetPostion < mergeAdapter.itemCount - 1) {
-            recyclerView.smoothScrollToPosition(targetPostion)
+            binding.recyclerView.smoothScrollToPosition(targetPostion)
         }
     }
 
     inner class VideoCallPlayBack : GSYSampleCallBack() {
         override fun onStartPrepared(url: String?, vararg objects: Any?) {
             super.onStartPrepared(url, *objects)
-            flHeader.gone()
-            llShares.gone()
+            binding.flHeader.gone()
+            binding.llShares.gone()
         }
 
         override fun onClickBlank(url: String?, vararg objects: Any?) {
@@ -377,12 +385,12 @@ class NewDetailActivity : BaseActivity() {
 
         override fun onAutoComplete(url: String?, vararg objects: Any?) {
             super.onAutoComplete(url, *objects)
-            flHeader.visible()
-            ivPullDown.visible()
-            ivCollection.gone()
-            ivShare.gone()
-            ivMore.gone()
-            llShares.visible()
+            binding.flHeader.visible()
+            binding.ivPullDown.visible()
+            binding.ivCollection.gone()
+            binding.ivShare.gone()
+            binding.ivMore.gone()
+            binding.llShares.visible()
         }
     }
 
@@ -390,18 +398,18 @@ class NewDetailActivity : BaseActivity() {
         override fun onClick(v: View) {
             viewModel.videoInfoData?.let {
                 when (v) {
-                    ivPullDown -> finish()
-                    ivMore -> {
+                    binding.ivPullDown -> finish()
+                    binding.ivMore -> {
                     }
-                    ivShare -> showDialogShare(it.webUrl.raw)
-                    ivCollection -> LoginActivity.start(this@NewDetailActivity)
-                    ivToWechatFriends -> share(it.webUrl.raw, SHARE_WECHAT)
-                    ivShareToWechatMemories -> share(it.webUrl.raw, SHARE_WECHAT_MEMORIES)
-                    ivShareToWeibo -> share(it.webUrl.forWeibo, SHARE_WEIBO)
-                    ivShareToQQ -> share(it.webUrl.raw, SHARE_QQ)
-                    ivShareToQQzone -> share(it.webUrl.raw, SHARE_QQZONE)
-                    ivAvatar, etComment -> LoginActivity.start(this@NewDetailActivity)
-                    ivReply, tvReplyCount -> scrollRepliesTop()
+                    binding.ivShare -> showDialogShare(it.webUrl.raw)
+                    binding.ivCollection -> LoginActivity.start(this@NewDetailActivity)
+                    binding.ivToWechatFriends -> share(it.webUrl.raw, SHARE_WECHAT)
+                    binding.ivShareToWechatMemories -> share(it.webUrl.raw, SHARE_WECHAT_MEMORIES)
+                    binding.ivShareToWeibo -> share(it.webUrl.forWeibo, SHARE_WEIBO)
+                    binding.ivShareToQQ -> share(it.webUrl.raw, SHARE_QQ)
+                    binding.ivShareToQQzone -> share(it.webUrl.raw, SHARE_QQZONE)
+                    binding.ivAvatar, binding.etComment -> LoginActivity.start(this@NewDetailActivity)
+                    binding.ivReply, binding.tvReplyCount -> scrollRepliesTop()
                     else -> {
                     }
                 }
@@ -411,16 +419,8 @@ class NewDetailActivity : BaseActivity() {
 
     @Parcelize
     data class VideoInfo(
-        val videoId: Long,
-        val playUrl: String,
-        val title: String,
-        val description: String,
-        val category: String,
-        val library: String,
-        val consumption: Consumption,
-        val cover: Cover,
-        val author: Author?,
-        val webUrl: WebUrl
+        val videoId: Long, val playUrl: String, val title: String, val description: String, val category: String, val library: String,
+        val consumption: Consumption, val cover: Cover, val author: Author?, val webUrl: WebUrl
     ) : Parcelable
 
     companion object {

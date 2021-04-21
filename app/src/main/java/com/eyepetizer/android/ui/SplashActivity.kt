@@ -22,12 +22,12 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import com.eyepetizer.android.R
+import com.eyepetizer.android.databinding.ActivitySplashBinding
 import com.eyepetizer.android.extension.edit
 import com.eyepetizer.android.extension.sharedPreferences
 import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.util.GlobalUtil
 import com.permissionx.guolindev.PermissionX
-import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -41,6 +41,11 @@ import kotlinx.coroutines.launch
  * @since  2020/5/15
  */
 class SplashActivity : BaseActivity() {
+
+    var _binding: ActivitySplashBinding? = null
+
+    val binding: ActivitySplashBinding
+        get() = _binding!!
 
     private val job by lazy { Job() }
 
@@ -68,12 +73,13 @@ class SplashActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
+        _binding = null
     }
 
     override fun setupViews() {
         super.setupViews()
-        ivSlogan.startAnimation(alphaAnimation)
-        ivSplashPicture.startAnimation(scaleAnimation)
+        binding.ivSlogan.startAnimation(alphaAnimation)
+        binding.ivSplashPicture.startAnimation(scaleAnimation)
         CoroutineScope(job).launch {
             delay(splashDuration)
             MainActivity.start(this@SplashActivity)
@@ -108,7 +114,8 @@ class SplashActivity : BaseActivity() {
                 scope.showForwardToSettingsDialog(deniedList, message, GlobalUtil.getString(R.string.settings), GlobalUtil.getString(R.string.cancel))
             }
             .request { allGranted, grantedList, deniedList ->
-                setContentView(R.layout.activity_splash)
+                _binding = ActivitySplashBinding.inflate(layoutInflater)
+                setContentView(binding.root)
             }
     }
 

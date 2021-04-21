@@ -6,7 +6,9 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title_bar" />
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/layout_title_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
