@@ -41,6 +41,7 @@
     <string name="slogan_two">Daily appetizersfor your eyes. Bon eyepétit.</string>
     <string name="slogan_description">让每一个人都开眼，开了又开。</string>
     <string name="slogan_description_two">每日精选视频推介，让你大开眼界。</string>
+    <string name="footer_not_more">- The End -</string>
 
     <!-- 网络 -->
     <string name="network_error">网络错误</string>

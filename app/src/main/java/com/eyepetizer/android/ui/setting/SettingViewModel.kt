@@ -18,12 +18,12 @@ package com.eyepetizer.android.ui.setting
 
 import android.content.Context
 import android.view.View
+import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
-import com.eyepetizer.android.extension.edit
 import com.eyepetizer.android.extension.sharedPreferences
 import com.eyepetizer.android.extension.showToast
 import com.eyepetizer.android.ui.common.ui.WebViewActivity

@@ -25,8 +25,8 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
+import androidx.core.content.edit
 import com.eyepetizer.android.EyepetizerApplication
-import com.eyepetizer.android.extension.edit
 import com.eyepetizer.android.extension.logW
 import com.eyepetizer.android.extension.sharedPreferences
 import java.util.*
@@ -79,7 +79,7 @@ object GlobalUtil {
      * @return 开眼当前应用程序的版本名。
      */
     val eyepetizerVersionName: String
-        get() = "6.3.01"
+        get() = "6.3.1"
 
     /**
      * 获取开眼应用程序的版本号。

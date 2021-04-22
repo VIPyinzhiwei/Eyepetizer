@@ -21,9 +21,9 @@ import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import androidx.core.content.edit
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.ActivitySplashBinding
-import com.eyepetizer.android.extension.edit
 import com.eyepetizer.android.extension.sharedPreferences
 import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.util.GlobalUtil
@@ -126,6 +126,6 @@ class SplashActivity : BaseActivity() {
          */
         var isFirstEntryApp: Boolean
             get() = sharedPreferences.getBoolean("is_first_entry_app", true)
-            set(value) = sharedPreferences.edit { putBoolean("is_first_entry_app", value) }
+            set(value) = sharedPreferences.edit{ putBoolean("is_first_entry_app", value) }
     }
 }
