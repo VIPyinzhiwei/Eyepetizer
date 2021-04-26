@@ -169,7 +169,7 @@
         app:layout_constraintStart_toEndOf="@id/ivSina"
         app:layout_constraintTop_toTopOf="@id/ivWechat" />
 
-    <androidx.constraintlayout.widget.Group
+    <View
         android:id="@+id/group"
         android:layout_width="0dp"
         android:layout_height="50dp"
