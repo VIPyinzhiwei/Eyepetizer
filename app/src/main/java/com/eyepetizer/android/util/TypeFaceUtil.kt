@@ -49,7 +49,8 @@ object TypeFaceUtil {
 
     fun getFzlLTypeface() = if (fzlLTypeface == null) {
         try {
-            Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
+            fzlLTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
+            fzlLTypeface
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
@@ -59,7 +60,8 @@ object TypeFaceUtil {
 
     fun getFzdb1Typeface() = if (fzdb1Typeface == null) {
         try {
-            Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+            fzdb1Typeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+            fzdb1Typeface
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
@@ -69,7 +71,8 @@ object TypeFaceUtil {
 
     fun getFuturaTypeface() = if (futuraTypeface == null) {
         try {
-            Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/Futura-CondensedMedium.ttf")
+            futuraTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/Futura-CondensedMedium.ttf")
+            futuraTypeface
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
@@ -79,7 +82,8 @@ object TypeFaceUtil {
 
     fun getDinTypeface() = if (dinTypeface == null) {
         try {
-            Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/DIN-Condensed-Bold.ttf")
+            dinTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/DIN-Condensed-Bold.ttf")
+            dinTypeface
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
@@ -90,7 +94,8 @@ object TypeFaceUtil {
 
     fun getLobsterTypeface() = if (lobsterTypeface == null) {
         try {
-            Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/Lobster-1.4.otf")
+            lobsterTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/Lobster-1.4.otf")
+            lobsterTypeface
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
