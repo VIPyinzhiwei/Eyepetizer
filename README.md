@@ -8,7 +8,7 @@
 
 整个项目没有复杂的封装，同时项目开发规范参考了 [Kotlin 官方文档][4] 与第三方 [AndroidStandardDevelop][5]。个人认为代码还是比较容易阅读理解的，因此也非常适合新手入门 Kotlin 语言，同时更快地掌握 Jetpack 组件的使用。
 
-另外值得一提的是，所有 UI 都是经过标注工具测量后的，无论是字体颜色、大小、间距等几乎都是**像素级**模仿的「开眼 Eyepetizer」Android 客户端 App，对应的 v6.3.1 版本（目前最新版）。
+另外值得一提的是，所有 UI 都是经过标注工具测量后的，无论是字体颜色、大小、间距等几乎都是**像素级**模仿的「开眼 Eyepetizer」Android 客户端 App，对应的 v6.3.1 版本。（[查看历史版本][31]）
 
 ## 屏幕截图
 <img src="screenshots/snapshot1.png" width="50%"/><img src="screenshots/snapshot2.png" width="50%"/>
@@ -44,6 +44,19 @@
 - [Charles][11] API 数据抓包
 - [PxCook][12] 标注工具
 - [开发助手][13] 反编译应用、提取应用 Apk 等
+
+## 更新日志
+#### Version 1.0.1 ####
+*2021-04-27*
+* 更新：项目依赖库升级、代码优化、布局属性优化。
+* 更新：kotlin-android-extensions 插件迁移到视图绑定。
+* 更新：替换 SharedPreferences、Retrofit 自带扩展函数。
+* 修复：加载字体资源导致的页面卡顿问题。
+* 修复：登录页底部文字显示不全问题。
+
+#### Version 1.0.0 ####
+*2020-06-21*
+* 首次发布版本。
 
 ## 关于我
 - RealName : 殷志威
@@ -125,3 +138,4 @@ limitations under the License.
 [28]:https://github.com/Tencent/VasSonic
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
+[31]:https://www.wandoujia.com/apps/6619883/history

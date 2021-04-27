@@ -8,7 +8,7 @@ This is a short video Android client project with a high imitation of "[Open Eye
 
 There is no complicated encapsulation of the entire project, and the project development specifications refer to [Kotlin official documents][4] and third-party [AndroidStandardDevelop][5]. Personally think that the code is relatively easy to read and understand, so it is also very suitable for novices to get started with the Kotlin language, and at the same time master the use of Jetpack components faster.
 
-It is also worth mentioning that all UIs are measured by the annotation tool, and the font color, size, spacing, etc. are almost **pixel-level** imitated "Open EyeEyeizer" Android client App, corresponding to v6 .3.1 version (currently the latest version).
+It is also worth mentioning that all UIs are measured by the annotation tool, and the font color, size, spacing, etc. are almost **pixel-level** imitated "Open EyeEyeizer" Android client App, corresponding to v6 .3.1 version . ([View historical version][31])
 
 ## Screenshots
 <img src="screenshots/snapshot1.png" width="50%"/><img src="screenshots/snapshot2.png" width="50%"/>
@@ -45,8 +45,21 @@ Can't load images? Attach [blog address][6]
 - [PxCook][12] Annotation tool
 - [Development assistant][13] Decompile application, extract application Apk, etc.
 
+## Change Log
+#### Version 1.0.1 ####
+*2021-04-27*
+* Update: Project dependency library upgrade, code optimization, layout property optimization.
+* Update: kotlin-android-extensions plugin migrated to view binding.
+* Update: replace SharedPreferences, Retrofit self extensions.
+* Fix: page lag problem caused by loading font resources.
+* Fix: Incomplete text display at the bottom of login page.
+
+#### Version 1.0.0 ####
+*2020-06-21*
+* Initial release.
+
 ## About me
-- RealName : 殷志威
+- RealName : YinZhiWei
 - NickName : vipyinzhiwei
 - WeChat : vipyinzhiwei
 - Email : <vipyinzhiwei@gmail.com>
@@ -125,3 +138,4 @@ limitations under the License.
 [28]:https://github.com/Tencent/VasSonic
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
+[31]:https://www.wandoujia.com/apps/6619883/history
