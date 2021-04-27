@@ -63,35 +63,35 @@ object ActionUrlUtil {
             decodeUrl.startsWith(Const.ActionUrl.WEBVIEW) -> {
                 WebViewActivity.start(activity, decodeUrl.getWebViewInfo().first(), decodeUrl.getWebViewInfo().last())
             }
-            decodeUrl == Const.ActionUrl.RANKLIST -> {
+            decodeUrl.startsWith(Const.ActionUrl.RANKLIST) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
             decodeUrl.startsWith(Const.ActionUrl.TAG) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
-            decodeUrl == Const.ActionUrl.HP_SEL_TAB_TWO_NEWTAB_MINUS_THREE -> {
+            decodeUrl.startsWith(Const.ActionUrl.HP_SEL_TAB_TWO_NEWTAB_MINUS_THREE) -> {
                 EventBus.getDefault().post(SwitchPagesEvent(DailyFragment::class.java))
             }
-            decodeUrl == Const.ActionUrl.CM_TAGSQUARE_TAB_ZERO -> {
+            decodeUrl.startsWith(Const.ActionUrl.CM_TAGSQUARE_TAB_ZERO) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
-            decodeUrl == Const.ActionUrl.CM_TOPIC_SQUARE -> {
+            decodeUrl.startsWith(Const.ActionUrl.CM_TOPIC_SQUARE) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
-            decodeUrl == Const.ActionUrl.CM_TOPIC_SQUARE_TAB_ZERO -> {
+            decodeUrl.startsWith(Const.ActionUrl.CM_TOPIC_SQUARE_TAB_ZERO) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
             decodeUrl.startsWith(Const.ActionUrl.COMMON_TITLE) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
-            actionUrl == Const.ActionUrl.HP_NOTIFI_TAB_ZERO -> {
+            decodeUrl.startsWith(Const.ActionUrl.HP_NOTIFI_TAB_ZERO) -> {
                 EventBus.getDefault().post(SwitchPagesEvent(PushFragment::class.java))
                 EventBus.getDefault().post(RefreshEvent(PushFragment::class.java))
             }
-            actionUrl.startsWith(Const.ActionUrl.TOPIC_DETAIL) -> {
+            decodeUrl.startsWith(Const.ActionUrl.TOPIC_DETAIL) -> {
                 "${toastTitle},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
             }
-            actionUrl.startsWith(Const.ActionUrl.DETAIL) -> {
+            decodeUrl.startsWith(Const.ActionUrl.DETAIL) -> {
                 getConversionVideoId(actionUrl)?.run { NewDetailActivity.start(activity, this) }
             }
             else -> {

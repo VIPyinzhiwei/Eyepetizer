@@ -29,6 +29,8 @@
     <string name="srl_footer_nothing">没有更多数据了</string>
     <string name="press_again_to_exit">再按一次退出%1$s</string>
     <string name="build_type">build_type:%1$s</string>
+    <string name="channel">channel:%1$s</string>
+    <string name="version_name">version_name:%1$s</string>
     <string name="currently_not_supported">该功能即将开放，敬请期待</string>
     <string name="jump_page_unknown_error">跳转界面出现未知异常</string>
     <string name="your_phone_does_not_install_qq">您的手机还没有安装QQ</string>

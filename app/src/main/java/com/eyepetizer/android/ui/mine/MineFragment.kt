@@ -20,7 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.multidex.BuildConfig
+import com.eyepetizer.android.BuildConfig
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.FragmentMineBinding
@@ -86,7 +86,10 @@ class MineFragment : BaseFragment() {
         }
 
         binding.tvVersionNumber.setOnLongClickListener {
-            String.format(GlobalUtil.getString(R.string.build_type), BuildConfig.BUILD_TYPE).showToast()
+            val channel = String.format(GlobalUtil.getString(R.string.channel), GlobalUtil.getApplicationMetaData("UMENG_CHANNEL"))
+            val buildType = String.format(GlobalUtil.getString(R.string.build_type), BuildConfig.BUILD_TYPE)
+            val versionName = String.format(GlobalUtil.getString(R.string.version_name), BuildConfig.VERSION_NAME)
+            "${channel}\n${buildType}\n${versionName}".showToast()
             true
         }
     }

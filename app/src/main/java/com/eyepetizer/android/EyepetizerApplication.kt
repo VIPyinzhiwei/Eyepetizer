@@ -16,6 +16,7 @@
 
 package com.eyepetizer.android
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
@@ -73,7 +74,7 @@ class EyepetizerApplication : Application() {
         super.onCreate()
         context = this
 
-        UMConfigure.init(this, null, null, UMConfigure.DEVICE_TYPE_PHONE, null)
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null)
         UMConfigure.setLogEnabled(BuildConfig.DEBUG)
 
         IjkPlayerManager.setLogLevel(if (BuildConfig.DEBUG) IjkMediaPlayer.IJK_LOG_WARN else IjkMediaPlayer.IJK_LOG_SILENT)
@@ -86,6 +87,7 @@ class EyepetizerApplication : Application() {
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
 }
