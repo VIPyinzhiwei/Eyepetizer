@@ -49,6 +49,7 @@ class UgcDetailActivity : BaseActivity() {
 
     private lateinit var adapter: UgcDetailAdapter
 
+    private var onPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +77,8 @@ class UgcDetailActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         GSYVideoManager.releaseAllVideos()
+        onPageChangeCallback?.run { binding.viewPager.unregisterOnPageChangeCallback(this) }
+        onPageChangeCallback = null
         _binding = null
     }
 
@@ -98,7 +101,8 @@ class UgcDetailActivity : BaseActivity() {
             binding.viewPager.adapter = adapter
             binding.viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
             binding.viewPager.offscreenPageLimit = 1
-            binding.viewPager.registerOnPageChangeCallback(AutoPlayPageChangeListener(binding.viewPager, viewModel.itemPosition, R.id.videoPlayer))
+            onPageChangeCallback = AutoPlayPageChangeListener(binding.viewPager, viewModel.itemPosition, R.id.videoPlayer)
+            binding.viewPager.registerOnPageChangeCallback(onPageChangeCallback!!)
             binding.viewPager.setCurrentItem(viewModel.itemPosition, false)
         }
     }
