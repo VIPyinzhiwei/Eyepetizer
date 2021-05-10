@@ -347,8 +347,7 @@ class NewDetailActivity : BaseActivity() {
     }
 
     private fun showFull() {
-        orientationUtils?.run { if (isLand != 1) resolveByClick() }
-        binding.videoPlayer.startWindowFullscreen(this, true, false)
+        orientationUtils?.resolveByClick()
     }
 
     fun scrollTop() {
