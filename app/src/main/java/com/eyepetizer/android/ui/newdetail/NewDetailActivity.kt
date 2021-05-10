@@ -25,8 +25,8 @@ import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.ActivityNewDetailBinding
 import com.eyepetizer.android.extension.*
@@ -67,7 +67,7 @@ class NewDetailActivity : BaseActivity() {
 
     private lateinit var replyAdapter: NewDetailReplyAdapter
 
-    private lateinit var mergeAdapter: MergeAdapter
+    private lateinit var mergeAdapter: ConcatAdapter
 
     private var orientationUtils: OrientationUtils? = null
 
@@ -142,7 +142,7 @@ class NewDetailActivity : BaseActivity() {
         orientationUtils = OrientationUtils(this, binding.videoPlayer)
         relatedAdapter = NewDetailRelatedAdapter(this, viewModel.relatedDataList, viewModel.videoInfoData)
         replyAdapter = NewDetailReplyAdapter(this, viewModel.repliesDataList)
-        mergeAdapter = MergeAdapter(relatedAdapter, replyAdapter)
+        mergeAdapter = ConcatAdapter(relatedAdapter, replyAdapter)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = mergeAdapter
         binding.recyclerView.setHasFixedSize(true)

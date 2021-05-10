@@ -17,6 +17,7 @@ package com.eyepetizer.android.ui.common.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.widget.ImageView
 import com.eyepetizer.android.R
 import com.eyepetizer.android.extension.gone
@@ -72,8 +73,8 @@ class AutoPlayerVideoPlayer : StandardGSYVideoPlayer {
         }
     }
 
-    override fun touchDoubleUp() {
-        //super.touchDoubleUp();
+    override fun touchDoubleUp(e: MotionEvent?) {
+        super.touchDoubleUp(e)
         //不需要双击暂停
     }
 
