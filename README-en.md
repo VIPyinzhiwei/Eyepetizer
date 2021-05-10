@@ -46,6 +46,11 @@ Can't load images? Attach [blog address][6]
 - [Development assistant][13] Decompile application, extract application Apk, etc.
 
 ## Change Log
+#### Version 1.0.2 ####
+*2021-05-10*
+* Update：Project dependency library is upgraded.
+* Fix：Fixed some known issues.
+
 #### Version 1.0.1 ####
 *2021-04-27*
 * Update: Project dependency library upgrade, code optimization, layout property optimization.
