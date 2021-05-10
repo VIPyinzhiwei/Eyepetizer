@@ -83,9 +83,9 @@ class NewDetailActivity : BaseActivity() {
         setContentView(binding.root)
     }
 
-    override fun setContentView(layoutResID: Int) {
+    override fun setContentView(layoutView: View) {
         if (checkArguments()) {
-            super.setContentView(layoutResID)
+            super.setContentView(layoutView)
             setStatusBarBackground(R.color.black)
         }
     }

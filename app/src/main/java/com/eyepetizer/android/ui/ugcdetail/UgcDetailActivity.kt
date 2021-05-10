@@ -19,6 +19,7 @@ package com.eyepetizer.android.ui.ugcdetail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.eyepetizer.android.R
@@ -55,9 +56,9 @@ class UgcDetailActivity : BaseActivity() {
         setContentView(binding.root)
     }
 
-    override fun setContentView(layoutResID: Int) {
+    override fun setContentView(layoutView: View) {
         if (checkArguments()) {
-            super.setContentView(layoutResID)
+            super.setContentView(layoutView)
             setStatusBarBackground(R.color.black)
         }
     }
