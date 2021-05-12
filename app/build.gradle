@@ -97,6 +97,7 @@ dependencies {
     //Android Jetpack 组件
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.work:work-runtime:2.5.0'
+    implementation "androidx.startup:startup-runtime:1.0.0"
 
     //Android KTX
     implementation 'androidx.core:core-ktx:1.3.2'

@@ -74,6 +74,16 @@
 
         <activity android:name=".ui.setting.OpenSourceProjectsActivity" />
 
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="com.eyepetizer.android.util.UmengInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5ee21dfcdbc2ec078743b1f3" />

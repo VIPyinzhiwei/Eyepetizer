@@ -73,14 +73,8 @@ class EyepetizerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
-
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null)
-        UMConfigure.setLogEnabled(BuildConfig.DEBUG)
-
         IjkPlayerManager.setLogLevel(if (BuildConfig.DEBUG) IjkMediaPlayer.IJK_LOG_WARN else IjkMediaPlayer.IJK_LOG_SILENT)
-
         WebViewActivity.DEFAULT_URL.preCreateSession()
-
         if (!SplashActivity.isFirstEntryApp && DialogAppraiseTipsWorker.isNeedShowDialog) {
             WorkManager.getInstance(this).enqueue(DialogAppraiseTipsWorker.showDialogWorkRequest)
         }
