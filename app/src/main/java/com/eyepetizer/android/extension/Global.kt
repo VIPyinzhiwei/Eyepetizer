@@ -21,10 +21,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.eyepetizer.android.EyepetizerApplication
 import com.eyepetizer.android.ui.common.ui.ShareDialogFragment
 import com.eyepetizer.android.util.GlobalUtil
 import com.eyepetizer.android.util.ShareUtil
+
+/**
+ * 获取DataStore实例。
+ */
+val dataStore: DataStore<Preferences> = EyepetizerApplication.context.dataStore
 
 /**
  * 获取SharedPreferences实例。

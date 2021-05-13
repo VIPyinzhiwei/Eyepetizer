@@ -18,17 +18,16 @@ package com.eyepetizer.android.ui.setting
 
 import android.content.Context
 import android.view.View
-import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
-import com.eyepetizer.android.extension.sharedPreferences
 import com.eyepetizer.android.extension.showToast
 import com.eyepetizer.android.ui.common.ui.WebViewActivity
 import com.eyepetizer.android.ui.common.ui.WebViewActivity.Companion.MODE_SONIC_WITH_OFFLINE_CACHE
 import com.eyepetizer.android.ui.login.LoginActivity
+import com.eyepetizer.android.util.DataStoreUtils
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.tencent.sonic.sdk.SonicEngine
 import com.umeng.analytics.MobclickAgent
@@ -39,16 +38,17 @@ import kotlinx.coroutines.withContext
 class SettingViewModel : ViewModel() {
 
     var rbDailyOpen: Boolean
-        get() = sharedPreferences.getBoolean("dailyOnOff", true)
-        set(value) = sharedPreferences.edit { putBoolean("dailyOnOff", value) }
+        get() = DataStoreUtils.readBooleanData("dailyOnOff", true)
+        set(value) = DataStoreUtils.saveSyncBooleanData("dailyOnOff", value)
+
 
     var rbWiFiOpen: Boolean
-        get() = sharedPreferences.getBoolean("wifiOnOff", true)
-        set(value) = sharedPreferences.edit { putBoolean("wifiOnOff", value) }
+        get() = DataStoreUtils.readBooleanData("wifiOnOff", true)
+        set(value) = DataStoreUtils.saveSyncBooleanData("wifiOnOff", value)
 
     var rbTranslateOpen: Boolean
-        get() = sharedPreferences.getBoolean("translateOnOff", true)
-        set(value) = sharedPreferences.edit { putBoolean("translateOnOff", value) }
+        get() = DataStoreUtils.readBooleanData("translateOnOff", true)
+        set(value) = DataStoreUtils.saveSyncBooleanData("translateOnOff", value)
 
     fun onClick(view: View) {
         when (view.id) {

@@ -25,10 +25,11 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
-import androidx.core.content.edit
 import com.eyepetizer.android.EyepetizerApplication
 import com.eyepetizer.android.extension.logW
-import com.eyepetizer.android.extension.sharedPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 /**
@@ -137,13 +138,13 @@ object GlobalUtil {
                     return deviceSerial.toString()
                 }
             }
-            var uuid = sharedPreferences.getString("uuid", "")
+            var uuid = DataStoreUtils.readStringData("uuid", "")
             if (!TextUtils.isEmpty(uuid)) {
                 deviceSerial = uuid
                 return deviceSerial.toString()
             }
             uuid = UUID.randomUUID().toString().replace("-", "").toUpperCase(Locale.getDefault())
-            sharedPreferences.edit { putString("uuid", uuid) }
+            CoroutineScope(Dispatchers.IO).launch { DataStoreUtils.saveStringData("uuid", uuid) }
             deviceSerial = uuid
             return deviceSerial.toString()
         } else {

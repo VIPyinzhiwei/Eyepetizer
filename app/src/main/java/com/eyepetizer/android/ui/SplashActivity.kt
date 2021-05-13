@@ -21,17 +21,13 @@ import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import androidx.core.content.edit
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.ActivitySplashBinding
-import com.eyepetizer.android.extension.sharedPreferences
 import com.eyepetizer.android.ui.common.ui.BaseActivity
+import com.eyepetizer.android.util.DataStoreUtils
 import com.eyepetizer.android.util.GlobalUtil
 import com.permissionx.guolindev.PermissionX
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 /**
@@ -125,7 +121,9 @@ class SplashActivity : BaseActivity() {
          * 是否首次进入APP应用
          */
         var isFirstEntryApp: Boolean
-            get() = sharedPreferences.getBoolean("is_first_entry_app", true)
-            set(value) = sharedPreferences.edit{ putBoolean("is_first_entry_app", value) }
+            get() = DataStoreUtils.readBooleanData("is_first_entry_app", true)
+            set(value) {
+                CoroutineScope(Dispatchers.IO).launch { DataStoreUtils.saveBooleanData("is_first_entry_app", value) }
+            }
     }
 }

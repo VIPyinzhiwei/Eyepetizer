@@ -21,7 +21,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.edit
 import androidx.work.BackoffPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.Worker
@@ -31,9 +30,12 @@ import com.eyepetizer.android.R
 import com.eyepetizer.android.extension.dp2px
 import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.extension.screenWidth
-import com.eyepetizer.android.extension.sharedPreferences
 import com.eyepetizer.android.ui.common.ui.WebViewActivity
 import com.umeng.analytics.MobclickAgent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 /**
@@ -67,8 +69,10 @@ class DialogAppraiseTipsWorker(val context: Context, parms: WorkerParameters) : 
          * 是否需要弹出对话框
          */
         var isNeedShowDialog: Boolean
-            get() = sharedPreferences.getBoolean("is_need_show_dialog", true)
-            set(value) = sharedPreferences.edit { putBoolean("is_need_show_dialog", value) }
+            get() = DataStoreUtils.readBooleanData("is_need_show_dialog", true)
+            set(value) {
+                CoroutineScope(Dispatchers.IO).launch { DataStoreUtils.saveBooleanData("is_need_show_dialog", value) }
+            }
 
         private var dialog: AlertDialog? = null
 
