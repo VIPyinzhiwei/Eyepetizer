@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.ActivitySettingBinding
@@ -44,7 +43,8 @@ class SettingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+        _binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onDestroy() {
