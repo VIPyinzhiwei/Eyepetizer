@@ -46,22 +46,7 @@ Can't load images? Attach [blog address][6]
 - [Development assistant][13] Decompile application, extract application Apk, etc.
 
 ## Change Log
-#### Version 1.0.2 ####
-*2021-05-10*
-* Update：Project dependency library is upgraded.
-* Fix：Fixed some known issues.
-
-#### Version 1.0.1 ####
-*2021-04-27*
-* Update: Project dependency library upgrade, code optimization, layout property optimization.
-* Update: kotlin-android-extensions plugin migrated to view binding.
-* Update: replace SharedPreferences, Retrofit self extensions.
-* Fix: page lag problem caused by loading font resources.
-* Fix: Incomplete text display at the bottom of login page.
-
-#### Version 1.0.0 ####
-*2020-06-21*
-* Initial release.
+[View Release History Update Log][32]
 
 ## About me
 - RealName : YinZhiWei
@@ -144,3 +129,4 @@ limitations under the License.
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
 [31]:https://www.wandoujia.com/apps/6619883/history
+[32]:https://github.com/VIPyinzhiwei/Eyepetizer/releases
