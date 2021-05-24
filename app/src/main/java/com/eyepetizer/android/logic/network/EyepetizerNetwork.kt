@@ -27,21 +27,10 @@ import com.eyepetizer.android.logic.network.api.VideoService
  */
 class EyepetizerNetwork {
 
-    private val mainPageService = ServiceCreator.create(MainPageService::class.java)
+    var mainPageService = ServiceCreator.create(MainPageService::class.java)
+        private set
 
     private val videoService = ServiceCreator.create(VideoService::class.java)
-
-    suspend fun fetchDiscovery(url: String) = mainPageService.getDiscovery(url)
-
-    suspend fun fetchHomePageRecommend(url: String) = mainPageService.getHomePageRecommend(url)
-
-    suspend fun fetchDaily(url: String) = mainPageService.getDaily(url)
-
-    suspend fun fetchCommunityRecommend(url: String) = mainPageService.getCommunityRecommend(url)
-
-    suspend fun fetchFollow(url: String) = mainPageService.gethFollow(url)
-
-    suspend fun fetchPushMessage(url: String) = mainPageService.getPushMessage(url)
 
     suspend fun fetchHotSearch() = mainPageService.getHotSearch()
 

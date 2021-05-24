@@ -53,6 +53,7 @@
     <string name="network_connect_timeout">网络连接超时</string>
     <string name="no_route_to_host">无法连接到服务器</string>
     <string name="network_response_code_error">服务器状态码异常：</string>
+    <string name="error_view_tip_retry">加载失败，点击重试</string>
 
     <!-- 时间和日期 -->
     <string name="minutes_ago">分钟前</string>

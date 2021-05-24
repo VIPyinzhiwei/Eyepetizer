@@ -16,9 +16,20 @@
 
 package com.eyepetizer.android.logic
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.eyepetizer.android.Const
 import com.eyepetizer.android.logic.dao.MainPageDao
+import com.eyepetizer.android.logic.model.*
 import com.eyepetizer.android.logic.network.EyepetizerNetwork
+import com.eyepetizer.android.ui.community.commend.CommendPagingSource
+import com.eyepetizer.android.ui.community.follow.FollowPagingSource
+import com.eyepetizer.android.ui.home.daily.DailyPagingSource
+import com.eyepetizer.android.ui.home.discovery.DiscoveryPagingSource
+import com.eyepetizer.android.ui.notification.push.PushPagingSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 /**
@@ -29,54 +40,48 @@ import kotlinx.coroutines.withContext
  */
 class MainPageRepository private constructor(private val mainPageDao: MainPageDao, private val eyepetizerNetwork: EyepetizerNetwork) {
 
-    suspend fun refreshDiscovery(url: String) = requestDiscovery(url)
-
-    suspend fun refreshHomePageRecommend(url: String) = requestHomePageRecommend(url)
-
-    suspend fun refreshDaily(url: String) = requestDaily(url)
-
-    suspend fun refreshCommunityRecommend(url: String) = requestCommunityRecommend(url)
-
-    suspend fun refreshFollow(url: String) = requestFollow(url)
-
-    suspend fun refreshPushMessage(url: String) = requestPushMessage(url)
-
     suspend fun refreshHotSearch() = requestHotSearch()
 
-    private suspend fun requestDiscovery(url: String) = withContext(Dispatchers.IO) {
-        val response = eyepetizerNetwork.fetchDiscovery(url)
-        mainPageDao.cacheDiscovery(response)
-        response
+    fun getMessagePagingData(): Flow<PagingData<PushMessage.Message>> {
+        return Pager(
+            config = PagingConfig(Const.Config.PAGE_SIZE),
+            pagingSourceFactory = { PushPagingSource(eyepetizerNetwork.mainPageService) }
+        ).flow
     }
 
-    private suspend fun requestHomePageRecommend(url: String) = withContext(Dispatchers.IO) {
-        val response = eyepetizerNetwork.fetchHomePageRecommend(url)
-        mainPageDao.cacheHomePageRecommend(response)
-        response
+    fun getCommunityRecommendPagingData(): Flow<PagingData<CommunityRecommend.Item>> {
+        return Pager(
+            config = PagingConfig(Const.Config.PAGE_SIZE),
+            pagingSourceFactory = { CommendPagingSource(eyepetizerNetwork.mainPageService) }
+        ).flow
     }
 
-    private suspend fun requestDaily(url: String) = withContext(Dispatchers.IO) {
-        val response = eyepetizerNetwork.fetchDaily(url)
-        mainPageDao.cacheDaily(response)
-        response
+    fun getFollowPagingData(): Flow<PagingData<Follow.Item>> {
+        return Pager(
+            config = PagingConfig(Const.Config.PAGE_SIZE),
+            pagingSourceFactory = { FollowPagingSource(eyepetizerNetwork.mainPageService) }
+        ).flow
     }
 
-    private suspend fun requestCommunityRecommend(url: String) = withContext(Dispatchers.IO) {
-        val response = eyepetizerNetwork.fetchCommunityRecommend(url)
-        mainPageDao.cacheCommunityRecommend(response)
-        response
+    fun getDiscoveryPagingData(): Flow<PagingData<Discovery.Item>> {
+        return Pager(
+            config = PagingConfig(Const.Config.PAGE_SIZE),
+            pagingSourceFactory = { DiscoveryPagingSource(eyepetizerNetwork.mainPageService) }
+        ).flow
     }
 
-    private suspend fun requestFollow(url: String) = withContext(Dispatchers.IO) {
-        val response = eyepetizerNetwork.fetchFollow(url)
-        mainPageDao.cacheFollow(response)
-        response
+    fun getHomePageRecommendPagingData(): Flow<PagingData<HomePageRecommend.Item>> {
+        return Pager(
+            config = PagingConfig(Const.Config.PAGE_SIZE),
+            pagingSourceFactory = { com.eyepetizer.android.ui.home.commend.CommendPagingSource(eyepetizerNetwork.mainPageService) }
+        ).flow
     }
 
-    private suspend fun requestPushMessage(url: String) = withContext(Dispatchers.IO) {
-        val response = eyepetizerNetwork.fetchPushMessage(url)
-        mainPageDao.cachePushMessageInfo(response)
-        response
+    fun getDailyPagingData(): Flow<PagingData<Daily.Item>> {
+        return Pager(
+            config = PagingConfig(Const.Config.PAGE_SIZE),
+            pagingSourceFactory = { DailyPagingSource(eyepetizerNetwork.mainPageService) }
+        ).flow
     }
 
     private suspend fun requestHotSearch() = withContext(Dispatchers.IO) {

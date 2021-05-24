@@ -23,6 +23,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eyepetizer.android.BuildConfig
@@ -45,16 +47,14 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import org.greenrobot.eventbus.EventBus
 
-class CommendAdapter(val fragment: CommendFragment, val dataList: List<HomePageRecommend.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<HomePageRecommend.Item,RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun getItemCount() = dataList.size
-
-    override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(dataList[position])
+    override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(getItem(position)!!)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecyclerViewHelp.getViewHolder(parent, viewType)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = dataList[position]
+        val item = getItem(position)!!
 
         when (holder) {
             is TextCardViewHeader5ViewHolder -> {
@@ -266,6 +266,16 @@ class CommendAdapter(val fragment: CommendFragment, val dataList: List<HomePageR
 
     companion object {
         const val TAG = "CommendAdapter"
+
+        private val DIFF_CALLBACK = object : ItemCallback<HomePageRecommend.Item>() {
+            override fun areItemsTheSame(oldItem: HomePageRecommend.Item, newItem: HomePageRecommend.Item): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: HomePageRecommend.Item, newItem: HomePageRecommend.Item): Boolean {
+                return oldItem == newItem
+            }
+        }
 
         fun startAutoPlay(activity: Activity, player: GSYVideoPlayer, position: Int, playUrl: String, coverUrl: String, playTag: String, callBack: GSYSampleCallBack? = null) {
             player.run {

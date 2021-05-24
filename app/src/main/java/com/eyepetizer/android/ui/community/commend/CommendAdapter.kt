@@ -23,6 +23,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -41,13 +43,11 @@ import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
 import de.hdodenhof.circleimageview.CircleImageView
 
-class CommendAdapter(val fragment: CommendFragment, var dataList: List<CommunityRecommend.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    override fun getItemCount() = dataList.size
+class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<CommunityRecommend.Item, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun getItemViewType(position: Int): Int {
-        val item = dataList[position]
-        return when (item.type) {
+        val item = getItem(position)
+        return when (item?.type) {
             STR_HORIZONTAL_SCROLLCARD_TYPE -> {
                 when (item.data.dataType) {
                     STR_ITEM_COLLECTION_DATA_TYPE -> HORIZONTAL_SCROLLCARD_ITEM_COLLECTION_TYPE
@@ -79,7 +79,7 @@ class CommendAdapter(val fragment: CommendFragment, var dataList: List<Community
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = dataList[position]
+        val item = getItem(position)!!
         when (holder) {
             is HorizontalScrollcardItemCollectionViewHolder -> {
                 (holder.itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
@@ -138,15 +138,15 @@ class CommendAdapter(val fragment: CommendFragment, var dataList: List<Community
                     STR_VIDEO_TYPE -> {
                         holder.ivPlay.visible()
                         holder.itemView.setOnClickListener {
-                            val items = dataList.filter { it.type == STR_COMMUNITY_COLUMNS_CARD && it.data.dataType == STR_FOLLOW_CARD_DATA_TYPE }
-                            UgcDetailActivity.start(fragment.activity, items, item)
+                            val items = snapshot().filter { it!!.type == STR_COMMUNITY_COLUMNS_CARD && it.data.dataType == STR_FOLLOW_CARD_DATA_TYPE }
+                            UgcDetailActivity.start(fragment.activity, items.map { it!! }, item)
                         }
                     }
                     STR_UGC_PICTURE_TYPE -> {
                         if (!item.data.content.data.urls.isNullOrEmpty() && item.data.content.data.urls.size > 1) holder.ivLayers.visible()
                         holder.itemView.setOnClickListener {
-                            val items = dataList.filter { it.type == STR_COMMUNITY_COLUMNS_CARD && it.data.dataType == STR_FOLLOW_CARD_DATA_TYPE }
-                            UgcDetailActivity.start(fragment.activity, items, item)
+                            val items = snapshot().filter { it!!.type == STR_COMMUNITY_COLUMNS_CARD && it.data.dataType == STR_FOLLOW_CARD_DATA_TYPE }
+                            UgcDetailActivity.start(fragment.activity, items.map { it!! }, item)
                         }
                     }
                     else -> {
@@ -313,6 +313,17 @@ class CommendAdapter(val fragment: CommendFragment, var dataList: List<Community
         const val HORIZONTAL_SCROLLCARD_ITEM_COLLECTION_TYPE = 1   //type:horizontalScrollCard -> dataType:ItemCollection
         const val HORIZONTAL_SCROLLCARD_TYPE = 2                   //type:horizontalScrollCard -> dataType:HorizontalScrollCard
         const val FOLLOW_CARD_TYPE = 3                             //type:communityColumnsCard -> dataType:FollowCard
+
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CommunityRecommend.Item>() {
+            override fun areItemsTheSame(oldItem: CommunityRecommend.Item, newItem: CommunityRecommend.Item): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: CommunityRecommend.Item, newItem: CommunityRecommend.Item): Boolean {
+                return oldItem == newItem
+            }
+        }
+
     }
 }
 

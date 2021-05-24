@@ -16,39 +16,19 @@
 
 package com.eyepetizer.android.ui.community.commend
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.eyepetizer.android.logic.MainPageRepository
 import com.eyepetizer.android.logic.model.CommunityRecommend
-import com.eyepetizer.android.logic.network.api.MainPageService
+import kotlinx.coroutines.flow.Flow
 
-class CommendViewModel(repository: MainPageRepository) : ViewModel() {
+class CommendViewModel(val repository: MainPageRepository) : ViewModel() {
 
     var dataList = ArrayList<CommunityRecommend.Item>()
 
-    private var requestParamLiveData = MutableLiveData<String>()
-
-    var nextPageUrl: String? = null
-
-    val dataListLiveData = Transformations.switchMap(requestParamLiveData) { url ->
-        liveData {
-            val resutlt = try {
-                val recommend = repository.refreshCommunityRecommend(url)
-                Result.success(recommend)
-            } catch (e: Exception) {
-                Result.failure<CommunityRecommend>(e)
-            }
-            emit(resutlt)
-        }
-    }
-
-    fun onRefresh() {
-        requestParamLiveData.value = MainPageService.COMMUNITY_RECOMMEND_URL
-    }
-
-    fun onLoadMore() {
-        requestParamLiveData.value = nextPageUrl ?: ""
+    fun getPagingData(): Flow<PagingData<CommunityRecommend.Item>> {
+        return repository.getCommunityRecommendPagingData().cachedIn(viewModelScope)
     }
 }

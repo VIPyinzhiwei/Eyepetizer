@@ -20,6 +20,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eyepetizer.android.BuildConfig
 import com.eyepetizer.android.Const
@@ -36,13 +38,13 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 
-class FollowAdapter(val fragment: FollowFragment, var dataList: List<Follow.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FollowAdapter(val fragment: FollowFragment) : PagingDataAdapter<Follow.Item, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun getItemCount() = dataList.size + 1
+    override fun getItemCount() = super.getItemCount() + 1
 
     override fun getItemViewType(position: Int) = when {
         position == 0 -> Const.ItemViewType.CUSTOM_HEADER
-        dataList[position - 1].type == "autoPlayFollowCard" && dataList[position - 1].data.dataType == "FollowCard" -> AUTO_PLAY_FOLLOW_CARD
+        getItem(position - 1)!!.type == "autoPlayFollowCard" && getItem(position - 1)!!.data.dataType == "FollowCard" -> AUTO_PLAY_FOLLOW_CARD
         else -> Const.ItemViewType.UNKNOWN
     }
 
@@ -57,7 +59,7 @@ class FollowAdapter(val fragment: FollowFragment, var dataList: List<Follow.Item
             is HeaderViewHolder -> holder.itemView.setOnClickListener { LoginActivity.start(fragment.activity) }
 
             is AutoPlayFollowCardViewHolder -> {
-                val item = dataList[position - 1]
+                val item = getItem(position - 1)!!
                 item.data.content.data.run {
                     holder.ivAvatar.load(item.data.header.icon ?: author?.icon ?: "")
 
@@ -91,7 +93,15 @@ class FollowAdapter(val fragment: FollowFragment, var dataList: List<Follow.Item
                         }
                     })
                     holder.let {
-                        setOnClickListener(it.videoPlayer.thumbImageView, it.itemView, it.ivCollectionCount, it.tvCollectionCount, it.ivFavorites, it.tvFavorites, it.ivShare)
+                        setOnClickListener(
+                            it.videoPlayer.thumbImageView,
+                            it.itemView,
+                            it.ivCollectionCount,
+                            it.tvCollectionCount,
+                            it.ivFavorites,
+                            it.tvFavorites,
+                            it.ivShare
+                        )
                         {
                             when (this) {
                                 it.videoPlayer.thumbImageView, it.itemView -> {
@@ -148,5 +158,15 @@ class FollowAdapter(val fragment: FollowFragment, var dataList: List<Follow.Item
     companion object {
         const val TAG = "FollowAdapter"
         const val AUTO_PLAY_FOLLOW_CARD = Const.ItemViewType.MAX    //type:autoPlayFollowCard -> dataType:FollowCard
+
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Follow.Item>() {
+            override fun areItemsTheSame(oldItem: Follow.Item, newItem: Follow.Item): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Follow.Item, newItem: Follow.Item): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

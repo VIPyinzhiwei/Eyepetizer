@@ -17,6 +17,8 @@
 package com.eyepetizer.android.ui.home.daily
 
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eyepetizer.android.BuildConfig
@@ -32,16 +34,14 @@ import com.eyepetizer.android.util.ActionUrlUtil
 import com.eyepetizer.android.util.GlobalUtil
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
-class DailyAdapter(val fragment: DailyFragment, val dataList: List<Daily.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DailyAdapter(val fragment: DailyFragment) : PagingDataAdapter<Daily.Item, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun getItemCount() = dataList.size
-
-    override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(dataList[position])
+    override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(getItem(position)!!)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecyclerViewHelp.getViewHolder(parent, viewType)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = dataList[position]
+        val item = getItem(position)!!
         when (holder) {
             is TextCardViewHeader5ViewHolder -> {
                 holder.tvTitle5.text = item.data.text
@@ -128,5 +128,17 @@ class DailyAdapter(val fragment: DailyFragment, val dataList: List<Daily.Item>) 
         const val DEFAULT_LIBRARY_TYPE = "DEFAULT"
         const val NONE_LIBRARY_TYPE = "NONE"
         const val DAILY_LIBRARY_TYPE = "DAILY"
+
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Daily.Item>() {
+
+            override fun areItemsTheSame(oldItem: Daily.Item, newItem: Daily.Item): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Daily.Item, newItem: Daily.Item): Boolean {
+                return oldItem == newItem
+            }
+
+        }
     }
 }

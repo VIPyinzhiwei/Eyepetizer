@@ -16,39 +16,19 @@
 
 package com.eyepetizer.android.ui.community.follow
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.eyepetizer.android.logic.MainPageRepository
 import com.eyepetizer.android.logic.model.Follow
-import com.eyepetizer.android.logic.network.api.MainPageService
+import kotlinx.coroutines.flow.Flow
 
-class FollowViewModel(repository: MainPageRepository) : ViewModel() {
+class FollowViewModel(val repository: MainPageRepository) : ViewModel() {
 
     var dataList = ArrayList<Follow.Item>()
 
-    private var requestParamLiveData = MutableLiveData<String>()
-
-    var nextPageUrl: String? = null
-
-    val dataListLiveData = Transformations.switchMap(requestParamLiveData) { url ->
-        liveData {
-            val resutlt = try {
-                val follow = repository.refreshFollow(url)
-                Result.success(follow)
-            } catch (e: Exception) {
-                Result.failure<Follow>(e)
-            }
-            emit(resutlt)
-        }
-    }
-
-    fun onRefresh() {
-        requestParamLiveData.value = MainPageService.FOLLOW_URL
-    }
-
-    fun onLoadMore() {
-        requestParamLiveData.value = nextPageUrl ?: ""
+    fun getPagingData(): Flow<PagingData<Follow.Item>> {
+        return repository.getFollowPagingData().cachedIn(viewModelScope)
     }
 }

@@ -21,8 +21,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.FragmentRefreshLayoutBinding
@@ -30,10 +31,13 @@ import com.eyepetizer.android.event.MessageEvent
 import com.eyepetizer.android.event.RefreshEvent
 import com.eyepetizer.android.extension.showToast
 import com.eyepetizer.android.ui.common.ui.BaseFragment
+import com.eyepetizer.android.ui.common.ui.FooterAdapter
 import com.eyepetizer.android.util.GlobalUtil
 import com.eyepetizer.android.util.InjectorUtil
 import com.eyepetizer.android.util.ResponseHandler
 import com.scwang.smart.refresh.layout.constant.RefreshState
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * 通知-推荐列表界面。
@@ -59,14 +63,19 @@ class PushFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = PushAdapter(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = PushAdapter(this, viewModel.dataList)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(FooterAdapter { adapter.retry() })
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.itemAnimator = null
-        binding.refreshLayout.setOnRefreshListener { viewModel.onRefresh() }
-        binding.refreshLayout.setOnLoadMoreListener { viewModel.onLoadMore() }
-        observe()
+        binding.refreshLayout.setOnRefreshListener { adapter.refresh() }
+        addLoadStateListener()
+
+        lifecycleScope.launch {
+            viewModel.getPagingData().collect {
+                adapter.submitData(it)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -74,20 +83,19 @@ class PushFragment : BaseFragment() {
         _binding = null
     }
 
-    override fun loadDataOnce() {
-        super.loadDataOnce()
-        startLoading()
-    }
-
-    override fun startLoading() {
-        super.startLoading()
-        viewModel.onRefresh()
+    override fun loadFinished() {
+        super.loadFinished()
+        binding.refreshLayout.finishRefresh()
     }
 
     @CallSuper
     override fun loadFailed(msg: String?) {
         super.loadFailed(msg)
-        showLoadErrorView(msg ?: GlobalUtil.getString(R.string.unknown_error)) { startLoading() }
+        binding.refreshLayout.finishRefresh()
+        showLoadErrorView(msg ?: GlobalUtil.getString(R.string.unknown_error)) {
+            startLoading()
+            adapter.refresh()
+        }
     }
 
     override fun onMessageEvent(messageEvent: MessageEvent) {
@@ -98,46 +106,48 @@ class PushFragment : BaseFragment() {
         }
     }
 
-    private fun observe() {
-        viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
-            val response = result.getOrNull()
-            if (response == null) {
-                ResponseHandler.getFailureTips(result.exceptionOrNull()).let { if (viewModel.dataList.isNullOrEmpty()) loadFailed(it) else it.showToast() }
-                binding.refreshLayout.closeHeaderOrFooter()
-                return@Observer
-            }
-            loadFinished()
-            viewModel.nextPageUrl = response.nextPageUrl
-            if (response.itemList.isNullOrEmpty() && viewModel.dataList.isEmpty()) {
-                //首次进入页面时，获取数据条目为0时处理。
-                binding.refreshLayout.closeHeaderOrFooter()
-                return@Observer
-            }
-            if (response.itemList.isNullOrEmpty() && viewModel.dataList.isNotEmpty()) {
-                //上拉加载数据时，返回数据条目为0时处理。
-                binding.refreshLayout.finishLoadMoreWithNoMoreData()
-                return@Observer
-            }
-            when (binding.refreshLayout.state) {
-                RefreshState.None, RefreshState.Refreshing -> {
-                    viewModel.dataList.clear()
-                    viewModel.dataList.addAll(response.itemList)
-                    adapter.notifyDataSetChanged()
+    private fun addLoadStateListener() {
+        adapter.addLoadStateListener {
+            when (it.refresh) {
+                is LoadState.NotLoading -> {
+                    loadFinished()
+                    if (it.source.append.endOfPaginationReached) {
+                        binding.refreshLayout.setEnableLoadMore(true)
+                        binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    } else {
+                        binding.refreshLayout.setEnableLoadMore(false)
+                    }
                 }
-                RefreshState.Loading -> {
-                    val itemCount = viewModel.dataList.size
-                    viewModel.dataList.addAll(response.itemList)
-                    adapter.notifyItemRangeInserted(itemCount, response.itemList.size)
+                is LoadState.Loading -> {
+                    if (binding.refreshLayout.state != RefreshState.Refreshing) {
+                        startLoading()
+                    }
                 }
-                else -> {
+                is LoadState.Error -> {
+                    val state = it.refresh as LoadState.Error
+                    loadFailed(ResponseHandler.getFailureTips(state.error))
                 }
             }
-            if (response.nextPageUrl.isNullOrEmpty()) {
-                binding.refreshLayout.finishLoadMoreWithNoMoreData()
-            } else {
-                binding.refreshLayout.closeHeaderOrFooter()
+        }
+        adapter.addLoadStateListener {
+            when (it.append) {
+                is LoadState.NotLoading -> {
+                    if (it.source.append.endOfPaginationReached) {
+                        binding.refreshLayout.setEnableLoadMore(true)
+                        binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    } else {
+                        binding.refreshLayout.setEnableLoadMore(false)
+                    }
+                }
+                is LoadState.Loading -> {
+
+                }
+                is LoadState.Error -> {
+                    val state = it.append as LoadState.Error
+                    ResponseHandler.getFailureTips(state.error).showToast()
+                }
             }
-        })
+        }
     }
 
     companion object {

@@ -16,39 +16,19 @@
 
 package com.eyepetizer.android.ui.home.discovery
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.eyepetizer.android.logic.MainPageRepository
 import com.eyepetizer.android.logic.model.Discovery
-import com.eyepetizer.android.logic.network.api.MainPageService
+import kotlinx.coroutines.flow.Flow
 
-class DiscoveryViewModel(repository: MainPageRepository) : ViewModel() {
+class DiscoveryViewModel(val repository: MainPageRepository) : ViewModel() {
 
     var dataList = ArrayList<Discovery.Item>()
 
-    private var requestParamLiveData = MutableLiveData<String>()
-
-    var nextPageUrl: String? = null
-
-    val dataListLiveData = Transformations.switchMap(requestParamLiveData) { url ->
-        liveData {
-            val resutlt = try {
-                val discovery = repository.refreshDiscovery(url)
-                Result.success(discovery)
-            } catch (e: Exception) {
-                Result.failure<Discovery>(e)
-            }
-            emit(resutlt)
-        }
-    }
-
-    fun onRefresh() {
-        requestParamLiveData.value = MainPageService.DISCOVERY_URL
-    }
-
-    fun onLoadMore() {
-        requestParamLiveData.value = nextPageUrl ?: ""
+    fun getPagingData(): Flow<PagingData<Discovery.Item>> {
+        return repository.getDiscoveryPagingData().cachedIn(viewModelScope)
     }
 }

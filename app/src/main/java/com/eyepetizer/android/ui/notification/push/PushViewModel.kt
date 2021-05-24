@@ -16,39 +16,19 @@
 
 package com.eyepetizer.android.ui.notification.push
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.eyepetizer.android.logic.MainPageRepository
 import com.eyepetizer.android.logic.model.PushMessage
-import com.eyepetizer.android.logic.network.api.MainPageService
+import kotlinx.coroutines.flow.Flow
 
 class PushViewModel(val repository: MainPageRepository) : ViewModel() {
 
     var dataList = ArrayList<PushMessage.Message>()
 
-    private var requestParamLiveData = MutableLiveData<String>()
-
-    var nextPageUrl: String? = null
-
-    val dataListLiveData = Transformations.switchMap(requestParamLiveData) { url ->
-        liveData {
-            val resutlt = try {
-                val pushMessage = repository.refreshPushMessage(url)
-                Result.success(pushMessage)
-            } catch (e: Exception) {
-                Result.failure<PushMessage>(e)
-            }
-            emit(resutlt)
-        }
-    }
-
-    fun onRefresh() {
-        requestParamLiveData.value = MainPageService.PUSHMESSAGE_URL
-    }
-
-    fun onLoadMore() {
-        requestParamLiveData.value = nextPageUrl ?: ""
+    fun getPagingData(): Flow<PagingData<PushMessage.Message>> {
+        return repository.getMessagePagingData().cachedIn(viewModelScope)
     }
 }

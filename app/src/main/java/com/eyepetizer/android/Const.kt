@@ -165,4 +165,13 @@ interface Const {
 
         }
     }
+
+    interface Config {
+
+        companion object {
+
+            const val PAGE_SIZE = 50
+
+        }
+    }
 }

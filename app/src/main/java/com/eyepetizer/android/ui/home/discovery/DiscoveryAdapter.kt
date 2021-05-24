@@ -22,6 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eyepetizer.android.BuildConfig
@@ -42,16 +44,14 @@ import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
 
-class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Discovery.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Discovery.Item, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun getItemCount() = dataList.size
-
-    override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(dataList[position])
+    override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(getItem(position)!!)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecyclerViewHelp.getViewHolder(parent, viewType)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = dataList[position]
+        val item = getItem(position)!!
         when (holder) {
             is TextCardViewHeader5ViewHolder -> {
                 holder.tvTitle5.text = item.data.text
@@ -125,7 +125,10 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
             is SpecialSquareCardCollectionViewHolder -> {
                 holder.tvTitle.text = item.data.header.title
                 holder.tvRightText.text = item.data.header.rightText
-                setOnClickListener(holder.tvRightText, holder.ivInto) { "${item.data.header.rightText},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast() }
+                setOnClickListener(
+                    holder.tvRightText,
+                    holder.ivInto
+                ) { "${item.data.header.rightText},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast() }
                 holder.recyclerView.setHasFixedSize(true)
                 holder.recyclerView.isNestedScrollingEnabled = true
                 holder.recyclerView.layoutManager = GridLayoutManager(fragment.activity, 2).apply { orientation = GridLayoutManager.HORIZONTAL }
@@ -138,7 +141,10 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
             is ColumnCardListViewHolder -> {
                 holder.tvTitle.text = item.data.header.title
                 holder.tvRightText.text = item.data.header.rightText
-                setOnClickListener(holder.tvRightText, holder.ivInto) { "${item.data.header.rightText},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast() }
+                setOnClickListener(
+                    holder.tvRightText,
+                    holder.ivInto
+                ) { "${item.data.header.rightText},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast() }
                 holder.recyclerView.setHasFixedSize(true)
                 holder.recyclerView.layoutManager = GridLayoutManager(fragment.activity, 2)
                 if (holder.recyclerView.itemDecorationCount == 0) {
@@ -325,5 +331,15 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
 
     companion object {
         const val TAG = "DiscoveryAdapter"
+
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Discovery.Item>() {
+            override fun areItemsTheSame(oldItem: Discovery.Item, newItem: Discovery.Item): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Discovery.Item, newItem: Discovery.Item): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
