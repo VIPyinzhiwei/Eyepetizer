@@ -83,6 +83,7 @@ interface Const {
     }
 
     interface ActionUrl {
+
         companion object {
 
             const val TAG = "eyepetizer://tag/"
@@ -162,7 +163,6 @@ interface Const {
             const val EVENT8 = "10008"
 
             const val EVENT9 = "10009"
-
         }
     }
 

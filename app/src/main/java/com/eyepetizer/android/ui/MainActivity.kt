@@ -21,7 +21,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.eyepetizer.android.R
@@ -236,7 +235,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun observe() {
-        WorkManager.getInstance(this).getWorkInfoByIdLiveData(DialogAppraiseTipsWorker.showDialogWorkRequest.id).observe(this, Observer { workInfo ->
+        WorkManager.getInstance(this).getWorkInfoByIdLiveData(DialogAppraiseTipsWorker.showDialogWorkRequest.id).observe(this, { workInfo ->
             logD(TAG, "observe: workInfo.state = ${workInfo.state}")
             if (workInfo.state == WorkInfo.State.SUCCEEDED) {
                 WorkManager.getInstance(this).cancelAllWork()

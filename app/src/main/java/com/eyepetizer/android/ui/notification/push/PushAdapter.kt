@@ -32,7 +32,6 @@ import com.eyepetizer.android.util.DateUtil
 
 class PushAdapter(val fragment: PushFragment) : PagingDataAdapter<PushMessage.Message, PushAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PushAdapter.ViewHolder {
         val holder = ViewHolder(R.layout.item_notification_push.inflate(parent))
         holder.itemView.setOnClickListener {

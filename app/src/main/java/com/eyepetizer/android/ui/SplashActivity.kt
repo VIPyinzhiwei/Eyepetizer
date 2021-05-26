@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import androidx.lifecycle.lifecycleScope
 import com.eyepetizer.android.R
 import com.eyepetizer.android.databinding.ActivitySplashBinding
 import com.eyepetizer.android.ui.common.ui.BaseActivity
@@ -42,8 +43,6 @@ class SplashActivity : BaseActivity() {
 
     val binding: ActivitySplashBinding
         get() = _binding!!
-
-    private val job by lazy { Job() }
 
     private val splashDuration = 3 * 1000L
 
@@ -68,7 +67,6 @@ class SplashActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        job.cancel()
         _binding = null
     }
 
@@ -76,7 +74,7 @@ class SplashActivity : BaseActivity() {
         super.setupViews()
         binding.ivSlogan.startAnimation(alphaAnimation)
         binding.ivSplashPicture.startAnimation(scaleAnimation)
-        CoroutineScope(job).launch {
+        lifecycleScope.launch {
             delay(splashDuration)
             MainActivity.start(this@SplashActivity)
             finish()

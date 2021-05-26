@@ -34,7 +34,7 @@
             android:textSize="12sp"
             app:typeface="fzlLTypeface" />
 
-        <com.eyepetizer.android.ui.common.view.TypefaceEditText
+        <com.eyepetizer.android.ui.common.view.TypefaceTextView
             android:id="@+id/tvCancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
