@@ -36,7 +36,7 @@ class PushAdapter(val fragment: PushFragment) : PagingDataAdapter<PushMessage.Me
         val holder = ViewHolder(R.layout.item_notification_push.inflate(parent))
         holder.itemView.setOnClickListener {
             getItem(holder.bindingAdapterPosition)?.let {
-                ActionUrlUtil.process(fragment, it.actionUrl, it.title)
+                ActionUrlUtil.process(fragment, it.actionUrl, it.title ?: "")
             }
         }
         return holder
@@ -44,7 +44,7 @@ class PushAdapter(val fragment: PushFragment) : PagingDataAdapter<PushMessage.Me
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.run {
-            holder.ivAvatar.load(icon) { error(R.mipmap.ic_launcher) }
+            holder.ivAvatar.load(icon ?: "") { error(R.mipmap.ic_launcher) }
             holder.tvTitle.text = title
             holder.tvTime.text = DateUtil.getConvertedDate(date)
             holder.tvContent.text = content

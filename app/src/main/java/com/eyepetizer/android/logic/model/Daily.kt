@@ -49,7 +49,7 @@ data class Daily(val itemList: List<Item>, val count: Int, val total: Int, val n
         val cover: Any,
         val description: String,
         val font: Any,
-        val icon: String,
+        val icon: String?,
         val iconType: String,
         val id: Int,
         val label: Any,

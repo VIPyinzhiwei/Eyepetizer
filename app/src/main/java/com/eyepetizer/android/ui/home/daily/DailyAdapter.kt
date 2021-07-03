@@ -78,7 +78,7 @@ class DailyAdapter(val fragment: DailyFragment) : PagingDataAdapter<Daily.Item, 
             }
             is Banner3ViewHolder -> {
                 holder.ivPicture.load(item.data.image, 4f)
-                holder.ivAvatar.load(item.data.header.icon)
+                holder.ivAvatar.load(item.data.header.icon ?: "")
                 holder.tvTitle.text = item.data.header.title
                 holder.tvDescription.text = item.data.header.description
                 if (item.data.label?.text.isNullOrEmpty()) holder.tvLabel.invisible() else holder.tvLabel.visible()
@@ -87,7 +87,7 @@ class DailyAdapter(val fragment: DailyFragment) : PagingDataAdapter<Daily.Item, 
             }
             is FollowCardViewHolder -> {
                 holder.ivVideo.load(item.data.content.data.cover.feed, 4f)
-                holder.ivAvatar.load(item.data.header.icon)
+                holder.ivAvatar.load(item.data.header.icon ?: "")
                 holder.tvVideoDuration.text = item.data.content.data.duration.conversionVideoDuration()
                 holder.tvDescription.text = item.data.header.description
                 holder.tvTitle.text = item.data.header.title
