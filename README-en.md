@@ -1,6 +1,11 @@
 English | [中文](README.md)
 
 # Eyepetizer
+[![](https://img.shields.io/badge/Google-Developer%20Library-4c86ea.svg?style=flat?style=flat-square&logo=Android)][33]
+[![](https://img.shields.io/badge/License-Apache%202.0-1d7fbf.svg?style=flat)][34]
+[![](https://img.shields.io/badge/API-21%2B-52c82d.svg?style=flat)][35]
+[![](https://img.shields.io/badge/GitHub-vipyinzhiwei-5674dd.svg?style=flat?style=flat-square&logo=GitHub)][36]
+
 A short video Android client project based on [Kotlin][1] language imitation "[Open Eyepetizer][2]", using the MVVM architecture implemented by [Jetpack][3] + [Coroutine][30].
 
 ## Brief introduction
@@ -130,3 +135,7 @@ limitations under the License.
 [30]:https://github.com/Kotlin/kotlinx.coroutines
 [31]:https://www.wandoujia.com/apps/6619883/history
 [32]:https://github.com/VIPyinzhiwei/Eyepetizer/releases
+[33]:https://devlibrary.withgoogle.com/products/android/repos/VIPyinzhiwei-Eyepetizer
+[34]:https://opensource.org/licenses/Apache-2.0
+[35]:https://android-arsenal.com/api?level=21
+[36]:https://github.com/VIPyinzhiwei
