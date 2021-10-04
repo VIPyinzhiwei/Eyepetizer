@@ -133,7 +133,7 @@ limitations under the License.
 [28]:https://github.com/Tencent/VasSonic
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
-[31]:https://www.wandoujia.com/apps/6619883/history
+[31]:https://m.apkpure.com/cn/%E5%BC%80%E7%9C%BC/com.wandoujia.eyepetizer/versions
 [32]:https://github.com/VIPyinzhiwei/Eyepetizer/releases
 [33]:https://devlibrary.withgoogle.com/products/android/repos/VIPyinzhiwei-Eyepetizer
 [34]:https://opensource.org/licenses/Apache-2.0
