@@ -62,7 +62,10 @@ object GlobalUtil {
      * @return 当前应用程序的版本名。
      */
     val appVersionName: String
-        get() = EyepetizerApplication.context.packageManager.getPackageInfo(appPackage, 0).versionName
+        get() = EyepetizerApplication.context.packageManager.getPackageInfo(
+            appPackage,
+            0
+        ).versionName
 
     /**
      * 获取当前应用程序的版本号。
@@ -70,9 +73,15 @@ object GlobalUtil {
      */
     val appVersionCode: Long
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            EyepetizerApplication.context.packageManager.getPackageInfo(appPackage, 0).longVersionCode
+            EyepetizerApplication.context.packageManager.getPackageInfo(
+                appPackage,
+                0
+            ).longVersionCode
         } else {
-            EyepetizerApplication.context.packageManager.getPackageInfo(appPackage, 0).versionCode.toLong()
+            EyepetizerApplication.context.packageManager.getPackageInfo(
+                appPackage,
+                0
+            ).versionCode.toLong()
         }
 
     /**
@@ -124,32 +133,36 @@ object GlobalUtil {
      */
     @SuppressLint("HardwareIds")
     fun getDeviceSerial(): String {
-        if (deviceSerial == null) {
-            var deviceId: String? = null
-            val appChannel = getApplicationMetaData("APP_CHANNEL")
-            if ("google" != appChannel || "samsung" != appChannel) {
-                try {
-                    deviceId = Settings.Secure.getString(EyepetizerApplication.context.contentResolver, Settings.Secure.ANDROID_ID)
-                } catch (e: Exception) {
-                    logW(TAG, "get android_id with error", e)
-                }
-                if (!TextUtils.isEmpty(deviceId) && deviceId!!.length < 255) {
-                    deviceSerial = deviceId
-                    return deviceSerial.toString()
-                }
+        if (deviceSerial != null)
+            return deviceSerial.toString()
+
+        var deviceId: String? = null
+        val appChannel = getApplicationMetaData("APP_CHANNEL")
+        if ("google" != appChannel || "samsung" != appChannel) {
+            try {
+                deviceId = Settings.Secure.getString(
+                    EyepetizerApplication.context.contentResolver,
+                    Settings.Secure.ANDROID_ID
+                )
+            } catch (e: Exception) {
+                logW(TAG, "get android_id with error", e)
             }
-            var uuid = DataStoreUtils.readStringData("uuid", "")
-            if (!TextUtils.isEmpty(uuid)) {
-                deviceSerial = uuid
+            if (!TextUtils.isEmpty(deviceId) && deviceId!!.length < 255) {
+                deviceSerial = deviceId
                 return deviceSerial.toString()
             }
-            uuid = UUID.randomUUID().toString().replace("-", "").toUpperCase(Locale.getDefault())
-            CoroutineScope(Dispatchers.IO).launch { DataStoreUtils.saveStringData("uuid", uuid) }
+        }
+
+        var uuid = DataStoreUtils.readStringData("uuid", "")
+        if (!TextUtils.isEmpty(uuid)) {
             deviceSerial = uuid
             return deviceSerial.toString()
-        } else {
-            return deviceSerial.toString()
         }
+
+        uuid = UUID.randomUUID().toString().replace("-", "").toUpperCase(Locale.getDefault())
+        CoroutineScope(Dispatchers.IO).launch { DataStoreUtils.saveStringData("uuid", uuid) }
+        deviceSerial = uuid
+        return deviceSerial.toString()
     }
 
     /**
@@ -196,7 +209,10 @@ object GlobalUtil {
     fun getApplicationMetaData(key: String): String? {
         var applicationInfo: ApplicationInfo? = null
         try {
-            applicationInfo = EyepetizerApplication.context.packageManager.getApplicationInfo(appPackage, PackageManager.GET_META_DATA)
+            applicationInfo = EyepetizerApplication.context.packageManager.getApplicationInfo(
+                appPackage,
+                PackageManager.GET_META_DATA
+            )
         } catch (e: PackageManager.NameNotFoundException) {
             logW(TAG, e.message, e)
         }
