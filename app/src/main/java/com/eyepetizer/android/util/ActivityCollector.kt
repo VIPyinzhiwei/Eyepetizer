@@ -28,7 +28,7 @@ import java.util.*
  */
 object ActivityCollector {
 
-    private val activitys = Stack<WeakReference<Activity>>()
+    private val activities = Stack<WeakReference<Activity>>()
 
     /**
      * 将Activity压入Application栈
@@ -36,7 +36,7 @@ object ActivityCollector {
      * @param task 将要压入栈的Activity对象
      */
     fun pushTask(task: WeakReference<Activity>?) {
-        activitys.push(task)
+        activities.push(task)
     }
 
     /**
@@ -45,7 +45,7 @@ object ActivityCollector {
      * @param task
      */
     fun removeTask(task: WeakReference<Activity>?) {
-        activitys.remove(task)
+        activities.remove(task)
     }
 
     /**
@@ -54,17 +54,17 @@ object ActivityCollector {
      * @param taskIndex Activity栈索引
      */
     fun removeTask(taskIndex: Int) {
-        if (activitys.size > taskIndex) activitys.removeAt(taskIndex)
+        if (activities.size > taskIndex) activities.removeAt(taskIndex)
     }
 
     /**
      * 将栈中Activity移除至栈顶
      */
     fun removeToTop() {
-        val end = activitys.size
+        val end = activities.size
         val start = 1
         for (i in end - 1 downTo start) {
-            val mActivity = activitys[i].get()
+            val mActivity = activities[i].get()
             if (null != mActivity && !mActivity.isFinishing) {
                 mActivity.finish()
             }
@@ -75,7 +75,7 @@ object ActivityCollector {
      * 移除全部（用于整个应用退出）
      */
     fun removeAll() {
-        for (task in activitys) {
+        for (task in activities) {
             val mActivity = task.get()
             if (null != mActivity && !mActivity.isFinishing) {
                 mActivity.finish()
