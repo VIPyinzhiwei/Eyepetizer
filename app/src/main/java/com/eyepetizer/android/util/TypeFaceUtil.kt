@@ -37,71 +37,58 @@ object TypeFaceUtil {
 
     const val LOBSTER_TYPEFACE = 5
 
-    private var fzlLTypeface: Typeface? = null
-
-    private var fzdb1Typeface: Typeface? = null
-
-    private var futuraTypeface: Typeface? = null
-
-    private var dinTypeface: Typeface? = null
-
-    private var lobsterTypeface: Typeface? = null
-
-    fun getFzlLTypeface() = if (fzlLTypeface == null) {
+    val fzlLTypeface: Typeface by lazy(LazyThreadSafetyMode.NONE) {
         try {
-            fzlLTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
-            fzlLTypeface
+            Typeface.createFromAsset(
+                EyepetizerApplication.context.assets,
+                "fonts/FZLanTingHeiS-L-GB-Regular.TTF"
+            )
+        } catch (e: java.lang.RuntimeException) {
+            Typeface.DEFAULT
+        }
+    }
+
+    val fzdb1Typeface: Typeface by lazy(LazyThreadSafetyMode.NONE) {
+        try {
+            Typeface.createFromAsset(
+                EyepetizerApplication.context.assets,
+                "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF"
+            )
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
-    } else {
-        fzlLTypeface!!
     }
 
-    fun getFzdb1Typeface() = if (fzdb1Typeface == null) {
+    val futuraTypeface: Typeface by lazy(LazyThreadSafetyMode.NONE) {
         try {
-            fzdb1Typeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
-            fzdb1Typeface
+            Typeface.createFromAsset(
+                EyepetizerApplication.context.assets,
+                "fonts/Futura-CondensedMedium.ttf"
+            )
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
-    } else {
-        fzdb1Typeface!!
     }
 
-    fun getFuturaTypeface() = if (futuraTypeface == null) {
+    val dinTypeface: Typeface by lazy(LazyThreadSafetyMode.NONE) {
         try {
-            futuraTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/Futura-CondensedMedium.ttf")
-            futuraTypeface
+            Typeface.createFromAsset(
+                EyepetizerApplication.context.assets,
+                "fonts/DIN-Condensed-Bold.ttf"
+            )
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
-    } else {
-        futuraTypeface!!
     }
 
-    fun getDinTypeface() = if (dinTypeface == null) {
+    val lobsterTypeface: Typeface by lazy(LazyThreadSafetyMode.NONE) {
         try {
-            dinTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/DIN-Condensed-Bold.ttf")
-            dinTypeface
+            Typeface.createFromAsset(
+                EyepetizerApplication.context.assets,
+                "fonts/Lobster-1.4.otf"
+            )
         } catch (e: RuntimeException) {
             Typeface.DEFAULT
         }
-
-    } else {
-        dinTypeface!!
     }
-
-    fun getLobsterTypeface() = if (lobsterTypeface == null) {
-        try {
-            lobsterTypeface = Typeface.createFromAsset(EyepetizerApplication.context.assets, "fonts/Lobster-1.4.otf")
-            lobsterTypeface
-        } catch (e: RuntimeException) {
-            Typeface.DEFAULT
-        }
-
-    } else {
-        lobsterTypeface!!
-    }
-
 }

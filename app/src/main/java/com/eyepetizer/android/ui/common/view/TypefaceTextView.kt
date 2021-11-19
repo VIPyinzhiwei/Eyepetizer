@@ -35,7 +35,11 @@ class TypefaceTextView : AppCompatTextView {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.TypefaceTextView, 0, 0)
             val typefaceType = typedArray.getInt(R.styleable.TypefaceTextView_typeface, 0)
@@ -49,12 +53,12 @@ class TypefaceTextView : AppCompatTextView {
         /**
          * 根据字体类型，获取自定义字体。
          */
-        fun getTypeface(typefaceType: Int?) = when (typefaceType) {
-            TypeFaceUtil.FZLL_TYPEFACE -> TypeFaceUtil.getFzlLTypeface()
-            TypeFaceUtil.FZDB1_TYPEFACE -> TypeFaceUtil.getFzdb1Typeface()
-            TypeFaceUtil.FUTURA_TYPEFACE -> TypeFaceUtil.getFuturaTypeface()
-            TypeFaceUtil.DIN_TYPEFACE -> TypeFaceUtil.getDinTypeface()
-            TypeFaceUtil.LOBSTER_TYPEFACE -> TypeFaceUtil.getLobsterTypeface()
+        fun getTypeface(typefaceType: Int?): Typeface = when (typefaceType) {
+            TypeFaceUtil.FZLL_TYPEFACE -> TypeFaceUtil.fzlLTypeface
+            TypeFaceUtil.FZDB1_TYPEFACE -> TypeFaceUtil.fzdb1Typeface
+            TypeFaceUtil.FUTURA_TYPEFACE -> TypeFaceUtil.futuraTypeface
+            TypeFaceUtil.DIN_TYPEFACE -> TypeFaceUtil.dinTypeface
+            TypeFaceUtil.LOBSTER_TYPEFACE -> TypeFaceUtil.lobsterTypeface
             else -> Typeface.DEFAULT
         }
     }

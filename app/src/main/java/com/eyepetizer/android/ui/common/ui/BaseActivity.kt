@@ -145,7 +145,6 @@ open class BaseActivity : AppCompatActivity() {
         val tvTitle = findViewById<TextView>(R.id.tvTitle)
         navigateBefore?.setOnClickListener { finish() }
         tvTitle?.isSelected = true  //获取焦点，实现跑马灯效果。
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
