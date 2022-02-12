@@ -1,0 +1,7 @@
+<h3>The main function</h3>
+<ul>
+<li>Watch high-quality HD short videos and comments.</li>
+<li>Browse community graphics and video creation.</li>
+<li>Check daily fresh news and hot search keywords.</li>
+<li>Share exciting short videos and fresh information.</li>
+</ul>
