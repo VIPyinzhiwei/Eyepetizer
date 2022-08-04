@@ -81,7 +81,7 @@ interface MainPageService {
         /**
          * 首页-推荐列表
          */
-        const val HOMEPAGE_RECOMMEND_URL = "${ServiceCreator.BASE_URL}api/v5/index/tab/allRec?page=0"
+        const val HOMEPAGE_RECOMMEND_URL = "${ServiceCreator.BASE_URL}api/v5/index/tab/allRec"
 
         /**
          * 首页-日报列表

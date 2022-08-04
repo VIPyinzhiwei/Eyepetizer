@@ -23,7 +23,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.eyepetizer.android.extension.logD
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.R
 import com.shuyu.gsyvideoplayer.utils.CommonUtil
@@ -47,7 +46,6 @@ class AutoPlayPageChangeListener(private val viewPager: ViewPager2, private var 
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
         super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-        logD(TAG, "onPageSelected>>>position:${position},positionOffsetPixels:${positionOffsetPixels}")
         if (defaultPosition == position && positionOffsetPixels == 0) {
             //进入页面后，调用setCurrentItem函数，手动触发onPageScrollStateChanged函数。
             onPageScrollStateChanged(ViewPager2.SCROLL_STATE_IDLE)
@@ -57,13 +55,11 @@ class AutoPlayPageChangeListener(private val viewPager: ViewPager2, private var 
 
     override fun onPageSelected(position: Int) {
         super.onPageSelected(position)
-        logD(TAG, "onPageSelected>>>position:${position}")
         isPageSelected = true
     }
 
     override fun onPageScrollStateChanged(state: Int) {
         super.onPageScrollStateChanged(state)
-        logD(TAG, "onPageScrollStateChanged>>>state:${state}")
         if (state == ViewPager2.SCROLL_STATE_IDLE && isPageSelected) {
             playVideo()
             isPageSelected = false
@@ -134,9 +130,4 @@ class AutoPlayPageChangeListener(private val viewPager: ViewPager2, private var 
             create()
         }.show()
     }
-
-    companion object {
-        const val TAG = "AutoPlayPageChangeListener"
-    }
-
 }

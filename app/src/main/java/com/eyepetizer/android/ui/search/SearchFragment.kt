@@ -16,6 +16,7 @@
 
 package com.eyepetizer.android.ui.search
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -53,16 +54,16 @@ import com.umeng.analytics.MobclickAgent
  */
 class SearchFragment : BaseFragment() {
 
-    var _binding: FragmentSearchBinding? = null
+    private var _binding: FragmentSearchBinding? = null
 
-    val binding: FragmentSearchBinding
+    private val binding: FragmentSearchBinding
         get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this, InjectorUtil.getSearchViewModelFactory()).get(SearchViewModel::class.java) }
 
     private lateinit var adapter: HotSearchAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return super.onCreateView(binding.root)
     }
@@ -71,7 +72,7 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.llSearch.visibleAlphaAnimation(500)
         binding.etQuery.setDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_search_gray_17dp), 14f, 14f)
-        binding.etQuery.setOnEditorActionListener(EditorActionListener())
+        binding.etQuery.setOnEditorActionListener(EditorActionListener(activity, binding))
         binding.tvCancel.setOnClickListener {
             hideSoftKeyboard()
             removeFragment(activity, this)
@@ -98,6 +99,7 @@ class SearchFragment : BaseFragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observe() {
         viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
             binding.etQuery.showSoftKeyboard()
@@ -147,7 +149,7 @@ class SearchFragment : BaseFragment() {
         }
     }
 
-    inner class EditorActionListener : TextView.OnEditorActionListener {
+    class EditorActionListener(val activity: Context, val binding: FragmentSearchBinding) : TextView.OnEditorActionListener {
         override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 MobclickAgent.onEvent(activity, Const.Mobclick.EVENT3)

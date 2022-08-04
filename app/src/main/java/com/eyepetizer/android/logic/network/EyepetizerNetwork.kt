@@ -42,17 +42,11 @@ class EyepetizerNetwork {
 
     companion object {
 
-        private var network: EyepetizerNetwork? = null
+        @Volatile
+        private var INSTANCE: EyepetizerNetwork? = null
 
-        fun getInstance(): EyepetizerNetwork {
-            if (network == null) {
-                synchronized(EyepetizerNetwork::class.java) {
-                    if (network == null) {
-                        network = EyepetizerNetwork()
-                    }
-                }
-            }
-            return network!!
+        fun getInstance(): EyepetizerNetwork = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: EyepetizerNetwork()
         }
     }
 }

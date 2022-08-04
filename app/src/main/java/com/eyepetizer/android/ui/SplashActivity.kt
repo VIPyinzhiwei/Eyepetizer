@@ -39,9 +39,9 @@ import kotlinx.coroutines.*
  */
 class SplashActivity : BaseActivity() {
 
-    var _binding: ActivitySplashBinding? = null
+    private var _binding: ActivitySplashBinding? = null
 
-    val binding: ActivitySplashBinding
+    private val binding: ActivitySplashBinding
         get() = _binding!!
 
     private val splashDuration = 3 * 1000L

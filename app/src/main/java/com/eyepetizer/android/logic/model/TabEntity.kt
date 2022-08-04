@@ -24,18 +24,12 @@ import com.flyco.tablayout.listener.CustomTabEntity
  * @author vipyinzhiwei
  * @since  2020/5/10
  */
-class TabEntity(private var title: String, private var selectedIcon: Int = 0, private var unSelectedIcon: Int = 0) : CustomTabEntity {
+class TabEntity(private val title: String, private val selectedIcon: Int = 0, private val unSelectedIcon: Int = 0) : CustomTabEntity {
 
-    override fun getTabTitle(): String {
-        return title
-    }
+    override fun getTabTitle() = title
 
-    override fun getTabSelectedIcon(): Int {
-        return selectedIcon
-    }
+    override fun getTabSelectedIcon() = selectedIcon
 
-    override fun getTabUnselectedIcon(): Int {
-        return unSelectedIcon
-    }
+    override fun getTabUnselectedIcon() = unSelectedIcon
 
 }

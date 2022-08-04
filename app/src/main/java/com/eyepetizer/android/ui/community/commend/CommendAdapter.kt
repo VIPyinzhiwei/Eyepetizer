@@ -112,7 +112,7 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
 
                 if (item.data.content.data.library == DailyAdapter.DAILY_LIBRARY_TYPE) holder.tvChoiceness.visible()
 
-                if (item.data.header?.iconType ?: "".trim() == "round") {
+                if ((item.data.header?.iconType ?: "".trim()) == "round") {
                     holder.ivAvatar.invisible()
                     holder.ivRoundAvatar.visible()
                     holder.ivRoundAvatar.load(item.data.content.data.owner.avatar)
@@ -149,9 +149,6 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
                             UgcDetailActivity.start(fragment.activity, items.map { it!! }, item)
                         }
                     }
-                    else -> {
-
-                    }
                 }
             }
             else -> {
@@ -180,14 +177,14 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
     /**
      * 主题创作广场+话题讨论大厅……
      */
-    inner class HorizontalScrollcardItemCollectionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class HorizontalScrollcardItemCollectionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
     }
 
-    inner class SquareCardOfCommunityContentAdapter(val fragment: CommendFragment, var dataList: List<CommunityRecommend.ItemX>) :
+    class SquareCardOfCommunityContentAdapter(val fragment: CommendFragment, var dataList: List<CommunityRecommend.ItemX>) :
         RecyclerView.Adapter<SquareCardOfCommunityContentAdapter.ViewHolder>() {
 
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val ivBgPicture: ImageView = view.findViewById(R.id.ivBgPicture)
             val tvTitle: TextView = view.findViewById(R.id.tvTitle)
             val tvSubTitle: TextView = view.findViewById(R.id.tvSubTitle)
@@ -209,7 +206,7 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
         }
     }
 
-    inner class SquareCardOfCommunityContentItemDecoration(val fragment: CommendFragment) : RecyclerView.ItemDecoration() {
+    class SquareCardOfCommunityContentItemDecoration(val fragment: CommendFragment) : RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             val position = parent.getChildAdapterPosition(view) // item position
@@ -232,13 +229,13 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
         }
     }
 
-    inner class HorizontalScrollcardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class HorizontalScrollcardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bannerViewPager = view.findViewById<BannerViewPager<CommunityRecommend.ItemX, BannerAdapter.ViewHolder>>(R.id.bannerViewPager)
     }
 
-    inner class BannerAdapter : BaseBannerAdapter<CommunityRecommend.ItemX, BannerAdapter.ViewHolder>() {
+    class BannerAdapter : BaseBannerAdapter<CommunityRecommend.ItemX, BannerAdapter.ViewHolder>() {
 
-        inner class ViewHolder(val view: View) : BaseViewHolder<CommunityRecommend.ItemX>(view) {
+        class ViewHolder(val view: View) : BaseViewHolder<CommunityRecommend.ItemX>(view) {
 
             override fun bindData(item: CommunityRecommend.ItemX, position: Int, pageSize: Int) {
                 val ivPicture = findView<ImageView>(R.id.ivPicture)
@@ -262,7 +259,7 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
         }
     }
 
-    inner class FollowCardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class FollowCardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivBgPicture: ImageView = view.findViewById(R.id.ivBgPicture)
         val tvChoiceness: TextView = view.findViewById(R.id.tvChoiceness)
         val ivLayers: ImageView = view.findViewById(R.id.ivLayers)
@@ -298,6 +295,7 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<Communit
     }
 
     companion object {
+
         const val TAG = "CommendAdapter"
 
         const val STR_HORIZONTAL_SCROLLCARD_TYPE = "horizontalScrollCard"

@@ -60,11 +60,11 @@ object DateUtil {
                     return pastMinutes.toString() + GlobalUtil.getString(R.string.minutes_ago)
                 }*/
                 timePast < DAY -> {
-                    var pastHours = timePast / HOUR
+                    /*var pastHours = timePast / HOUR
                     if (pastHours <= 0) {
                         pastHours = 1
                     }
-                    /*return pastHours.toString() + GlobalUtil.getString(R.string.hours_ago)*/
+                    return pastHours.toString() + GlobalUtil.getString(R.string.hours_ago)*/
                     return getDateAndHourMinuteTime(dateMillis)
                 }
                 timePast < WEEK -> {
@@ -90,19 +90,10 @@ object DateUtil {
 
     fun isBlockedForever(timeLeft: Long) = timeLeft > 5 * YEAR
 
-    fun getDate(dateMillis: Long, pattern: String = "yyyy-MM-dd"): String {
-        val sdf = SimpleDateFormat(pattern, Locale.getDefault())
-        return sdf.format(Date(dateMillis))
-    }
+    fun getDate(dateMillis: Long, pattern: String = "yyyy-MM-dd") = SimpleDateFormat(pattern, Locale.getDefault()).format(Date(dateMillis))
 
-    private fun getDateAndTime(dateMillis: Long): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-        return sdf.format(Date(dateMillis))
-    }
+    private fun getDateAndTime(dateMillis: Long) = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date(dateMillis))
 
-    private fun getDateAndHourMinuteTime(dateMillis: Long): String {
-        val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-        return sdf.format(Date(dateMillis))
-    }
+    private fun getDateAndHourMinuteTime(dateMillis: Long) = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(dateMillis))
 
 }

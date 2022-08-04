@@ -199,7 +199,7 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Disc
                     holder.ivAvatar.load(item.data.detail.icon)
                     holder.tvTitle.text = item.data.detail.title
                     holder.tvDescription.text = item.data.detail.description
-                    CommendAdapter.startAutoPlay(fragment.activity, holder.videoPlayer, position, url, imageUrl, CommendAdapter.TAG, object : GSYSampleCallBack() {
+                    CommendAdapter.startAutoPlay(fragment.activity, holder.videoPlayer, position, url, imageUrl, TAG, object : GSYSampleCallBack() {
                         override fun onPrepared(url: String?, vararg objects: Any?) {
                             super.onPrepared(url, *objects)
                             GSYVideoManager.instance().isNeedMute = true
@@ -222,9 +222,9 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Disc
         }
     }
 
-    inner class HorizontalScrollCardAdapter : BaseBannerAdapter<Discovery.ItemX, HorizontalScrollCardAdapter.ViewHolder>() {
+    class HorizontalScrollCardAdapter : BaseBannerAdapter<Discovery.ItemX, HorizontalScrollCardAdapter.ViewHolder>() {
 
-        inner class ViewHolder(val view: View) : BaseViewHolder<Discovery.ItemX>(view) {
+        class ViewHolder(val view: View) : BaseViewHolder<Discovery.ItemX>(view) {
 
             override fun bindData(item: Discovery.ItemX, position: Int, pageSize: Int) {
                 val ivPicture = findView<ImageView>(R.id.ivPicture)
@@ -235,33 +235,29 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Disc
             }
         }
 
-        override fun getLayoutId(viewType: Int): Int {
-            return R.layout.item_banner_item_type
-        }
+        override fun getLayoutId(viewType: Int) = R.layout.item_banner_item_type
 
-        override fun createViewHolder(view: View, viewType: Int): ViewHolder {
-            return ViewHolder(view)
-        }
+        override fun createViewHolder(view: View, viewType: Int) = ViewHolder(view)
 
         override fun onBind(holder: ViewHolder, data: Discovery.ItemX, position: Int, pageSize: Int) {
             holder.bindData(data, position, pageSize)
         }
     }
 
-    inner class SpecialSquareCardCollectionAdapter(val dataList: List<Discovery.ItemX>) : RecyclerView.Adapter<SpecialSquareCardCollectionAdapter.ViewHolder>() {
+    class SpecialSquareCardCollectionAdapter(val dataList: List<Discovery.ItemX>) : RecyclerView.Adapter<SpecialSquareCardCollectionAdapter.ViewHolder>() {
 
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val ivPicture = view.findViewById<ImageView>(R.id.ivPicture)
             val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialSquareCardCollectionAdapter.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_special_square_card_collection_type_item, parent, false))
         }
 
         override fun getItemCount() = dataList.size
 
-        override fun onBindViewHolder(holder: SpecialSquareCardCollectionAdapter.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = dataList[position]
             holder.ivPicture.load(item.data.image, 4f)
             holder.tvTitle.text = item.data.title
@@ -269,20 +265,20 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Disc
         }
     }
 
-    inner class ColumnCardListAdapter(val dataList: List<Discovery.ItemX>) : RecyclerView.Adapter<ColumnCardListAdapter.ViewHolder>() {
+    class ColumnCardListAdapter(val dataList: List<Discovery.ItemX>) : RecyclerView.Adapter<ColumnCardListAdapter.ViewHolder>() {
 
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val ivPicture = view.findViewById<ImageView>(R.id.ivPicture)
             val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColumnCardListAdapter.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_column_card_list_type_item, parent, false))
         }
 
         override fun getItemCount() = dataList.size
 
-        override fun onBindViewHolder(holder: ColumnCardListAdapter.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = dataList[position]
             holder.ivPicture.load(item.data.image, 4f)
             holder.tvTitle.text = item.data.title
@@ -290,7 +286,7 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Disc
         }
     }
 
-    inner class SpecialSquareCardCollectionItemDecoration : RecyclerView.ItemDecoration() {
+    class SpecialSquareCardCollectionItemDecoration : RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             val position = parent.getChildAdapterPosition(view) // item position
@@ -330,16 +326,14 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment) : PagingDataAdapter<Disc
     }
 
     companion object {
+
         const val TAG = "DiscoveryAdapter"
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Discovery.Item>() {
-            override fun areItemsTheSame(oldItem: Discovery.Item, newItem: Discovery.Item): Boolean {
-                return oldItem.id == newItem.id
-            }
 
-            override fun areContentsTheSame(oldItem: Discovery.Item, newItem: Discovery.Item): Boolean {
-                return oldItem == newItem
-            }
+            override fun areItemsTheSame(oldItem: Discovery.Item, newItem: Discovery.Item) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Discovery.Item, newItem: Discovery.Item) = oldItem == newItem
         }
     }
 }

@@ -48,7 +48,7 @@ class CommunityFragment : BaseViewPagerFragment() {
 
     override val createFragments: Array<Fragment> = arrayOf(CommendFragment.newInstance(), FollowFragment.newInstance())
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return super.onCreateView(inflater.inflate(R.layout.fragment_main_container, container, false))
     }
 
@@ -58,8 +58,6 @@ class CommunityFragment : BaseViewPagerFragment() {
             when (viewPager?.currentItem) {
                 0 -> EventBus.getDefault().post(RefreshEvent(CommendFragment::class.java))
                 1 -> EventBus.getDefault().post(RefreshEvent(FollowFragment::class.java))
-                else -> {
-                }
             }
         } else if (messageEvent is SwitchPagesEvent) {
             when (messageEvent.activityClass) {

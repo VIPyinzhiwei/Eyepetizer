@@ -30,7 +30,6 @@ import com.eyepetizer.android.util.GlobalUtil
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.shuyu.gsyvideoplayer.player.IjkPlayerManager
-import com.umeng.commonsdk.UMConfigure
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 
 /**

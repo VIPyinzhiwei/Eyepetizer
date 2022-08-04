@@ -47,7 +47,7 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import org.greenrobot.eventbus.EventBus
 
-class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<HomePageRecommend.Item,RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<HomePageRecommend.Item, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun getItemViewType(position: Int) = RecyclerViewHelp.getItemViewType(getItem(position)!!)
 
@@ -265,19 +265,25 @@ class CommendAdapter(val fragment: CommendFragment) : PagingDataAdapter<HomePage
 
 
     companion object {
+
         const val TAG = "CommendAdapter"
 
         private val DIFF_CALLBACK = object : ItemCallback<HomePageRecommend.Item>() {
-            override fun areItemsTheSame(oldItem: HomePageRecommend.Item, newItem: HomePageRecommend.Item): Boolean {
-                return oldItem.id == newItem.id
-            }
 
-            override fun areContentsTheSame(oldItem: HomePageRecommend.Item, newItem: HomePageRecommend.Item): Boolean {
-                return oldItem == newItem
-            }
+            override fun areItemsTheSame(oldItem: HomePageRecommend.Item, newItem: HomePageRecommend.Item) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: HomePageRecommend.Item, newItem: HomePageRecommend.Item) = oldItem == newItem
         }
 
-        fun startAutoPlay(activity: Activity, player: GSYVideoPlayer, position: Int, playUrl: String, coverUrl: String, playTag: String, callBack: GSYSampleCallBack? = null) {
+        fun startAutoPlay(
+            activity: Activity,
+            player: GSYVideoPlayer,
+            position: Int,
+            playUrl: String,
+            coverUrl: String,
+            playTag: String,
+            callBack: GSYSampleCallBack? = null
+        ) {
             player.run {
                 //防止错位设置
                 setPlayTag(playTag)

@@ -26,15 +26,15 @@ import java.lang.ref.WeakReference
  */
 object IntentDataHolderUtil {
 
-    private val dataList = hashMapOf<String, WeakReference<Any>>()
+    private val map = hashMapOf<String, WeakReference<Any>>()
 
     fun setData(key: String, t: Any) {
         val value = WeakReference(t)
-        dataList[key] = value
+        map[key] = value
     }
 
     fun <T> getData(key: String): T? {
-        val reference = dataList[key]
+        val reference = map[key]
         return try {
             reference?.get() as T
         } catch (e: Exception) {

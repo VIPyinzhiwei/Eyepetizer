@@ -40,9 +40,9 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
  */
 class UgcDetailActivity : BaseActivity() {
 
-    var _binding: ActivityUgcDetailBinding? = null
+    private var _binding: ActivityUgcDetailBinding? = null
 
-    val binding: ActivityUgcDetailBinding
+    private val binding: ActivityUgcDetailBinding
         get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this).get(UgcDetailViewModel::class.java) }
@@ -130,6 +130,7 @@ class UgcDetailActivity : BaseActivity() {
     }
 
     companion object {
+
         const val TAG = "UgcDetailActivity"
         const val EXTRA_RECOMMEND_ITEM_LIST_JSON = "recommend_item_list"
         const val EXTRA_RECOMMEND_ITEM_JSON = "recommend_item"

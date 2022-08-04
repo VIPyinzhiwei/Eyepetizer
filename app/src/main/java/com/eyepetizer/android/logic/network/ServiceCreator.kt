@@ -62,11 +62,11 @@ object ServiceCreator {
 
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
-            val request = chain.request()
+            val originalRequest = chain.request()
             val t1 = System.nanoTime()
-            logV(TAG, "Sending request: ${request.url()} \n ${request.headers()}")
+            logV(TAG, "Sending request: ${originalRequest.url()} \n ${originalRequest.headers()}")
 
-            val response = chain.proceed(request)
+            val response = chain.proceed(originalRequest)
 
             val t2 = System.nanoTime()
             logV(TAG, "Received response for  ${response.request().url()} in ${(t2 - t1) / 1e6} ms\n${response.headers()}")
@@ -80,8 +80,8 @@ object ServiceCreator {
 
     class HeaderInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
-            val original = chain.request()
-            val request = original.newBuilder().apply {
+            val originalRequest = chain.request()
+            val request = originalRequest.newBuilder().apply {
                 header("model", "Android")
                 header("If-Modified-Since", "${Date()}")
                 header("User-Agent", System.getProperty("http.agent") ?: "unknown")
@@ -104,7 +104,7 @@ object ServiceCreator {
                 addQueryParameter("last_channel", GlobalUtil.deviceBrand)
                 addQueryParameter("system_version_code", "${Build.VERSION.SDK_INT}")
             }.build()
-            val request = originalRequest.newBuilder().url(url).method(originalRequest.method(), originalRequest.body()).build()
+            val request = originalRequest.newBuilder().url(url).build()
             return chain.proceed(request)
         }
     }

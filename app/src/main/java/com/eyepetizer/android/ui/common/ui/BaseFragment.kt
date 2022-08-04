@@ -21,20 +21,14 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.CallSuper
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.eyepetizer.android.R
-import com.eyepetizer.android.databinding.ActivitySettingBinding.inflate
-import com.eyepetizer.android.databinding.FragmentRefreshLayoutBinding
 import com.eyepetizer.android.event.MessageEvent
 import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.ui.common.callback.RequestLifecycle
@@ -102,11 +96,6 @@ open class BaseFragment : Fragment(), RequestLifecycle {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logD(TAG, "BaseFragment-->onViewCreated()")
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        logD(TAG, "BaseFragment-->onActivityCreated()")
     }
 
     override fun onStart() {

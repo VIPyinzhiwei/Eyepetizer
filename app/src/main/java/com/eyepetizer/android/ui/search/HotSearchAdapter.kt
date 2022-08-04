@@ -67,11 +67,11 @@ class HotSearchAdapter(val fragment: SearchFragment, var dataList: List<String>)
         }
     }
 
-    inner class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
     }
 
-    inner class HotSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class HotSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvKeywords = view.findViewById<TextView>(R.id.tvKeywords)
     }
 

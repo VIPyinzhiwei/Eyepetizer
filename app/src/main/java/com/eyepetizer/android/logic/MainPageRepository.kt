@@ -92,18 +92,11 @@ class MainPageRepository private constructor(private val mainPageDao: MainPageDa
 
     companion object {
 
-        private var repository: MainPageRepository? = null
+        @Volatile
+        private var INSTANCE: MainPageRepository? = null
 
-        fun getInstance(dao: MainPageDao, network: EyepetizerNetwork): MainPageRepository {
-            if (repository == null) {
-                synchronized(MainPageRepository::class.java) {
-                    if (repository == null) {
-                        repository = MainPageRepository(dao, network)
-                    }
-                }
-            }
-
-            return repository!!
+        fun getInstance(dao: MainPageDao, network: EyepetizerNetwork): MainPageRepository = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: MainPageRepository(dao, network)
         }
     }
 }

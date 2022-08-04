@@ -43,9 +43,9 @@ import com.eyepetizer.android.util.GlobalUtil
  */
 class OpenSourceProjectsActivity : BaseActivity() {
 
-    var _binding: ActivityOpenSourceProjectsBinding? = null
+    private var _binding: ActivityOpenSourceProjectsBinding? = null
 
-    val binding: ActivityOpenSourceProjectsBinding
+    private val binding: ActivityOpenSourceProjectsBinding
         get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +89,7 @@ class OpenSourceProjectsActivity : BaseActivity() {
         add(OpenSourceProject("Kotlinx Coroutines", "https://github.com/Kotlin/kotlinx.coroutines"))
     }
 
-    inner class OpenSourceProjectsAdapter(val activity: Activity, private val projectList: List<OpenSourceProject>) :
+    class OpenSourceProjectsAdapter(val activity: Activity, private val projectList: List<OpenSourceProject>) :
         RecyclerView.Adapter<OpenSourceProjectsAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -111,7 +111,7 @@ class OpenSourceProjectsActivity : BaseActivity() {
             holder.url.text = item.url
         }
 
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
             var name: TextView = view.findViewById(R.id.name)
 
@@ -120,7 +120,7 @@ class OpenSourceProjectsActivity : BaseActivity() {
         }
     }
 
-    inner class OpenSourceProject(val name: String, val url: String)
+    data class OpenSourceProject(val name: String, val url: String)
 
     companion object {
 

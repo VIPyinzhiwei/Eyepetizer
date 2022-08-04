@@ -46,10 +46,10 @@ fun TextView.setDrawable(drawable: Drawable?, iconWidth: Float? = null, iconHeig
  *
  * @param lDrawable     左边图标
  * @param rDrawable     右边图标
- * @param lIconWidth    图标宽dp：默认自动根据图标大小
- * @param lIconHeight   图标高dp：默认自动根据图标大小
- * @param rIconWidth    图标宽dp：默认自动根据图标大小
- * @param rIconHeight   图标高dp：默认自动根据图标大小
+ * @param lIconWidth    左边图标宽dp：默认自动根据图标大小
+ * @param lIconHeight   左边图标高dp：默认自动根据图标大小
+ * @param rIconWidth    右边图标宽dp：默认自动根据图标大小
+ * @param rIconHeight   右边图标高dp：默认自动根据图标大小
  */
 fun TextView.setDrawables(lDrawable: Drawable?, rDrawable: Drawable?, lIconWidth: Float? = null, lIconHeight: Float? = null, rIconWidth: Float? = null, rIconHeight: Float? = null) {
     if (lIconWidth != null && lIconHeight != null) {

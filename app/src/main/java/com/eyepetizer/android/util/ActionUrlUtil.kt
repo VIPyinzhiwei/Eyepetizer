@@ -117,12 +117,10 @@ object ActionUrlUtil {
      *  @param actionUrl 解码后的actionUrl
      *  @return 视频id
      */
-    private fun getConversionVideoId(actionUrl: String?): Long? {
-        return try {
-            val list = actionUrl?.split(Const.ActionUrl.DETAIL)
-            list!![1].toLong()
-        } catch (e: Exception) {
-            null
-        }
+    private fun getConversionVideoId(actionUrl: String?): Long? = try {
+        val list = actionUrl?.split(Const.ActionUrl.DETAIL)
+        list!![1].toLong()
+    } catch (e: Exception) {
+        null
     }
 }

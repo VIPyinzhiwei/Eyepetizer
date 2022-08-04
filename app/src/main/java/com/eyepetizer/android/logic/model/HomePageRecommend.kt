@@ -135,7 +135,7 @@ data class HomePageRecommend(val itemList: List<Item>, val count: Int, val total
         val nickname: String,
         val resourceType: String,
         val url: String,
-        val urls: List<String>,
+        val urls: List<String>?,
         val userCover: String
     )
 }

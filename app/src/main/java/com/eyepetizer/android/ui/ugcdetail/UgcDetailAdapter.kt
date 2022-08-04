@@ -85,8 +85,6 @@ class UgcDetailAdapter(val activity: UgcDetailActivity, var dataList: List<Commu
                             tvPrivateLetter, tvFollow, ivCollectionCount, tvCollectionCount, ivFavorites, tvFavorites -> LoginActivity.start(activity)
                             ivShare -> showDialogShare(activity, getShareContent(item))
                             ivReply, tvReplyCount -> R.string.currently_not_supported.showToast()
-                            else -> {
-                            }
                         }
                     }
                     itemView.setOnClickListener { switchHeaderAndUgcInfoVisibility() }
@@ -187,9 +185,9 @@ class UgcDetailAdapter(val activity: UgcDetailActivity, var dataList: List<Commu
         }
     }
 
-    inner class PhotosAdapter(val dataList: List<String>, val ugcHolder: FollowCardViewHolder) : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
+    class PhotosAdapter(val dataList: List<String>, val ugcHolder: FollowCardViewHolder) : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
-        inner class ViewHolder(view: PhotoView) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: PhotoView) : RecyclerView.ViewHolder(view) {
             val photoView = view
         }
 

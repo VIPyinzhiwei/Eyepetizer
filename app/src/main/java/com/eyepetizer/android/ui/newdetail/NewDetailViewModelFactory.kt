@@ -23,7 +23,7 @@ import com.eyepetizer.android.logic.VideoRepository
 class NewDetailViewModelFactory(private val repository: VideoRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return NewDetailViewModel(repository) as T
     }
 }

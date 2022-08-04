@@ -57,8 +57,6 @@ class HorizontalRecyclerView : RecyclerView {
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 parent.requestDisallowInterceptTouchEvent(false)
             }
-            else -> {
-            }
         }
         lastX = x
         lastY = y

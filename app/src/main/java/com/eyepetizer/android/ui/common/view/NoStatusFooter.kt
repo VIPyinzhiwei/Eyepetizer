@@ -28,7 +28,6 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import com.eyepetizer.android.R
 import com.eyepetizer.android.extension.dp2px
-import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.util.TypeFaceUtil
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshKernel
@@ -92,14 +91,12 @@ class NoStatusFooter : SimpleComponent, RefreshFooter {
     }
 
     override fun onInitialized(@NonNull kernel: RefreshKernel, height: Int, maxDragHeight: Int) {
-        logD(TAG, "onInitialized: height=${height},noMoreData=${mNoMoreData}")
         mRefreshKernel = kernel
         mRefreshKernel?.requestDrawBackgroundFor(this, mBackgroundColor)
         if (mFooterHeight == 0) mFooterHeight = height    //获取SmartRefreshLayout全局设置的Footer高度。
     }
 
     override fun onFinish(refreshLayout: RefreshLayout, success: Boolean): Int {
-        logD(TAG, "onFinish: $success")
         super.onFinish(refreshLayout, success)
         return 0
     }
@@ -108,7 +105,6 @@ class NoStatusFooter : SimpleComponent, RefreshFooter {
      * 设置数据全部加载完成，将不能再次触发加载功能
      */
     override fun setNoMoreData(noMoreData: Boolean): Boolean {
-        logD(TAG, "setNoMoreData: $noMoreData")
         if (mNoMoreData != noMoreData) {
             mNoMoreData = noMoreData
             refreshFooterHeight()
@@ -121,7 +117,6 @@ class NoStatusFooter : SimpleComponent, RefreshFooter {
 
     override fun onStateChanged(refreshLayout: RefreshLayout, oldState: RefreshState, newState: RefreshState) {
         super.onStateChanged(refreshLayout, oldState, newState)
-        logD(TAG, "onStateChanged: newState=${newState},noMoreData=${mNoMoreData}")
         if (!mNoMoreData) {
             when (newState) {
                 RefreshState.None -> {
@@ -149,7 +144,6 @@ class NoStatusFooter : SimpleComponent, RefreshFooter {
     }
 
     private fun refreshFooterHeight() {
-        logD(TAG, "refreshFooterHeight: noMoreData=${mNoMoreData}")
         if (mNoMoreData) {
             mRefreshKernel?.refreshLayout?.setFooterHeightPx(mFooterHeight)
         } else {
@@ -158,37 +152,31 @@ class NoStatusFooter : SimpleComponent, RefreshFooter {
         mRefreshKernel?.requestRemeasureHeightFor(this)
     }
 
-    fun setTextTitleSize(size: Float): NoStatusFooter {
+    fun setTextTitleSize(size: Float) = apply {
         mTitleText.textSize = size
         mRefreshKernel?.requestRemeasureHeightFor(this)
-        return this
     }
 
-    fun setTextTitleTypeface(tf: Typeface): NoStatusFooter {
+    fun setTextTitleTypeface(tf: Typeface) = apply {
         mTitleText.typeface = tf
         mRefreshKernel?.requestRemeasureHeightFor(this)
-        return this
     }
 
-    fun setPrimaryColor(@ColorInt primaryColor: Int): NoStatusFooter {
+    fun setPrimaryColor(@ColorInt primaryColor: Int) = apply {
         mBackgroundColor = primaryColor
         mRefreshKernel?.requestDrawBackgroundFor(this, primaryColor)
-        return this
     }
 
-    fun setAccentColor(@ColorInt accentColor: Int): NoStatusFooter {
+    fun setAccentColor(@ColorInt accentColor: Int) = apply {
         mTitleText.setTextColor(accentColor)
-        return this
     }
 
-    fun setAccentColorId(@ColorRes colorId: Int): NoStatusFooter {
+    fun setAccentColorId(@ColorRes colorId: Int) = apply {
         val thisView: View = this
         setAccentColor(ContextCompat.getColor(thisView.context, colorId))
-        return this
     }
 
     companion object {
-        const val TAG = "NoStatusFooter"
         var REFRESH_FOOTER_NOTHING: String? = null      //没有更多数据了
     }
 }

@@ -32,7 +32,7 @@ import com.eyepetizer.android.util.DateUtil
 
 class PushAdapter(val fragment: PushFragment) : PagingDataAdapter<PushMessage.Message, PushAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PushAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val holder = ViewHolder(R.layout.item_notification_push.inflate(parent))
         holder.itemView.setOnClickListener {
             getItem(holder.bindingAdapterPosition)?.let {
@@ -51,7 +51,7 @@ class PushAdapter(val fragment: PushFragment) : PagingDataAdapter<PushMessage.Me
         }
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tvTitle)
         val tvTime: TextView = view.findViewById(R.id.tvTime)
         val tvContent: TextView = view.findViewById(R.id.tvContent)
@@ -61,13 +61,10 @@ class PushAdapter(val fragment: PushFragment) : PagingDataAdapter<PushMessage.Me
     companion object {
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PushMessage.Message>() {
-            override fun areItemsTheSame(oldItem: PushMessage.Message, newItem: PushMessage.Message): Boolean {
-                return oldItem.id == newItem.id
-            }
 
-            override fun areContentsTheSame(oldItem: PushMessage.Message, newItem: PushMessage.Message): Boolean {
-                return oldItem == newItem
-            }
+            override fun areItemsTheSame(oldItem: PushMessage.Message, newItem: PushMessage.Message) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: PushMessage.Message, newItem: PushMessage.Message) = oldItem == newItem
         }
 
     }

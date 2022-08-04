@@ -77,8 +77,6 @@ class SettingViewModel : ViewModel() {
                 MobclickAgent.onEvent(view.context, Const.Mobclick.EVENT6)
                 AboutActivity.start(view.context)
             }
-            else -> {
-            }
         }
     }
 
