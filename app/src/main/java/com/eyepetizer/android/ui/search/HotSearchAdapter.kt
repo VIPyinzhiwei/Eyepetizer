@@ -36,7 +36,7 @@ import com.eyepetizer.android.util.GlobalUtil
  */
 class HotSearchAdapter(val fragment: SearchFragment, var dataList: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun getItemCount() = dataList.size
+    override fun getItemCount() = dataList.size + 1
 
     override fun getItemViewType(position: Int) = when (position) {
         0 -> Const.ItemViewType.CUSTOM_HEADER
@@ -54,7 +54,7 @@ class HotSearchAdapter(val fragment: SearchFragment, var dataList: List<String>)
                 holder.tvTitle.text = GlobalUtil.getString(R.string.hot_keywords)
             }
             is HotSearchViewHolder -> {
-                val item = dataList[position]
+                val item = dataList[position - 1]
                 holder.tvKeywords.text = item
                 holder.itemView.setOnClickListener {
                     "${item},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast()
