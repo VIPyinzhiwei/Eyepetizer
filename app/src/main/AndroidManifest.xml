@@ -10,6 +10,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <queries>
+        <package android:name="com.tencent.mobileqq" />
+        <package android:name="com.tencent.mm" />
+        <package android:name="com.sina.weibo" />
+    </queries>
+
     <application
         android:name=".EyepetizerApplication"
         android:allowBackup="false"
