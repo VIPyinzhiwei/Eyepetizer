@@ -19,6 +19,7 @@ package com.eyepetizer.android.logic.network
 import android.os.Build
 import com.eyepetizer.android.extension.logV
 import com.eyepetizer.android.extension.screenPixel
+import com.eyepetizer.android.logic.network.api.MainPageService
 import com.eyepetizer.android.ui.common.callback.GsonTypeAdapterFactory
 import com.eyepetizer.android.util.GlobalUtil
 import com.google.gson.GsonBuilder
@@ -96,8 +97,11 @@ object ServiceCreator {
             val originalHttpUrl = originalRequest.url()
             val url = originalHttpUrl.newBuilder().apply {
                 addQueryParameter("udid", GlobalUtil.getDeviceSerial())
-                addQueryParameter("vc", GlobalUtil.eyepetizerVersionCode.toString())
-                addQueryParameter("vn", GlobalUtil.eyepetizerVersionName)
+                //针对开眼官方【首页推荐 】api 变动， 需要单独做处理。原因：附加 vc、vn 这两个字段后，请求接口无响应。
+                if (!originalHttpUrl.toString().contains(MainPageService.HOMEPAGE_RECOMMEND_URL)) {
+                    addQueryParameter("vc", GlobalUtil.eyepetizerVersionCode.toString())
+                    addQueryParameter("vn", GlobalUtil.eyepetizerVersionName)
+                }
                 addQueryParameter("size", screenPixel())
                 addQueryParameter("deviceModel", GlobalUtil.deviceModel)
                 addQueryParameter("first_channel", GlobalUtil.deviceBrand)
