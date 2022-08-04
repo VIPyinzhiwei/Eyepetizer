@@ -24,21 +24,11 @@ package com.eyepetizer.android.logic.dao
  */
 object EyepetizerDatabase {
 
-    private var mainPageDao: MainPageDao? = null
+    private lateinit var mainPageDao: MainPageDao
 
-    private var videoDao: VideoDao? = null
+    private lateinit var videoDao: VideoDao
 
-    fun getMainPageDao(): MainPageDao {
-        if (mainPageDao == null) {
-            mainPageDao = MainPageDao()
-        }
-        return mainPageDao!!
-    }
+    fun getMainPageDao() = if (this::mainPageDao.isInitialized) mainPageDao else MainPageDao()
 
-    fun getVideoDao(): VideoDao {
-        if (videoDao == null) {
-            videoDao = VideoDao()
-        }
-        return videoDao!!
-    }
+    fun getVideoDao() = if (this::videoDao.isInitialized) videoDao else VideoDao()
 }

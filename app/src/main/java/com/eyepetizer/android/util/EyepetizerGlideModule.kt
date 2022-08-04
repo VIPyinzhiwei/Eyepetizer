@@ -35,9 +35,7 @@ import java.io.InputStream
 @GlideModule
 class EyepetizerGlideModule : AppGlideModule() {
 
-    override fun isManifestParsingEnabled(): Boolean {
-        return false
-    }
+    override fun isManifestParsingEnabled() = false
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         super.registerComponents(context, glide, registry)

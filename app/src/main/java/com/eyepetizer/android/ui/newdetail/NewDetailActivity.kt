@@ -16,6 +16,7 @@
 
 package com.eyepetizer.android.ui.newdetail
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
@@ -56,9 +57,9 @@ import kotlinx.parcelize.Parcelize
  */
 class NewDetailActivity : BaseActivity() {
 
-    var _binding: ActivityNewDetailBinding? = null
+    private var _binding: ActivityNewDetailBinding? = null
 
-    val binding: ActivityNewDetailBinding
+    private val binding: ActivityNewDetailBinding
         get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this, InjectorUtil.getNewDetailViewModelFactory()).get(NewDetailViewModel::class.java) }
@@ -195,6 +196,7 @@ class NewDetailActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observe() {
         //刷新，视频信息+相关推荐+评论
         if (!viewModel.videoDetailLiveData.hasObservers()) {
@@ -205,7 +207,7 @@ class NewDetailActivity : BaseActivity() {
                     return@Observer
                 }
                 viewModel.nextPageUrl = response.videoReplies.nextPageUrl
-                if (response.videoRelated == null || response.videoRelated.itemList.isNullOrEmpty() && response.videoReplies.itemList.isNullOrEmpty()) {
+                if (response.videoRelated == null || response.videoRelated.itemList.isEmpty() && response.videoReplies.itemList.isEmpty()) {
                     return@Observer
                 }
                 response.videoBeanForClient?.run {
@@ -220,7 +222,7 @@ class NewDetailActivity : BaseActivity() {
                 relatedAdapter.notifyDataSetChanged()
                 replyAdapter.notifyDataSetChanged()
                 when {
-                    viewModel.repliesDataList.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    viewModel.repliesDataList.isEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
                     response.videoReplies.nextPageUrl.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
                     else -> binding.refreshLayout.closeHeaderOrFooter()
                 }
@@ -235,7 +237,7 @@ class NewDetailActivity : BaseActivity() {
                     return@Observer
                 }
                 viewModel.nextPageUrl = response.videoReplies.nextPageUrl
-                if (response.videoRelated == null || response.videoRelated.itemList.isNullOrEmpty() && response.videoReplies.itemList.isNullOrEmpty()) {
+                if (response.videoRelated == null || response.videoRelated.itemList.isEmpty() && response.videoReplies.itemList.isEmpty()) {
                     return@Observer
                 }
                 viewModel.relatedDataList.clear()
@@ -246,7 +248,7 @@ class NewDetailActivity : BaseActivity() {
                 relatedAdapter.notifyDataSetChanged()
                 replyAdapter.notifyDataSetChanged()
                 when {
-                    viewModel.repliesDataList.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    viewModel.repliesDataList.isEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
                     response.videoReplies.nextPageUrl.isNullOrEmpty() -> binding.refreshLayout.finishLoadMoreWithNoMoreData()
                     else -> binding.refreshLayout.closeHeaderOrFooter()
                 }
@@ -261,7 +263,7 @@ class NewDetailActivity : BaseActivity() {
                     return@Observer
                 }
                 viewModel.nextPageUrl = response.nextPageUrl
-                if (response.itemList.isNullOrEmpty()) {
+                if (response.itemList.isEmpty()) {
                     return@Observer
                 }
                 val itemCount = replyAdapter.itemCount
@@ -299,7 +301,7 @@ class NewDetailActivity : BaseActivity() {
             //设置触摸显示控制ui的消失时间
             dismissControlTime = 5000
             //设置播放过程中的回调
-            setVideoAllCallBack(VideoCallPlayBack())
+            setVideoAllCallBack(VideoCallPlayBack(binding, ::switchTitleBarVisible, ::delayHideBottomContainer))
             //设置播放URL
             setUp(it.playUrl, false, it.title)
             //开始播放
@@ -365,7 +367,8 @@ class NewDetailActivity : BaseActivity() {
         }
     }
 
-    inner class VideoCallPlayBack : GSYSampleCallBack() {
+    class VideoCallPlayBack(val binding: ActivityNewDetailBinding, val switchTitleBarVisible: () -> Unit, val delayHideBottomContainer: () -> Unit) :
+        GSYSampleCallBack() {
         override fun onStartPrepared(url: String?, vararg objects: Any?) {
             super.onStartPrepared(url, *objects)
             binding.flHeader.gone()
@@ -409,8 +412,6 @@ class NewDetailActivity : BaseActivity() {
                     binding.ivShareToQQzone -> share(it.webUrl.raw, SHARE_QQZONE)
                     binding.ivAvatar, binding.etComment -> LoginActivity.start(this@NewDetailActivity)
                     binding.ivReply, binding.tvReplyCount -> scrollRepliesTop()
-                    else -> {
-                    }
                 }
             }
         }
@@ -423,8 +424,8 @@ class NewDetailActivity : BaseActivity() {
     ) : Parcelable
 
     companion object {
-        const val TAG = "NewDetailActivity"
 
+        const val TAG = "NewDetailActivity"
         const val EXTRA_VIDEOINFO = "videoInfo"
         const val EXTRA_VIDEO_ID = "videoId"
 

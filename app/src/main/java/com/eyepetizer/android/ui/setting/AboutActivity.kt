@@ -39,9 +39,9 @@ import com.umeng.analytics.MobclickAgent
  */
 class AboutActivity : BaseActivity() {
 
-    var _binding: ActivityAboutBinding? = null
+    private var _binding: ActivityAboutBinding? = null
 
-    val binding: ActivityAboutBinding
+    private val binding: ActivityAboutBinding
         get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {

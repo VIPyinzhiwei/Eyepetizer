@@ -22,4 +22,4 @@ package com.eyepetizer.android.event
  * @author vipyinzhiwei
  * @since  2020/5/19
  */
-open class SwitchPagesEvent(var activityClass: Class<*>? = null) : MessageEvent()
+class SwitchPagesEvent(val activityClass: Class<*>? = null) : MessageEvent()

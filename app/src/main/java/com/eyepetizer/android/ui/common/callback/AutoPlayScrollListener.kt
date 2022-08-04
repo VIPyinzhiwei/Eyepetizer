@@ -37,9 +37,8 @@ import com.shuyu.gsyvideoplayer.video.base.GSYBaseVideoPlayer
  * @author vipyinzhiwei
  * @since 2020/5/26
  */
-class AutoPlayScrollListener(private val itemPlayId: Int, private val rangeTop: Int, private val rangeBottom: Int) : RecyclerView.OnScrollListener() {
-
-    private var isNeedShowWifiDialog = true
+class AutoPlayScrollListener(private val itemPlayId: Int, private val rangeTop: Int = PLAY_RANGE_TOP, private val rangeBottom: Int = PLAY_RANGE_BOTTOM) :
+    RecyclerView.OnScrollListener() {
 
     private var firstVisible = 0
     private var lastVisible = 0
@@ -48,8 +47,8 @@ class AutoPlayScrollListener(private val itemPlayId: Int, private val rangeTop: 
     private val playHandler = Handler()
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, scrollState: Int) {
-        when (scrollState) {
-            RecyclerView.SCROLL_STATE_IDLE -> playVideo(recyclerView)
+        if (scrollState == RecyclerView.SCROLL_STATE_IDLE) {
+            playVideo(recyclerView)
         }
     }
 
@@ -92,64 +91,67 @@ class AutoPlayScrollListener(private val itemPlayId: Int, private val rangeTop: 
                     runnable = null
                     if (tmpPlayer === gsyBaseVideoPlayer) return
                 }
-                runnable = PlayRunnable(gsyBaseVideoPlayer)
+                runnable = PlayRunnable(gsyBaseVideoPlayer, rangeTop, rangeBottom)
                 //降低频率
-                playHandler.postDelayed(runnable, 400)
+                playHandler.postDelayed(runnable!!, 400)
             }
         }
     }
 
-    private inner class PlayRunnable(var gsyBaseVideoPlayer: GSYBaseVideoPlayer?) : Runnable {
+    private class PlayRunnable(val gsyBaseVideoPlayer: GSYBaseVideoPlayer?, val rangeTop: Int, val rangeBottom: Int) : Runnable {
+
+        private var isNeedShowWifiDialog = true
+
         override fun run() {
             var inPosition = false
             //如果未播放，需要播放
             if (gsyBaseVideoPlayer != null) {
                 val screenPosition = IntArray(2)
-                gsyBaseVideoPlayer!!.getLocationOnScreen(screenPosition)
-                val halfHeight = gsyBaseVideoPlayer!!.height / 2
-                val rangePosition = screenPosition[1] + halfHeight
+                gsyBaseVideoPlayer.getLocationOnScreen(screenPosition)
+                val halfHeight = gsyBaseVideoPlayer.height / 2
+                val rangePosition = screenPosition.last() + halfHeight
                 //中心点在播放区域内
                 if (rangePosition >= rangeTop && rangePosition <= rangeBottom) {
                     inPosition = true
                 }
                 if (inPosition) {
-                    startPlayLogic(gsyBaseVideoPlayer!!, gsyBaseVideoPlayer!!.context)
+                    startPlayLogic(gsyBaseVideoPlayer, gsyBaseVideoPlayer.context)
                 }
             }
         }
-    }
 
-    private fun startPlayLogic(gsyBaseVideoPlayer: GSYBaseVideoPlayer, context: Context) {
-        if (!CommonUtil.isWifiConnected(context) && isNeedShowWifiDialog) {
-            showWifiDialog(gsyBaseVideoPlayer, context)
-            return
+        private fun startPlayLogic(gsyBaseVideoPlayer: GSYBaseVideoPlayer, context: Context) {
+            if (!CommonUtil.isWifiConnected(context) && isNeedShowWifiDialog) {
+                showWifiDialog(gsyBaseVideoPlayer, context)
+                return
+            }
+            gsyBaseVideoPlayer.startPlayLogic()
         }
-        gsyBaseVideoPlayer.startPlayLogic()
-    }
 
-    private fun showWifiDialog(gsyBaseVideoPlayer: GSYBaseVideoPlayer, context: Context) {
-        if (!NetworkUtils.isAvailable(context)) {
-            Toast.makeText(context, context.resources.getString(R.string.no_net), Toast.LENGTH_LONG).show()
-            return
+        private fun showWifiDialog(gsyBaseVideoPlayer: GSYBaseVideoPlayer, context: Context) {
+            if (!NetworkUtils.isAvailable(context)) {
+                Toast.makeText(context, context.resources.getString(R.string.no_net), Toast.LENGTH_LONG).show()
+                return
+            }
+            AlertDialog.Builder(context).apply {
+                setMessage(context.resources.getString(R.string.tips_not_wifi))
+                setPositiveButton(context.resources.getString(R.string.tips_not_wifi_confirm)) { dialog, which ->
+                    dialog.dismiss()
+                    gsyBaseVideoPlayer.startPlayLogic()
+                    isNeedShowWifiDialog = false
+                }
+                setPositiveButton(context.resources.getString(R.string.tips_not_wifi_confirm)) { dialog, which ->
+                    dialog.dismiss()
+                    gsyBaseVideoPlayer.startPlayLogic()
+                    isNeedShowWifiDialog = false
+                }
+                setNegativeButton(context.resources.getString(R.string.tips_not_wifi_cancel)) { dialog, which ->
+                    dialog.dismiss()
+                    isNeedShowWifiDialog = true
+                }
+                create()
+            }.show()
         }
-        AlertDialog.Builder(context).apply {
-            setMessage(context.resources.getString(R.string.tips_not_wifi))
-            setPositiveButton(context.resources.getString(R.string.tips_not_wifi_confirm)) { dialog, which ->
-                dialog.dismiss()
-                gsyBaseVideoPlayer.startPlayLogic()
-                isNeedShowWifiDialog = false
-            }
-            setPositiveButton(context.resources.getString(R.string.tips_not_wifi_confirm)) { dialog, which ->
-                dialog.dismiss()
-                gsyBaseVideoPlayer.startPlayLogic()
-                isNeedShowWifiDialog = false
-            }
-            setNegativeButton(context.resources.getString(R.string.tips_not_wifi_cancel)) { dialog, which ->
-                dialog.dismiss()
-                isNeedShowWifiDialog = true
-            }
-            create()
-        }.show()
     }
 
     companion object {

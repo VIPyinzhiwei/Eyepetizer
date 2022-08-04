@@ -159,9 +159,7 @@ object GlobalUtil {
      * 字符串资源id
      * @return 字符串资源id对应的字符串内容。
      */
-    fun getString(resId: Int): String {
-        return EyepetizerApplication.context.resources.getString(resId)
-    }
+    fun getString(resId: Int): String = EyepetizerApplication.context.resources.getString(resId)
 
     /**
      * 获取资源文件中定义的字符串。
@@ -170,9 +168,7 @@ object GlobalUtil {
      * 字符串资源id
      * @return 字符串资源id对应的字符串内容。
      */
-    fun getDimension(resId: Int): Int {
-        return EyepetizerApplication.context.resources.getDimensionPixelOffset(resId)
-    }
+    fun getDimension(resId: Int): Int = EyepetizerApplication.context.resources.getDimensionPixelOffset(resId)
 
     /**
      * 获取指定资源名的资源id。
@@ -183,9 +179,7 @@ object GlobalUtil {
      * 资源类型
      * @return 指定资源名的资源id。
      */
-    fun getResourceId(name: String, type: String): Int {
-        return EyepetizerApplication.context.resources.getIdentifier(name, type, appPackage)
-    }
+    fun getResourceId(name: String, type: String): Int = EyepetizerApplication.context.resources.getIdentifier(name, type, appPackage)
 
     /**
      * 获取AndroidManifest.xml文件中，<application>标签下的meta-data值。

@@ -23,7 +23,7 @@ import com.eyepetizer.android.logic.MainPageRepository
 class DiscoveryViewModelFactory(private val repository: MainPageRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return DiscoveryViewModel(repository) as T
     }
 }

@@ -43,12 +43,12 @@ import com.umeng.analytics.MobclickAgent
  */
 class MineFragment : BaseFragment() {
 
-    var _binding: FragmentMineBinding? = null
+    private var _binding: FragmentMineBinding? = null
 
-    val binding: FragmentMineBinding
+    private val binding: FragmentMineBinding
         get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMineBinding.inflate(inflater, container, false)
         return super.onCreateView(binding.root)
     }
@@ -78,9 +78,6 @@ class MineFragment : BaseFragment() {
                 this@MineFragment.rootView, binding.llScrollViewContent -> {
                     MobclickAgent.onEvent(activity, Const.Mobclick.EVENT4)
                     AboutActivity.start(activity)
-                }
-
-                else -> {
                 }
             }
         }

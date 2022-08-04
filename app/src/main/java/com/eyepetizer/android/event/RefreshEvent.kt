@@ -22,4 +22,4 @@ package com.eyepetizer.android.event
  * @author vipyinzhiwei
  * @since  2020/5/19
  */
-open class RefreshEvent(var activityClass: Class<*>? = null) : MessageEvent()
+class RefreshEvent(val activityClass: Class<*>? = null) : MessageEvent()

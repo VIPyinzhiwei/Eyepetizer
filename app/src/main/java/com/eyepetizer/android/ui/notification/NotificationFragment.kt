@@ -50,7 +50,7 @@ class NotificationFragment : BaseViewPagerFragment() {
 
     override val createFragments: Array<Fragment> = arrayOf(PushFragment.newInstance(), InteractionFragment.newInstance(), InboxFragment.newInstance())
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return super.onCreateView(inflater.inflate(R.layout.fragment_main_container, container, false))
     }
 
@@ -61,16 +61,12 @@ class NotificationFragment : BaseViewPagerFragment() {
                 0 -> EventBus.getDefault().post(RefreshEvent(PushFragment::class.java))
                 1 -> EventBus.getDefault().post(RefreshEvent(InteractionFragment::class.java))
                 2 -> EventBus.getDefault().post(RefreshEvent(InboxFragment::class.java))
-                else -> {
-                }
             }
         } else if (messageEvent is SwitchPagesEvent) {
             when (messageEvent.activityClass) {
                 PushFragment::class.java -> viewPager?.currentItem = 0
                 InteractionFragment::class.java -> viewPager?.currentItem = 1
                 InboxFragment::class.java -> viewPager?.currentItem = 2
-                else -> {
-                }
             }
         }
     }

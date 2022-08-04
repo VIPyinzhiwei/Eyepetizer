@@ -39,7 +39,7 @@ import com.umeng.analytics.MobclickAgent
  * @author vipyinzhiwei
  * @since  2020/5/24
  */
-open class ShareDialogFragment : BottomSheetDialogFragment() {
+class ShareDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentShareDialogBinding? = null
 
@@ -64,12 +64,12 @@ open class ShareDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.let { act ->
-            attachedActivity = act
-            binding.tvToWechatFriends.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_wechat_black_30dp), 30f, 30f, 1)
-            binding.tvShareToWeibo.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_weibo_black_30dp), 30f, 30f, 1)
-            binding.tvShareToQQ.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_qq_black_30dp), 30f, 30f, 1)
-            binding.tvShareToQQzone.setDrawable(ContextCompat.getDrawable(act, R.drawable.ic_share_qq_zone_black_30dp), 30f, 30f, 1)
+        activity?.let {
+            attachedActivity = it
+            binding.tvToWechatFriends.setDrawable(ContextCompat.getDrawable(it, R.drawable.ic_share_wechat_black_30dp), 30f, 30f, 1)
+            binding.tvShareToWeibo.setDrawable(ContextCompat.getDrawable(it, R.drawable.ic_share_weibo_black_30dp), 30f, 30f, 1)
+            binding.tvShareToQQ.setDrawable(ContextCompat.getDrawable(it, R.drawable.ic_share_qq_black_30dp), 30f, 30f, 1)
+            binding.tvShareToQQzone.setDrawable(ContextCompat.getDrawable(it, R.drawable.ic_share_qq_zone_black_30dp), 30f, 30f, 1)
 
             binding.tvShareToQQ.setOnClickListener {
                 share(attachedActivity, shareContent, SHARE_QQ)

@@ -36,9 +36,9 @@ import com.eyepetizer.android.util.GlobalUtil
  */
 class LoginActivity : BaseActivity() {
 
-    var _binding: ActivityLoginBinding? = null
+    private var _binding: ActivityLoginBinding? = null
 
-    val binding: ActivityLoginBinding
+    private val binding: ActivityLoginBinding
         get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,8 +94,6 @@ class LoginActivity : BaseActivity() {
                 }
                 binding.tvUserLogin, binding.ivWechat, binding.ivSina, binding.ivQQ -> {
                     R.string.currently_not_supported.showToast()
-                }
-                else -> {
                 }
             }
         }

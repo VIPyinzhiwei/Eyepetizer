@@ -124,20 +124,18 @@ class DailyAdapter(val fragment: DailyFragment) : PagingDataAdapter<Daily.Item, 
     }
 
     companion object {
+
         const val TAG = "DailyAdapter"
+
         const val DEFAULT_LIBRARY_TYPE = "DEFAULT"
         const val NONE_LIBRARY_TYPE = "NONE"
         const val DAILY_LIBRARY_TYPE = "DAILY"
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Daily.Item>() {
 
-            override fun areItemsTheSame(oldItem: Daily.Item, newItem: Daily.Item): Boolean {
-                return oldItem.id == newItem.id
-            }
+            override fun areItemsTheSame(oldItem: Daily.Item, newItem: Daily.Item) = oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Daily.Item, newItem: Daily.Item): Boolean {
-                return oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: Daily.Item, newItem: Daily.Item) = oldItem == newItem
 
         }
     }

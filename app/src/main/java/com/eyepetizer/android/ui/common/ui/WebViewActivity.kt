@@ -45,9 +45,9 @@ import com.tencent.sonic.sdk.*
  */
 class WebViewActivity : BaseActivity() {
 
-    var _binding: ActivityWebViewBinding? = null
+    private var _binding: ActivityWebViewBinding? = null
 
-    val binding: ActivityWebViewBinding
+    private val binding: ActivityWebViewBinding
         get() = _binding!!
 
     private var title: String = ""
@@ -133,8 +133,8 @@ class WebViewActivity : BaseActivity() {
             defaultTextEncodingName = "UTF-8"
             setSupportZoom(true)
         }
-        binding.webView.webChromeClient = UIWebChromeClient()
-        binding.webView.webViewClient = UIWebViewClient()
+        binding.webView.webChromeClient = UIWebChromeClient(binding, this)
+        binding.webView.webViewClient = UIWebViewClient(binding, this)
         binding.webView.setDownloadListener { url, _, _, _, _ ->
             // 调用系统浏览器下载
             val uri = Uri.parse(url)
@@ -186,37 +186,34 @@ class WebViewActivity : BaseActivity() {
         }
     }
 
-    inner class UIWebViewClient : WebViewClient() {
+    class UIWebViewClient(val binding: ActivityWebViewBinding, val activity: WebViewActivity) : WebViewClient() {
         override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
-            logD(TAG, "onPageStarted >>> url:${url}")
-            linkUrl = url
+            activity.linkUrl = url
             super.onPageStarted(view, url, favicon)
             binding.progressBar.visibility = View.VISIBLE
         }
 
         override fun onPageFinished(view: WebView, url: String) {
-            logD(TAG, "onPageFinished >>> url:${url}")
             super.onPageFinished(view, url)
-            sonicSession?.sessionClient?.pageFinish(url)
+            activity.sonicSession?.sessionClient?.pageFinish(url)
             binding.progressBar.visibility = View.INVISIBLE
         }
 
-        override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? {
-            if (sonicSession != null) {
-                val requestResponse = sonicSessionClient?.requestResource(url)
+        override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
+            if (activity.sonicSession != null) {
+                val requestResponse = activity.sonicSessionClient?.requestResource(request?.url.toString())
                 if (requestResponse is WebResourceResponse) return requestResponse
             }
-            return null
+            return super.shouldInterceptRequest(view, request)
         }
     }
 
-    inner class UIWebChromeClient : WebChromeClient() {
+    class UIWebChromeClient(val binding: ActivityWebViewBinding, val activity: WebViewActivity) : WebChromeClient() {
         override fun onReceivedTitle(view: WebView?, title: String?) {
             super.onReceivedTitle(view, title)
-            logD(TAG, "onReceivedTitle >>> title:${title}")
-            if (!isTitleFixed) {
+            if (!activity.isTitleFixed) {
                 title?.run {
-                    this@WebViewActivity.title = this
+                    activity.title = this
                     binding.titleBar.tvTitle.text = this
                 }
             }
@@ -224,7 +221,6 @@ class WebViewActivity : BaseActivity() {
     }
 
     companion object {
-        const val TAG = "WebViewActivity"
 
         private const val TITLE = "title"
 

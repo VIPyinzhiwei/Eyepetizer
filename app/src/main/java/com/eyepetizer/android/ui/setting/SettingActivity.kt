@@ -34,9 +34,9 @@ import com.eyepetizer.android.util.GlobalUtil
  */
 class SettingActivity : BaseActivity() {
 
-    var _binding: ActivitySettingBinding? = null
+    private var _binding: ActivitySettingBinding? = null
 
-    val binding: ActivitySettingBinding
+    private val binding: ActivitySettingBinding
         get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this).get(SettingViewModel::class.java) }

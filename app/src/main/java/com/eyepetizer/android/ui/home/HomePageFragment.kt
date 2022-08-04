@@ -56,7 +56,7 @@ class HomePageFragment : BaseViewPagerFragment() {
 
     override val createFragments: Array<Fragment> = arrayOf(DiscoveryFragment.newInstance(), CommendFragment.newInstance(), DailyFragment.newInstance())
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMainContainerBinding.inflate(layoutInflater, container, false)
         return super.onCreateView(binding.root)
     }
@@ -79,16 +79,12 @@ class HomePageFragment : BaseViewPagerFragment() {
                 0 -> EventBus.getDefault().post(RefreshEvent(DiscoveryFragment::class.java))
                 1 -> EventBus.getDefault().post(RefreshEvent(CommendFragment::class.java))
                 2 -> EventBus.getDefault().post(RefreshEvent(DailyFragment::class.java))
-                else -> {
-                }
             }
         } else if (messageEvent is SwitchPagesEvent) {
             when (messageEvent.activityClass) {
                 DiscoveryFragment::class.java -> viewPager?.currentItem = 0
                 CommendFragment::class.java -> viewPager?.currentItem = 1
                 DailyFragment::class.java -> viewPager?.currentItem = 2
-                else -> {
-                }
             }
         }
     }

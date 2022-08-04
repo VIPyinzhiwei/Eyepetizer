@@ -20,7 +20,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -56,7 +55,7 @@ class CommendFragment : BaseFragment() {
 
     private lateinit var adapter: CommendAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentRefreshLayoutBinding.inflate(layoutInflater, container, false)
         return super.onCreateView(binding.root)
     }
@@ -68,7 +67,7 @@ class CommendFragment : BaseFragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.itemAnimator = null
-        binding.recyclerView.adapter = adapter.withLoadStateFooter(FooterAdapter { adapter.retry() })
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(FooterAdapter(adapter::retry))
         binding.refreshLayout.setOnRefreshListener { adapter.refresh() }
         addLoadStateListener()
 
@@ -89,7 +88,6 @@ class CommendFragment : BaseFragment() {
         binding.refreshLayout.finishRefresh()
     }
 
-    @CallSuper
     override fun loadFailed(msg: String?) {
         super.loadFailed(msg)
         binding.refreshLayout.finishRefresh()
@@ -103,7 +101,7 @@ class CommendFragment : BaseFragment() {
         super.onMessageEvent(messageEvent)
         if (messageEvent is RefreshEvent && javaClass == messageEvent.activityClass) {
             binding.refreshLayout.autoRefresh()
-            if (binding.recyclerView.adapter?.itemCount ?: 0 > 0) binding.recyclerView.scrollToPosition(0)
+            if ((binding.recyclerView.adapter?.itemCount ?: 0) > 0) binding.recyclerView.scrollToPosition(0)
         }
     }
 

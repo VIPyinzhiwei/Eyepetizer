@@ -98,11 +98,11 @@ abstract class BaseViewPagerFragment : BaseFragment() {
 
             }
         })
-        pageChangeCallback = PageChangeCallback()
+        pageChangeCallback = PageChangeCallback(tabLayout)
         viewPager?.registerOnPageChangeCallback(pageChangeCallback!!)
     }
 
-    inner class PageChangeCallback : ViewPager2.OnPageChangeCallback() {
+    class PageChangeCallback(val tabLayout: CommonTabLayout?) : ViewPager2.OnPageChangeCallback() {
 
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
@@ -110,7 +110,7 @@ abstract class BaseViewPagerFragment : BaseFragment() {
         }
     }
 
-    inner class VpAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    class VpAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
         private val fragments = mutableListOf<Fragment>()
 

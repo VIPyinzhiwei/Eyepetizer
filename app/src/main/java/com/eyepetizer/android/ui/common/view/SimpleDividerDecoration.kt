@@ -60,7 +60,7 @@ class SimpleDividerDecoration(context: Context) : RecyclerView.ItemDecoration() 
         this.leftSpace = leftSpace
     }
 
-    constructor(context: Context, dividerHeight: Int, @ColorInt dividerColor : Int) : this(context) {
+    constructor(context: Context, dividerHeight: Int, @ColorInt dividerColor: Int) : this(context) {
         this.dividerHeight = dividerHeight
         dividerPaint.color = dividerColor
     }

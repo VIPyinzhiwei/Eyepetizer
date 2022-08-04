@@ -101,8 +101,7 @@ class FollowAdapter(val fragment: FollowFragment) : PagingDataAdapter<Follow.Ite
                             it.ivFavorites,
                             it.tvFavorites,
                             it.ivShare
-                        )
-                        {
+                        ) {
                             when (this) {
                                 it.videoPlayer.thumbImageView, it.itemView -> {
                                     NewDetailActivity.start(
@@ -136,9 +135,9 @@ class FollowAdapter(val fragment: FollowFragment) : PagingDataAdapter<Follow.Ite
         }
     }
 
-    inner class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    inner class AutoPlayFollowCardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class AutoPlayFollowCardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivAvatar = view.findViewById<ImageView>(R.id.ivAvatar)
         val tvReleaseTime = view.findViewById<TextView>(R.id.tvReleaseTime)
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
@@ -152,21 +151,20 @@ class FollowAdapter(val fragment: FollowFragment) : PagingDataAdapter<Follow.Ite
         val tvFavorites = view.findViewById<TextView>(R.id.tvFavorites)
         val tvVideoDuration = view.findViewById<TextView>(R.id.tvVideoDuration)
         val ivShare = view.findViewById<ImageView>(R.id.ivShare)
-        val videoPlayer: GSYVideoPlayer = view.findViewById<GSYVideoPlayer>(R.id.videoPlayer)
+        val videoPlayer: GSYVideoPlayer = view.findViewById(R.id.videoPlayer)
     }
 
     companion object {
+
         const val TAG = "FollowAdapter"
+
         const val AUTO_PLAY_FOLLOW_CARD = Const.ItemViewType.MAX    //type:autoPlayFollowCard -> dataType:FollowCard
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Follow.Item>() {
-            override fun areItemsTheSame(oldItem: Follow.Item, newItem: Follow.Item): Boolean {
-                return oldItem.id == newItem.id
-            }
 
-            override fun areContentsTheSame(oldItem: Follow.Item, newItem: Follow.Item): Boolean {
-                return oldItem == newItem
-            }
+            override fun areItemsTheSame(oldItem: Follow.Item, newItem: Follow.Item) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Follow.Item, newItem: Follow.Item) = oldItem == newItem
         }
     }
 }

@@ -20,7 +20,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -47,16 +46,16 @@ import kotlinx.coroutines.launch
  */
 class PushFragment : BaseFragment() {
 
-    var _binding: FragmentRefreshLayoutBinding? = null
+    private var _binding: FragmentRefreshLayoutBinding? = null
 
-    val binding: FragmentRefreshLayoutBinding
+    private val binding: FragmentRefreshLayoutBinding
         get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this, InjectorUtil.getPushViewModelFactory()).get(PushViewModel::class.java) }
 
     private lateinit var adapter: PushAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentRefreshLayoutBinding.inflate(inflater, container, false)
         return super.onCreateView(binding.root)
     }
@@ -65,7 +64,7 @@ class PushFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = PushAdapter(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.adapter = adapter.withLoadStateFooter(FooterAdapter { adapter.retry() })
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(FooterAdapter(adapter::retry))
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.itemAnimator = null
         binding.refreshLayout.setOnRefreshListener { adapter.refresh() }
@@ -88,7 +87,6 @@ class PushFragment : BaseFragment() {
         binding.refreshLayout.finishRefresh()
     }
 
-    @CallSuper
     override fun loadFailed(msg: String?) {
         super.loadFailed(msg)
         binding.refreshLayout.finishRefresh()
@@ -102,7 +100,7 @@ class PushFragment : BaseFragment() {
         super.onMessageEvent(messageEvent)
         if (messageEvent is RefreshEvent && javaClass == messageEvent.activityClass) {
             binding.refreshLayout.autoRefresh()
-            if (binding.recyclerView.adapter?.itemCount ?: 0 > 0) binding.recyclerView.scrollToPosition(0)
+            if ((binding.recyclerView.adapter?.itemCount ?: 0) > 0) binding.recyclerView.scrollToPosition(0)
         }
     }
 

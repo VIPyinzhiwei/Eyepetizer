@@ -32,12 +32,12 @@ import com.eyepetizer.android.ui.login.LoginActivity
  */
 class InboxFragment : BaseFragment() {
 
-    var _binding: FragmentNotificationLoginTipsBinding? = null
+    private var _binding: FragmentNotificationLoginTipsBinding? = null
 
-    val binding: FragmentNotificationLoginTipsBinding
+    private val binding: FragmentNotificationLoginTipsBinding
         get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentNotificationLoginTipsBinding.inflate(inflater, container, false)
         return super.onCreateView(binding.root)
     }

@@ -81,8 +81,6 @@ class NewDetailRelatedAdapter(private val activity: NewDetailActivity, val dataL
                                 ivShare, tvShareCount -> showDialogShare(activity, "${videoInfoData?.title}：${videoInfoData?.webUrl?.raw}")
                                 ivCache, tvCache -> R.string.currently_not_supported.showToast()
                                 tvFollow -> LoginActivity.start(activity)
-                                else -> {
-                                }
                             }
                         }
                     }
@@ -106,7 +104,10 @@ class NewDetailRelatedAdapter(private val activity: NewDetailActivity, val dataL
                 holder.ivShare.setOnClickListener { showDialogShare(activity, "${item.data.title}：${item.data.webUrl.raw}") }
                 holder.itemView.setOnClickListener {
                     item.data.run {
-                        NewDetailActivity.start(activity, NewDetailActivity.VideoInfo(id, playUrl, title, description, category, library, consumption, cover, author, webUrl))
+                        NewDetailActivity.start(
+                            activity,
+                            NewDetailActivity.VideoInfo(id, playUrl, title, description, category, library, consumption, cover, author, webUrl)
+                        )
                         activity.scrollTop()
                     }
                 }
@@ -122,7 +123,7 @@ class NewDetailRelatedAdapter(private val activity: NewDetailActivity, val dataL
         this.videoInfoData = videoInfoData
     }
 
-    inner class CustomHeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class CustomHeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
         val tvCategory = view.findViewById<TextView>(R.id.tvCategory)
         val ivFoldText = view.findViewById<ImageView>(R.id.ivFoldText)
@@ -145,7 +146,7 @@ class NewDetailRelatedAdapter(private val activity: NewDetailActivity, val dataL
     /**
      * 相关推荐，数据集合里附带的热门评论，UI展示上不做处理。
      */
-    inner class SimpleHotReplyCardViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class SimpleHotReplyCardViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 
     companion object {

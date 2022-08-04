@@ -28,7 +28,6 @@ import com.eyepetizer.android.databinding.ActivityMainBinding
 import com.eyepetizer.android.event.MessageEvent
 import com.eyepetizer.android.event.RefreshEvent
 import com.eyepetizer.android.event.SwitchPagesEvent
-import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.extension.setOnClickListener
 import com.eyepetizer.android.extension.showToast
 import com.eyepetizer.android.ui.common.ui.BaseActivity
@@ -50,9 +49,9 @@ import org.greenrobot.eventbus.EventBus
  */
 class MainActivity : BaseActivity() {
 
-    var _binding: ActivityMainBinding? = null
+    private var _binding: ActivityMainBinding? = null
 
-    val binding: ActivityMainBinding
+    private val binding: ActivityMainBinding
         get() = _binding!!
 
     private var backPressTime = 0L
@@ -157,7 +156,7 @@ class MainActivity : BaseActivity() {
                     binding.navigationBar.ivCommunity.isSelected = true
                     binding.navigationBar.tvCommunity.isSelected = true
                     if (communityFragment == null) {
-                        communityFragment = CommunityFragment()
+                        communityFragment = CommunityFragment.newInstance()
                         add(R.id.homeActivityFragContainer, communityFragment!!)
                     } else {
                         show(communityFragment!!)
@@ -167,7 +166,7 @@ class MainActivity : BaseActivity() {
                     binding.navigationBar.ivNotification.isSelected = true
                     binding.navigationBar.tvNotification.isSelected = true
                     if (notificationFragment == null) {
-                        notificationFragment = NotificationFragment()
+                        notificationFragment = NotificationFragment.newInstance()
                         add(R.id.homeActivityFragContainer, notificationFragment!!)
                     } else {
                         show(notificationFragment!!)
@@ -236,7 +235,6 @@ class MainActivity : BaseActivity() {
 
     private fun observe() {
         WorkManager.getInstance(this).getWorkInfoByIdLiveData(DialogAppraiseTipsWorker.showDialogWorkRequest.id).observe(this, { workInfo ->
-            logD(TAG, "observe: workInfo.state = ${workInfo.state}")
             if (workInfo.state == WorkInfo.State.SUCCEEDED) {
                 WorkManager.getInstance(this).cancelAllWork()
             } else if (workInfo.state == WorkInfo.State.RUNNING) {

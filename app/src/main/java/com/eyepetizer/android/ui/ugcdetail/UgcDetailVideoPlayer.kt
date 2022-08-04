@@ -20,7 +20,6 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import com.eyepetizer.android.R
 import com.eyepetizer.android.extension.gone
-import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.extension.visible
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView
@@ -64,21 +63,18 @@ class UgcDetailVideoPlayer : StandardGSYVideoPlayer {
     //正常
     override fun changeUiToNormal() {
         super.changeUiToNormal()
-        logD(javaClass.simpleName, "changeUiToNormal")
         initFirstLoad = true
     }
 
     //准备中
     override fun changeUiToPreparingShow() {
         super.changeUiToPreparingShow()
-        logD(javaClass.simpleName, "changeUiToPreparingShow")
         mBottomContainer.gone()
     }
 
     //播放中
     override fun changeUiToPlayingShow() {
         super.changeUiToPlayingShow()
-        logD(javaClass.simpleName, "changeUiToPlayingShow")
         if (initFirstLoad) mBottomContainer.gone()
         initFirstLoad = false
     }
@@ -86,7 +82,6 @@ class UgcDetailVideoPlayer : StandardGSYVideoPlayer {
     //开始缓冲
     override fun changeUiToPlayingBufferingShow() {
         super.changeUiToPlayingBufferingShow()
-        logD(javaClass.simpleName, "changeUiToPlayingBufferingShow")
         if (initFirstLoad) {
             mStartButton.gone()
             initFirstLoad = false
@@ -98,20 +93,17 @@ class UgcDetailVideoPlayer : StandardGSYVideoPlayer {
     //暂停
     override fun changeUiToPauseShow() {
         super.changeUiToPauseShow()
-        logD(javaClass.simpleName, "changeUiToPauseShow")
     }
 
     //自动播放结束
     override fun changeUiToCompleteShow() {
         super.changeUiToCompleteShow()
-        logD(javaClass.simpleName, "changeUiToCompleteShow")
         mBottomContainer.gone()
     }
 
     //错误状态
     override fun changeUiToError() {
         super.changeUiToError()
-        logD(javaClass.simpleName, "changeUiToError")
     }
 
     fun getBottomContainer() = mBottomContainer

@@ -97,23 +97,21 @@ class NewDetailReplyAdapter(val activity: NewDetailActivity, val dataList: List<
     private fun getTimeReply(dateMillis: Long): String {
         val currentMillis = System.currentTimeMillis()
         val timePast = currentMillis - dateMillis
-        if (timePast > -DateUtil.MINUTE) { // 采用误差一分钟以内的算法，防止客户端和服务器时间不同步导致的显示问题
+        if (timePast > -DateUtil.MINUTE) {
             when {
                 timePast < DateUtil.DAY -> {
-                    var pastHours = timePast / DateUtil.HOUR
-                    if (pastHours <= 0) {
-                        pastHours = 1
-                    }
                     return DateUtil.getDate(dateMillis, "HH:mm")
                 }
-                else -> return DateUtil.getDate(dateMillis, "yyyy/MM/dd")
+                else -> {
+                    return DateUtil.getDate(dateMillis, "yyyy/MM/dd")
+                }
             }
         } else {
             return DateUtil.getDate(dateMillis, "yyyy/MM/dd HH:mm")
         }
     }
 
-    inner class ReplyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ReplyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivAvatar = view.findViewById<ImageView>(R.id.ivAvatar)
         val tvNickName = view.findViewById<TextView>(R.id.tvNickName)
         val ivLike = view.findViewById<ImageView>(R.id.ivLike)

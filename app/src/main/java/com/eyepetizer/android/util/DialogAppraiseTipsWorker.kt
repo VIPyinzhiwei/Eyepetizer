@@ -28,7 +28,6 @@ import androidx.work.WorkerParameters
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.R
 import com.eyepetizer.android.extension.dp2px
-import com.eyepetizer.android.extension.logD
 import com.eyepetizer.android.extension.screenWidth
 import com.eyepetizer.android.ui.common.ui.WebViewActivity
 import com.umeng.analytics.MobclickAgent
@@ -47,10 +46,8 @@ class DialogAppraiseTipsWorker(val context: Context, parms: WorkerParameters) : 
 
     override fun doWork(): Result {
         return if (isNeedShowDialog) {
-            logD(TAG, "${System.currentTimeMillis()},execute doWork function,result : retry")
             Result.retry()
         } else {
-            logD(TAG, "${System.currentTimeMillis()},execute doWork function,result : success")
             Result.success()
         }
     }
