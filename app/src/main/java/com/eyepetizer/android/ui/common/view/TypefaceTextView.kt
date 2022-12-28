@@ -19,6 +19,7 @@ package com.eyepetizer.android.ui.common.view
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.eyepetizer.android.R
 import com.eyepetizer.android.util.TypeFaceUtil
@@ -36,6 +37,7 @@ class TypefaceTextView : AppCompatTextView {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        if (isInEditMode) return
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.TypefaceTextView, 0, 0)
             val typefaceType = typedArray.getInt(R.styleable.TypefaceTextView_typeface, 0)
