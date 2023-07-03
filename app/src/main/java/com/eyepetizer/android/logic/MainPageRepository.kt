@@ -21,7 +21,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.eyepetizer.android.Const
 import com.eyepetizer.android.logic.dao.MainPageDao
-import com.eyepetizer.android.logic.model.*
+import com.eyepetizer.android.logic.model.CommunityRecommend
+import com.eyepetizer.android.logic.model.Daily
+import com.eyepetizer.android.logic.model.Discovery
+import com.eyepetizer.android.logic.model.Follow
+import com.eyepetizer.android.logic.model.HomePageRecommend
+import com.eyepetizer.android.logic.model.PushMessage
 import com.eyepetizer.android.logic.network.EyepetizerNetwork
 import com.eyepetizer.android.ui.community.commend.CommendPagingSource
 import com.eyepetizer.android.ui.community.follow.FollowPagingSource
@@ -95,8 +100,15 @@ class MainPageRepository private constructor(private val mainPageDao: MainPageDa
         @Volatile
         private var INSTANCE: MainPageRepository? = null
 
-        fun getInstance(dao: MainPageDao, network: EyepetizerNetwork): MainPageRepository = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: MainPageRepository(dao, network)
+        fun getInstance(dao: MainPageDao, network: EyepetizerNetwork): MainPageRepository {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    if (INSTANCE == null) {
+                        INSTANCE = MainPageRepository(dao, network)
+                    }
+                }
+            }
+            return INSTANCE!!
         }
     }
 }

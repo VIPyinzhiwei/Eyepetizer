@@ -69,8 +69,15 @@ class VideoRepository(private val dao: VideoDao, private val network: Eyepetizer
         @Volatile
         private var INSTANCE: VideoRepository? = null
 
-        fun getInstance(dao: VideoDao, network: EyepetizerNetwork): VideoRepository = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: VideoRepository(dao, network)
+        fun getInstance(dao: VideoDao, network: EyepetizerNetwork): VideoRepository {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    if (INSTANCE == null) {
+                        INSTANCE = VideoRepository(dao, network)
+                    }
+                }
+            }
+            return INSTANCE!!
         }
     }
 
