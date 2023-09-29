@@ -36,6 +36,7 @@ class TypefaceEditText : AppCompatEditText {
 
     @SuppressLint("CustomViewStyleable")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        if (isInEditMode) return
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.TypefaceTextView, 0, 0)
             val typefaceType = typedArray.getInt(R.styleable.TypefaceTextView_typeface, 0)

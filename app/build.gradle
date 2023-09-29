@@ -107,7 +107,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.5.1"
 
     //特定功能依赖库
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'com.scwang.smart:refresh-header-material:2.0.0'
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.0'
