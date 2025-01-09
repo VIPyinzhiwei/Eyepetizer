@@ -8,6 +8,8 @@ English | [中文](README.md)
 
 A short video Android client project based on [Kotlin][1] language imitation "[Open Eyepetizer][2]", using the MVVM architecture implemented by [Jetpack][3] + [Coroutine][30].
 
+<a href="https://trendshift.io/repositories/3263" target="_blank"><img src="https://trendshift.io/api/badge/repositories/3263" alt="zeromicro%2Fgo-zero | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+
 ## Brief introduction
 This is a short video Android client project with a high imitation of "[Open Eyepetizer][2]". Personally, I feel that the UI design style of this app is very beautiful, and the interface is simple and fresh. Through this project, I will learn and integrate related technologies.
 
