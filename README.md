@@ -8,6 +8,8 @@
 
 基于 [Kotlin][1] 语言仿写「[开眼 Eyepetizer][2]」的一个短视频 Android 客户端项目，采用 [Jetpack][3] + [协程][30]实现的 MVVM 架构。
 
+<a href="https://trendshift.io/repositories/3263" target="_blank"><img src="https://trendshift.io/api/badge/repositories/3263" alt="zeromicro%2Fgo-zero | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+
 ## 简介
 这是一个高仿「[开眼 Eyepetizer][2]」的短视频 Android 客户端项目，个人觉得这款 App 的 UI 设计风格很好看，界面简洁清新，通过此项目，进行相关技术的学习与整合。
 
