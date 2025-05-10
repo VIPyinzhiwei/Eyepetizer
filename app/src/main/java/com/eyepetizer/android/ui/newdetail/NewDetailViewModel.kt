@@ -17,9 +17,9 @@
 package com.eyepetizer.android.ui.newdetail
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.switchMap
 import com.eyepetizer.android.logic.VideoRepository
 import com.eyepetizer.android.logic.model.VideoDetail
 import com.eyepetizer.android.logic.model.VideoRelated
@@ -48,7 +48,7 @@ class NewDetailViewModel(repository: VideoRepository) : ViewModel() {
 
     var nextPageUrl: String? = null
 
-    val videoDetailLiveData = Transformations.switchMap(videoDetailLiveData_) {
+    val videoDetailLiveData = videoDetailLiveData_.switchMap {
         liveData {
             val resutlt = try {
                 val videoDetail = repository.refreshVideoDetail(it.videoId, it.repliesUrl)   //视频信息+相关推荐+评论
@@ -60,7 +60,7 @@ class NewDetailViewModel(repository: VideoRepository) : ViewModel() {
         }
     }
 
-    val repliesAndRepliesLiveData = Transformations.switchMap(repliesAndRepliesLiveData_) {
+    val repliesAndRepliesLiveData = repliesAndRepliesLiveData_.switchMap {
         liveData {
             val resutlt = try {
                 val videoDetail = repository.refreshVideoRelatedAndVideoReplies(it.videoId, it.repliesUrl)   //相关推荐+评论
@@ -72,7 +72,7 @@ class NewDetailViewModel(repository: VideoRepository) : ViewModel() {
         }
     }
 
-    val repliesLiveData = Transformations.switchMap(repliesLiveData_) {
+    val repliesLiveData = repliesLiveData_.switchMap {
         liveData {
             val resutlt = try {
                 val videoDetail = repository.refreshVideoReplies(it)   //评论

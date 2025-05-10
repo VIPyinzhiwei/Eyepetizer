@@ -17,9 +17,9 @@
 package com.eyepetizer.android.ui.search
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.switchMap
 import com.eyepetizer.android.logic.MainPageRepository
 
 class SearchViewModel(val repository: MainPageRepository) : ViewModel() {
@@ -28,7 +28,7 @@ class SearchViewModel(val repository: MainPageRepository) : ViewModel() {
 
     private var requestParamLiveData = MutableLiveData<Any>()
 
-    val dataListLiveData = Transformations.switchMap(requestParamLiveData) {
+    val dataListLiveData = requestParamLiveData.switchMap{
         liveData {
             val resutlt = try {
                 val hotSearch = repository.refreshHotSearch()

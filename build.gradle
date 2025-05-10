@@ -4,11 +4,10 @@ buildscript {
     ext.kotlin_version = '1.7.10'
     repositories {
         google()
-        jcenter()
-        maven { url 'https://repo1.maven.org/maven2/' }
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -19,9 +18,10 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url 'https://repo1.maven.org/maven2/' }
+        mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.tencent.com/repository/maven-public/' }
+        maven { url "https://maven.aliyun.com/repository/public" }
     }
 }
 

@@ -23,19 +23,10 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import android.webkit.*
 import com.eyepetizer.android.databinding.ActivityWebViewBinding
-import com.eyepetizer.android.extension.logD
-import com.eyepetizer.android.extension.preCreateSession
 import com.eyepetizer.android.extension.visible
-import com.eyepetizer.android.ui.common.ui.vassonic.OfflinePkgSessionConnection
-import com.eyepetizer.android.ui.common.ui.vassonic.SonicJavaScriptInterface
-import com.eyepetizer.android.ui.common.ui.vassonic.SonicRuntimeImpl
-import com.eyepetizer.android.ui.common.ui.vassonic.SonicSessionClientImpl
 import com.eyepetizer.android.util.GlobalUtil
-import com.tencent.sonic.sdk.*
-
 
 /**
  * 展示网页共通界面。
@@ -58,16 +49,11 @@ class WebViewActivity : BaseActivity() {
 
     private var isTitleFixed: Boolean = false
 
-    private var sonicSession: SonicSession? = null
-
-    private var sonicSessionClient: SonicSessionClientImpl? = null
-
     private var mode: Int = MODE_DEFAULT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initParams()
-        preloadInitVasSonic()
         _binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
@@ -76,12 +62,7 @@ class WebViewActivity : BaseActivity() {
         super.setupViews()
         initTitleBar()
         initWebView()
-        if (sonicSessionClient != null) {
-            sonicSessionClient?.bindWebView(binding.webView)
-            sonicSessionClient?.clientReady()
-        } else {
-            binding.webView.loadUrl(linkUrl)
-        }
+        binding.webView.loadUrl(linkUrl)
     }
 
     override fun onBackPressed() {
@@ -94,8 +75,6 @@ class WebViewActivity : BaseActivity() {
 
     override fun onDestroy() {
         binding.webView.destroy()
-        sonicSession?.destroy()
-        sonicSession = null
         _binding = null
         super.onDestroy()
     }
@@ -120,12 +99,9 @@ class WebViewActivity : BaseActivity() {
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             javaScriptEnabled = true
             binding.webView.removeJavascriptInterface("searchBoxJavaBridge_")
-            intent.putExtra(SonicJavaScriptInterface.PARAM_LOAD_URL_TIME, System.currentTimeMillis())
-            binding.webView.addJavascriptInterface(SonicJavaScriptInterface(sonicSessionClient, intent), "sonic")
             allowContentAccess = true
             databaseEnabled = true
             domStorageEnabled = true
-            setAppCacheEnabled(true)
             savePassword = false
             saveFormData = false
             useWideViewPort = true
@@ -143,49 +119,6 @@ class WebViewActivity : BaseActivity() {
         }
     }
 
-    /**
-     * 使用VasSonic框架提升H5首屏加载速度。
-     */
-    private fun preloadInitVasSonic() {
-        window.addFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
-
-        // init sonic engine if necessary, or maybe u can do this when application created
-        if (!SonicEngine.isGetInstanceAllowed()) {
-            SonicEngine.createInstance(SonicRuntimeImpl(application), SonicConfig.Builder().build())
-        }
-
-        // if it's sonic mode , startup sonic session at first time
-        if (MODE_DEFAULT != mode) { // sonic mode
-            val sessionConfigBuilder = SonicSessionConfig.Builder()
-            sessionConfigBuilder.setSupportLocalServer(true)
-
-            // if it's offline pkg mode, we need to intercept the session connection
-            if (MODE_SONIC_WITH_OFFLINE_CACHE == mode) {
-                sessionConfigBuilder.setCacheInterceptor(object : SonicCacheInterceptor(null) {
-                    override fun getCacheData(session: SonicSession): String? {
-                        return null // offline pkg does not need cache
-                    }
-                })
-                sessionConfigBuilder.setConnectionInterceptor(object : SonicSessionConnectionInterceptor() {
-                    override fun getConnection(session: SonicSession, intent: Intent): SonicSessionConnection {
-                        return OfflinePkgSessionConnection(this@WebViewActivity, session, intent)
-                    }
-                })
-            }
-
-            // create sonic session and run sonic flow
-            sonicSession = SonicEngine.getInstance().createSession(linkUrl, sessionConfigBuilder.build())
-            if (null != sonicSession) {
-                sonicSession?.bindClient(SonicSessionClientImpl().also { sonicSessionClient = it })
-            } else {
-                // this only happen when a same sonic session is already running,
-                // u can comment following codes to feedback as a default mode.
-                // throw new UnknownError("create session fail!");
-                logD(TAG, "${title},${linkUrl}:create sonic session fail!")
-            }
-        }
-    }
-
     class UIWebViewClient(val binding: ActivityWebViewBinding, val activity: WebViewActivity) : WebViewClient() {
         override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
             activity.linkUrl = url
@@ -195,15 +128,10 @@ class WebViewActivity : BaseActivity() {
 
         override fun onPageFinished(view: WebView, url: String) {
             super.onPageFinished(view, url)
-            activity.sonicSession?.sessionClient?.pageFinish(url)
             binding.progressBar.visibility = View.INVISIBLE
         }
 
         override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
-            if (activity.sonicSession != null) {
-                val requestResponse = activity.sonicSessionClient?.requestResource(request?.url.toString())
-                if (requestResponse is WebResourceResponse) return requestResponse
-            }
             return super.shouldInterceptRequest(view, request)
         }
     }
@@ -253,14 +181,12 @@ class WebViewActivity : BaseActivity() {
          * @param mode          加载模式：MODE_DEFAULT 默认使用WebView加载；MODE_SONIC 使用VasSonic框架加载； MODE_SONIC_WITH_OFFLINE_CACHE 使用VasSonic框架离线加载
          */
         fun start(context: Context, title: String, url: String, isShare: Boolean = true, isTitleFixed: Boolean = true, mode: Int = MODE_SONIC) {
-            url.preCreateSession()  //预加载url
             val intent = Intent(context, WebViewActivity::class.java).apply {
                 putExtra(TITLE, title)
                 putExtra(LINK_URL, url)
                 putExtra(IS_SHARE, isShare)
                 putExtra(IS_TITLE_FIXED, isTitleFixed)
                 putExtra(PARAM_MODE, mode)
-                putExtra(SonicJavaScriptInterface.PARAM_CLICK_TIME, System.currentTimeMillis())
             }
             context.startActivity(intent)
         }

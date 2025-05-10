@@ -80,7 +80,6 @@
 - [PhotoView][25] 支持手势缩放图片
 - [Circleimageview][26] 圆形图像
 - [GSYVideoPlayer][27] 视频播放器
-- [VasSonic][28] 提升H5首屏加载速度
 - [Leakcanary][29] 内存泄漏检测
 - [Kotlinx Coroutines][30] 简化代码管理后台线程与回调
 
@@ -132,7 +131,6 @@ limitations under the License.
 [25]:https://github.com/chrisbanes/PhotoView
 [26]:https://github.com/hdodenhof/CircleImageView
 [27]:https://github.com/CarGuo/GSYVideoPlayer
-[28]:https://github.com/Tencent/VasSonic
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
 [31]:https://m.apkpure.com/cn/%E5%BC%80%E7%9C%BC/com.wandoujia.eyepetizer/versions

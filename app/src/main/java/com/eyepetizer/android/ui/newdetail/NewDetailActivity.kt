@@ -34,6 +34,8 @@ import com.eyepetizer.android.extension.*
 import com.eyepetizer.android.logic.model.Author
 import com.eyepetizer.android.logic.model.Consumption
 import com.eyepetizer.android.logic.model.Cover
+import com.eyepetizer.android.logic.model.VideoDetail
+import com.eyepetizer.android.logic.model.VideoReplies
 import com.eyepetizer.android.logic.model.WebUrl
 import com.eyepetizer.android.ui.common.ui.BaseActivity
 import com.eyepetizer.android.ui.common.view.NoStatusFooter
@@ -200,7 +202,7 @@ class NewDetailActivity : BaseActivity() {
     private fun observe() {
         //刷新，视频信息+相关推荐+评论
         if (!viewModel.videoDetailLiveData.hasObservers()) {
-            viewModel.videoDetailLiveData.observe(this, Observer { result ->
+            viewModel.videoDetailLiveData.observe(this, Observer<Result<VideoDetail>> { result ->
                 val response = result.getOrNull()
                 if (response == null) {
                     ResponseHandler.getFailureTips(result.exceptionOrNull()).showToast()
@@ -211,7 +213,9 @@ class NewDetailActivity : BaseActivity() {
                     return@Observer
                 }
                 response.videoBeanForClient?.run {
-                    viewModel.videoInfoData = VideoInfo(id, playUrl, title, description, category, library, consumption, cover, author, webUrl)
+                    viewModel.videoInfoData = VideoInfo(videoId = id, playUrl = playUrl, title = title, description = description, 
+                                                       category = category, library = library, consumption = consumption, 
+                                                       cover = cover, author = author, webUrl = webUrl)
                     startVideoPlayer()
                     relatedAdapter.bindVideoInfo(viewModel.videoInfoData)
                 }
@@ -230,7 +234,7 @@ class NewDetailActivity : BaseActivity() {
         }
         //刷新，相关推荐+评论
         if (!viewModel.repliesAndRepliesLiveData.hasObservers()) {
-            viewModel.repliesAndRepliesLiveData.observe(this, Observer { result ->
+            viewModel.repliesAndRepliesLiveData.observe(this, Observer<Result<VideoDetail>> { result ->
                 val response = result.getOrNull()
                 if (response == null) {
                     ResponseHandler.getFailureTips(result.exceptionOrNull()).showToast()
@@ -256,7 +260,7 @@ class NewDetailActivity : BaseActivity() {
         }
         //上拉加载，评论
         if (!viewModel.repliesLiveData.hasObservers()) {
-            viewModel.repliesLiveData.observe(this, Observer { result ->
+            viewModel.repliesLiveData.observe(this, Observer<Result<VideoReplies>> { result ->
                 val response = result.getOrNull()
                 if (response == null) {
                     ResponseHandler.getFailureTips(result.exceptionOrNull()).showToast()

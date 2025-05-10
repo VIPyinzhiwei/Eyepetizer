@@ -84,7 +84,6 @@ class OpenSourceProjectsActivity : BaseActivity() {
         add(OpenSourceProject("PhotoView", "https://github.com/chrisbanes/PhotoView"))
         add(OpenSourceProject("Circleimageview", "https://github.com/hdodenhof/CircleImageView"))
         add(OpenSourceProject("GSYVideoPlayer", "https://github.com/CarGuo/GSYVideoPlayer"))
-        add(OpenSourceProject("VasSonic", "https://github.com/Tencent/VasSonic"))
         add(OpenSourceProject("Leakcanary", "https://github.com/square/leakcanary"))
         add(OpenSourceProject("Kotlinx Coroutines", "https://github.com/Kotlin/kotlinx.coroutines"))
     }

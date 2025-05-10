@@ -29,7 +29,6 @@ import com.eyepetizer.android.ui.common.ui.WebViewActivity.Companion.MODE_SONIC_
 import com.eyepetizer.android.ui.login.LoginActivity
 import com.eyepetizer.android.util.DataStoreUtils
 import com.shuyu.gsyvideoplayer.GSYVideoManager
-import com.tencent.sonic.sdk.SonicEngine
 import com.umeng.analytics.MobclickAgent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -86,9 +85,6 @@ class SettingViewModel : ViewModel() {
             Glide.get(context).clearMemory()
             withContext(Dispatchers.IO) {
                 Glide.get(context).clearDiskCache()
-                if (SonicEngine.isGetInstanceAllowed()) {
-                    SonicEngine.getInstance().cleanCache()
-                }
             }
             R.string.clear_cache_succeed.showToast()
         }

@@ -80,7 +80,6 @@ Through this project, I hope to help you better learn Jetpack and MVVM architect
 - [PhotoView][25] Support gesture zoom picture
 - [Circleimageview][26] Round image
 - [GSYVideoPlayer][27] Video player
-- [VasSonic][28] Improve H5 first screen loading speed
 - [Leakcanary][29] Memory leak detection
 - [Kotlinx Coroutines][30] Simplify code management background threads and callbacks
 
@@ -132,7 +131,6 @@ limitations under the License.
 [25]:https://github.com/chrisbanes/PhotoView
 [26]:https://github.com/hdodenhof/CircleImageView
 [27]:https://github.com/CarGuo/GSYVideoPlayer
-[28]:https://github.com/Tencent/VasSonic
 [29]:https://github.com/square/leakcanary
 [30]:https://github.com/Kotlin/kotlinx.coroutines
 [31]:https://m.apkpure.com/cn/%E5%BC%80%E7%9C%BC/com.wandoujia.eyepetizer/versions

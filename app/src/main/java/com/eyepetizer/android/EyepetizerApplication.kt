@@ -21,9 +21,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.work.WorkManager
-import com.eyepetizer.android.extension.preCreateSession
 import com.eyepetizer.android.ui.SplashActivity
-import com.eyepetizer.android.ui.common.ui.WebViewActivity
 import com.eyepetizer.android.ui.common.view.NoStatusFooter
 import com.eyepetizer.android.util.DialogAppraiseTipsWorker
 import com.eyepetizer.android.util.GlobalUtil
@@ -73,7 +71,6 @@ class EyepetizerApplication : Application() {
         super.onCreate()
         context = this
         IjkPlayerManager.setLogLevel(if (BuildConfig.DEBUG) IjkMediaPlayer.IJK_LOG_WARN else IjkMediaPlayer.IJK_LOG_SILENT)
-        WebViewActivity.DEFAULT_URL.preCreateSession()
         if (!SplashActivity.isFirstEntryApp && DialogAppraiseTipsWorker.isNeedShowDialog) {
             WorkManager.getInstance(this).enqueue(DialogAppraiseTipsWorker.showDialogWorkRequest)
         }
