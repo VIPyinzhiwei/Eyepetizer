@@ -60,7 +60,7 @@ Can't load images? Attach [blog address][6]
 - NickName : vipyinzhiwei
 - WeChat : vipyinzhiwei
 - Email : <vipyinzhiwei@gmail.com>
-- Blog : <https://www.vipyinzhiwei.com>
+- Blog : <https://vipyinzhiwei.com>
 
 ## Encourage
 Through this project, I hope to help you better learn Jetpack and MVVM architecture. If you like the design of Eyepetizer, and feel that the source code of this project is helpful for your study, you can click **"Star"** in the upper right corner to support it, thank you! ^_^
@@ -109,7 +109,7 @@ limitations under the License.
 [3]:https://developer.android.com/jetpack
 [4]:https://www.kotlincn.net/docs/reference/coding-conventions.html
 [5]:https://github.com/Blankj/AndroidStandardDevelop
-[6]:https://www.vipyinzhiwei.com/2020/06/19/pager05/#more
+[6]:https://vipyinzhiwei.com/2020/06/19/pager05/#more
 [7]:https://github.com/VIPyinzhiwei/Eyepetizer/raw/master/eyepetizer.apk
 [8]:https://developer.android.com/studio/write/vector-asset-studio?hl=zh-cn
 [9]:https://www.iconfont.cn

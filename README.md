@@ -60,7 +60,7 @@
 - NickName : vipyinzhiwei
 - WeChat : vipyinzhiwei
 - Email : <vipyinzhiwei@gmail.com>
-- Blog : <https://www.vipyinzhiwei.com>
+- Blog : <https://vipyinzhiwei.com>
 
 ## 鼓励
 通过这个项目希望能够帮助大家更好地学习 Jetpack 与 MVVM 架构。如果你喜欢 Eyepetizer 的设计，感觉本项目的源代码对你的学习有所帮助，可以点右上角 **"Star"** 支持一下，谢谢！^_^
@@ -109,7 +109,7 @@ limitations under the License.
 [3]:https://developer.android.com/jetpack
 [4]:https://www.kotlincn.net/docs/reference/coding-conventions.html
 [5]:https://github.com/Blankj/AndroidStandardDevelop
-[6]:https://www.vipyinzhiwei.com/2020/06/19/pager05/#more
+[6]:https://vipyinzhiwei.com/2020/06/19/pager05/#more
 [7]:https://github.com/VIPyinzhiwei/Eyepetizer/raw/master/eyepetizer.apk
 [8]:https://developer.android.com/studio/write/vector-asset-studio?hl=zh-cn
 [9]:https://www.iconfont.cn
